@@ -85,7 +85,7 @@ class IconStyle extends TextStyle {
 
   final IconData icon;
 
-  IconStyle(@required this.icon);
+  IconStyle(this.icon);
 
 }
 
