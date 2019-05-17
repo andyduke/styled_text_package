@@ -114,7 +114,6 @@ class StyledText extends StatefulWidget {
     this.textDirection,
     this.softWrap = true,
     this.overflow = TextOverflow.clip,
-    // this.textScaleFactor = 1.0,
     this.textScaleFactor,
     this.maxLines,
     this.locale,
@@ -160,7 +159,6 @@ class _StyledTextState extends State<StyledText> {
 
       var xmlStreamer = new XmlStreamer('<?xml version="1.0" encoding="UTF-8"?><root>' + _text + '</root>');
       xmlStreamer.read().listen((e) {
-        // print("listen: $e");
 
         switch(e.state) {
 
@@ -224,7 +222,6 @@ class _StyledTextState extends State<StyledText> {
         }
 
       }).onDone(() {
-        // print('${_textSpans.toPlainText()}');
         setState(() {
           _textSpans = node;
         });
@@ -235,14 +232,8 @@ class _StyledTextState extends State<StyledText> {
 
   @override
   Widget build(BuildContext context) {
-    // if (_textSpans != null) {
-    //   print('render: ${_textSpans.toPlainText()}');
-    //   print('render: ${_textSpans.toStringDeep()}');
-    // }
-
     return (_textSpans != null)
       ? RichText(
-          // textScaleFactor: MediaQuery.of(context).textScaleFactor,
           textAlign: widget.textAlign,
           textDirection: widget.textDirection,
           softWrap: widget.softWrap,
