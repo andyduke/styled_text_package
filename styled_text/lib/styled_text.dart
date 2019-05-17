@@ -6,10 +6,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:xmlstream/xmlstream.dart';
 
-typedef ActionTappedCallback = void Function(TextSpan text, Map<String, String> attributes);
+typedef ActionTappedCallback = void Function(
+    TextSpan text, Map<String, String> attributes);
 
 class _StyledTextRecoginzer extends TapGestureRecognizer {
-
   ActionTappedCallback onTextTap;
   TextSpan text;
   Map<String, String> attributes;
@@ -27,11 +27,9 @@ class _StyledTextRecoginzer extends TapGestureRecognizer {
       onTextTap(text, attributes);
     }
   }
-
 }
 
 class ActionTextStyle extends TextStyle {
-
   final ActionTappedCallback onTap;
 
   ActionTextStyle({
@@ -57,40 +55,36 @@ class ActionTextStyle extends TextStyle {
     String package,
     this.onTap,
   }) : super(
-    inherit: inherit,
-    color: color,
-    fontSize: fontSize,
-    fontWeight: fontWeight,
-    fontStyle: fontStyle,
-    letterSpacing: letterSpacing,
-    wordSpacing: wordSpacing,
-    textBaseline: textBaseline,
-    height: height,
-    locale: locale,
-    foreground: foreground,
-    background: background,
-    shadows: shadows,
-    decoration: decoration,
-    decorationColor: decorationColor,
-    decorationStyle: decorationStyle,
-    debugLabel: debugLabel,
-    fontFamily: fontFamily,
-    fontFamilyFallback: fontFamilyFallback,
-    package: package,
-  );
-
+          inherit: inherit,
+          color: color,
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+          fontStyle: fontStyle,
+          letterSpacing: letterSpacing,
+          wordSpacing: wordSpacing,
+          textBaseline: textBaseline,
+          height: height,
+          locale: locale,
+          foreground: foreground,
+          background: background,
+          shadows: shadows,
+          decoration: decoration,
+          decorationColor: decorationColor,
+          decorationStyle: decorationStyle,
+          debugLabel: debugLabel,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          package: package,
+        );
 }
 
 class IconStyle extends TextStyle {
-
   final IconData icon;
 
   IconStyle(this.icon);
-
 }
 
 class StyledText extends StatefulWidget {
-
   final String text;
   final TextStyle style;
   final Map<String, TextStyle> styles;
@@ -109,7 +103,6 @@ class StyledText extends StatefulWidget {
     @required this.text,
     this.style,
     @required this.styles,
-
     this.textAlign = TextAlign.start,
     this.textDirection,
     this.softWrap = true,
@@ -122,11 +115,9 @@ class StyledText extends StatefulWidget {
 
   @override
   _StyledTextState createState() => _StyledTextState();
-
 }
 
 class _StyledTextState extends State<StyledText> {
-
   String _text;
   TextSpan _textSpans;
 
@@ -152,19 +143,20 @@ class _StyledTextState extends State<StyledText> {
       _text = widget.text;
 
       _textSpans = null;
-      TextStyle defaultStyle = widget.style ?? DefaultTextStyle.of(context).style;
+      TextStyle defaultStyle =
+          widget.style ?? DefaultTextStyle.of(context).style;
       TextSpan node = TextSpan(style: defaultStyle, children: []);
       ListQueue<TextSpan> textQueue = ListQueue();
       Map<String, String> attributes;
 
-      var xmlStreamer = new XmlStreamer('<?xml version="1.0" encoding="UTF-8"?><root>' + _text + '</root>');
+      var xmlStreamer = new XmlStreamer(
+          '<?xml version="1.0" encoding="UTF-8"?><root>' + _text + '</root>');
       xmlStreamer.read().listen((e) {
-
-        switch(e.state) {
-
+        switch (e.state) {
           case XmlState.Text:
           case XmlState.CDATA:
-            node.children.add(TextSpan(text: e.value, recognizer: node.recognizer));
+            node.children
+                .add(TextSpan(text: e.value, recognizer: node.recognizer));
             break;
 
           case XmlState.Open:
@@ -185,11 +177,13 @@ class _StyledTextState extends State<StyledText> {
                   ),
                 );
               } else {
-                final _StyledTextRecoginzer recognizer = ((style is ActionTextStyle) && style.onTap != null)
-                  ? _StyledTextRecoginzer(onTextTap: style.onTap)
-                  : null;
+                final _StyledTextRecoginzer recognizer =
+                    ((style is ActionTextStyle) && style.onTap != null)
+                        ? _StyledTextRecoginzer(onTextTap: style.onTap)
+                        : null;
 
-                node = TextSpan(style: style, children: [], recognizer: recognizer);
+                node = TextSpan(
+                    style: style, children: [], recognizer: recognizer);
               }
             }
 
@@ -218,33 +212,30 @@ class _StyledTextState extends State<StyledText> {
           case XmlState.Namespace:
           case XmlState.Top:
             break;
-
         }
-
       }).onDone(() {
         setState(() {
           _textSpans = node;
         });
       });
-
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return (_textSpans != null)
-      ? RichText(
-          textAlign: widget.textAlign,
-          textDirection: widget.textDirection,
-          softWrap: widget.softWrap,
-          overflow: widget.overflow,
-          textScaleFactor: widget.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
-          maxLines: widget.maxLines,
-          locale: widget.locale,
-          strutStyle: widget.strutStyle,
-          text: _textSpans,
-        )
-      : const SizedBox();
+        ? RichText(
+            textAlign: widget.textAlign,
+            textDirection: widget.textDirection,
+            softWrap: widget.softWrap,
+            overflow: widget.overflow,
+            textScaleFactor: widget.textScaleFactor ??
+                MediaQuery.of(context).textScaleFactor,
+            maxLines: widget.maxLines,
+            locale: widget.locale,
+            strutStyle: widget.strutStyle,
+            text: _textSpans,
+          )
+        : const SizedBox();
   }
-
 }

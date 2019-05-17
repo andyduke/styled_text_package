@@ -1,0 +1,23 @@
+name: styled_text_example
+description: Demonstrates how to use 'Styled Text'.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  styled_text:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+
+  uses-material-design: true
