@@ -214,9 +214,11 @@ class _StyledTextState extends State<StyledText> {
             break;
         }
       }).onDone(() {
-        setState(() {
-          _textSpans = node;
-        });
+        if(mounted){
+            setState(() {
+              _textSpans = node;
+            });
+        }
       });
     }
   }
