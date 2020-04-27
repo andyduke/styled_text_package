@@ -155,8 +155,14 @@ class _StyledTextState extends State<StyledText> {
         switch (e.state) {
           case XmlState.Text:
           case XmlState.CDATA:
-            node.children
-                .add(TextSpan(text: e.value, recognizer: node.recognizer));
+            node.children.add(TextSpan(
+                text: e.value
+                    .replaceAll('&quot;', '"')
+                    .replaceAll('&apos;', "'")
+                    .replaceAll('&amp;', '&')
+                    .replaceAll('&lt;', "<")
+                    .replaceAll('&gt;', ">"),
+                recognizer: node.recognizer));
             break;
 
           case XmlState.Open:
@@ -214,10 +220,10 @@ class _StyledTextState extends State<StyledText> {
             break;
         }
       }).onDone(() {
-        if(mounted){
-            setState(() {
-              _textSpans = node;
-            });
+        if (mounted) {
+          setState(() {
+            _textSpans = node;
+          });
         }
       });
     }

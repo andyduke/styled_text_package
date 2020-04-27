@@ -70,10 +70,21 @@ class DemoPage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
 
             StyledText(
               text: 'Test: <b>bold</b> text.',
+              styles: {
+                'b': TextStyle(fontWeight: FontWeight.bold),
+              },
+            ),
+
+            const SizedBox(height: 20),
+
+            StyledText(
+              text: 'Quotes Test: <b>&quot;bold&quot;</b> text.',
               styles: {
                 'b': TextStyle(fontWeight: FontWeight.bold),
               },
