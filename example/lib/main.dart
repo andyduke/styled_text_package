@@ -4,7 +4,6 @@ import 'package:styled_text/styled_text.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,11 +14,9 @@ class MyApp extends StatelessWidget {
       home: DemoPage(),
     );
   }
-
 }
 
 class DemoPage extends StatelessWidget {
-
   void _alert(BuildContext context) {
     showDialog<void>(
       context: context,
@@ -73,44 +70,36 @@ class DemoPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-
             StyledText(
               text: 'Test: <b>bold</b> text.',
               styles: {
                 'b': TextStyle(fontWeight: FontWeight.bold),
               },
             ),
-
             const SizedBox(height: 20),
-
             StyledText(
               text: 'Quotes Test: <b>&quot;bold&quot;</b> text.',
               styles: {
                 'b': TextStyle(fontWeight: FontWeight.bold),
               },
             ),
-
             const SizedBox(height: 20),
-
             StyledText(
               text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
               styles: {
                 'bold': TextStyle(fontWeight: FontWeight.bold),
-                'red': TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                'red':
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
               },
             ),
-
             const SizedBox(height: 20),
-
             StyledText(
               text: 'Text with alarm <alarm/> icon.',
               styles: {
                 'alarm': IconStyle(Icons.alarm),
               },
             ),
-
             const SizedBox(height: 20),
-
             StyledText(
               text: 'Text with <action>action</action> inside.',
               styles: {
@@ -120,11 +109,10 @@ class DemoPage extends StatelessWidget {
                 ),
               },
             ),
-
             const SizedBox(height: 20),
-
             StyledText(
-              text: 'Text with <link href="https://flutter.dev">link</link> inside.',
+              text:
+                  'Text with <link href="https://flutter.dev">link</link> inside.',
               styles: {
                 'link': ActionTextStyle(
                   decoration: TextDecoration.underline,
@@ -132,11 +120,9 @@ class DemoPage extends StatelessWidget {
                 ),
               },
             ),
-
           ],
         ),
       ),
     );
   }
-
 }
