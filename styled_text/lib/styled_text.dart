@@ -150,7 +150,6 @@ class _StyledTextState extends State<StyledText> {
       Map<String, String> attributes;
         
       _text = _text
-          .replaceAll('&', '&amp;')
           .replaceAll('"', '&quot;')
           .replaceAll("'", '&apos;');
 
@@ -163,9 +162,11 @@ class _StyledTextState extends State<StyledText> {
             node.children
                 .add(TextSpan(
                   text: e.value
-                      .replaceAll('&amp;', '&')
                       .replaceAll('&quot;', '"')
-                      .replaceAll('&apos;', "'"),
+                      .replaceAll('&apos;', "'")
+                      .replaceAll('&amp;', '&')
+                      .replaceAll('&lt;', "<")
+                      .replaceAll('&gt;', ">"),
                   recognizer: node.recognizer
                 )
             );
