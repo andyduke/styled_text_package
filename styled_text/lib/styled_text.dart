@@ -156,7 +156,16 @@ class _StyledTextState extends State<StyledText> {
           case XmlState.Text:
           case XmlState.CDATA:
             node.children
-                .add(TextSpan(text: e.value, recognizer: node.recognizer));
+                .add(TextSpan(
+                  text: e.value
+                      .replaceAll('&quot;', '"')
+                      .replaceAll('&apos;', "'")
+                      .replaceAll('&amp;', '&')
+                      .replaceAll('&lt;', "<")
+                      .replaceAll('&gt;', ">"),
+                  recognizer: node.recognizer
+                )
+            );
             break;
 
           case XmlState.Open:
