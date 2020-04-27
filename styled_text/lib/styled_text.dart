@@ -166,6 +166,7 @@ class _StyledTextState extends State<StyledText> {
                   recognizer: node.recognizer
                 )
             );
+            break;
 
           case XmlState.Open:
             textQueue.addLast(node);
