@@ -148,6 +148,11 @@ class _StyledTextState extends State<StyledText> {
       TextSpan node = TextSpan(style: defaultStyle, children: []);
       ListQueue<TextSpan> textQueue = ListQueue();
       Map<String, String> attributes;
+        
+      _text = _text
+          .replaceAll('&', '&amp;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&apos;');
 
       var xmlStreamer = new XmlStreamer(
           '<?xml version="1.0" encoding="UTF-8"?><root>' + _text + '</root>');
@@ -156,8 +161,14 @@ class _StyledTextState extends State<StyledText> {
           case XmlState.Text:
           case XmlState.CDATA:
             node.children
-                .add(TextSpan(text: e.value, recognizer: node.recognizer));
-            break;
+                .add(TextSpan(
+                  text: e.value
+                      .replaceAll('&amp;', '&')
+                      .replaceAll('&quot;', '"')
+                      .replaceAll('&apos;', "'"),
+                  recognizer: node.recognizer
+                )
+            );
 
           case XmlState.Open:
             textQueue.addLast(node);
