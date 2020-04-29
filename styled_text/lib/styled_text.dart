@@ -84,23 +84,94 @@ class IconStyle extends TextStyle {
   IconStyle(this.icon);
 }
 
+///
+/// Text widget with formatting via tags.
+/// 
+/// Formatting is specified as xml tags. For each tag, you can specify a style in the [styles] parameter.
+/// 
+/// Example:
+/// ```dart
+/// StyledText(
+///   text: '<red>Red</red> text.',
+///   styles: [
+///     'red': TextStyle(color: Colors.red),
+///   ],
+/// )
+/// ```
+/// See also:
+/// 
+/// * [TextStyle], which discusses how to style text.
+/// 
 class StyledText extends StatefulWidget {
+
+  /// The text to display in this widget. The text must be valid xml.
   final String text;
+
+  /// Do not ignore line feeds in the source text.
+  final bool isNewLineAsBreaks;
+
+  /// Default text style.
   final TextStyle style;
+
+  /// Style map for tags in text.
+  /// 
+  /// Example:
+  /// ```dart
+  /// StyledText(
+  ///   text: '<red>Red</red> text.',
+  ///   styles: [
+  ///     'red': TextStyle(color: Colors.red),
+  ///   ],
+  /// )
+  /// ```
   final Map<String, TextStyle> styles;
 
+  /// How the text should be aligned horizontally.
   final TextAlign textAlign;
+
+  /// The directionality of the text.
   final TextDirection textDirection;
+
+  /// Whether the text should break at soft line breaks.
+  ///
+  /// If false, the glyphs in the text will be positioned as if there was unlimited horizontal space.
   final bool softWrap;
+
+  /// How visual overflow should be handled.
   final TextOverflow overflow;
+
+  /// The number of font pixels for each logical pixel.
+  ///
+  /// For example, if the text scale factor is 1.5, text will be 50% larger than
+  /// the specified font size.
   final double textScaleFactor;
+
+  /// An optional maximum number of lines for the text to span, wrapping if necessary.
+  /// If the text exceeds the given number of lines, it will be truncated according
+  /// to [overflow].
+  ///
+  /// If this is 1, text will not wrap. Otherwise, text will be wrapped at the
+  /// edge of the box.
   final int maxLines;
+
+  /// Used to select a font when the same Unicode character can
+  /// be rendered differently, depending on the locale.
+  ///
+  /// It's rarely necessary to set this property. By default its value
+  /// is inherited from the enclosing app with `Localizations.localeOf(context)`.
+  ///
+  /// See [RenderParagraph.locale] for more information.
   final Locale locale;
+
+  /// {@macro flutter.painting.textPainter.strutStyle}
   final StrutStyle strutStyle;
 
+  /// Create a text widget with formatting via tags. 
+  ///
   StyledText({
     Key key,
     @required this.text,
+    this.isNewLineAsBreaks = false,
     this.style,
     @required this.styles,
     this.textAlign = TextAlign.start,
@@ -141,6 +212,10 @@ class _StyledTextState extends State<StyledText> {
   void _updateTextSpans() {
     if (_text != widget.text) {
       _text = widget.text;
+
+      if (widget.isNewLineAsBreaks) {
+        _text = _text.replaceAll("\n", '<br/>');
+      }
 
       _textSpans = null;
       TextStyle defaultStyle =

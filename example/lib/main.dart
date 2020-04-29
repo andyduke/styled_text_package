@@ -70,19 +70,46 @@ class DemoPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+
+            // Simple formatted text
             StyledText(
               text: 'Test: <b>bold</b> text.',
               styles: {
                 'b': TextStyle(fontWeight: FontWeight.bold),
               },
             ),
+
+            // Text with quotes
             const SizedBox(height: 20),
             StyledText(
-              text: 'Quotes Test: <b>&quot;bold&quot;</b> text.',
+              text: 'Quoted Test: <b>&quot;bold&quot;</b> text.',
               styles: {
                 'b': TextStyle(fontWeight: FontWeight.bold),
               },
             ),
+
+            // Multiline text without breaks
+            const SizedBox(height: 20),
+            StyledText(
+              text: """Multiline text 
+(wo breaks)""",
+              styles: {
+                'b': TextStyle(fontWeight: FontWeight.bold),
+              },
+            ),
+
+            // Multiline text with breaks
+            const SizedBox(height: 20),
+            StyledText(
+              text: """Multiline text
+(with breaks)""",
+              isNewLineAsBreaks: true,
+              styles: {
+                'b': TextStyle(fontWeight: FontWeight.bold),
+              },
+            ),
+
+            // Custom tags styles
             const SizedBox(height: 20),
             StyledText(
               text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
@@ -92,6 +119,8 @@ class DemoPage extends StatelessWidget {
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
               },
             ),
+
+            // Icon
             const SizedBox(height: 20),
             StyledText(
               text: 'Text with alarm <alarm/> icon.',
@@ -99,6 +128,8 @@ class DemoPage extends StatelessWidget {
                 'alarm': IconStyle(Icons.alarm),
               },
             ),
+
+            // Action
             const SizedBox(height: 20),
             StyledText(
               text: 'Text with <action>action</action> inside.',
@@ -109,6 +140,8 @@ class DemoPage extends StatelessWidget {
                 ),
               },
             ),
+
+            // Link
             const SizedBox(height: 20),
             StyledText(
               text:
