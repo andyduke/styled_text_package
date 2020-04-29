@@ -108,7 +108,11 @@ class StyledText extends StatefulWidget {
   final String text;
 
   /// Do not ignore line feeds in the source text.
+  @Deprecated('will be removed in 1.0.2, use newLineAsBreaks instead')
   final bool isNewLineAsBreaks;
+
+  /// Treat newlines as line breaks.
+  final bool newLineAsBreaks;
 
   /// Default text style.
   final TextStyle style;
@@ -171,7 +175,8 @@ class StyledText extends StatefulWidget {
   StyledText({
     Key key,
     @required this.text,
-    this.isNewLineAsBreaks = false,
+    @Deprecated('will be removed in 1.0.2, use newLineAsBreaks instead') this.isNewLineAsBreaks = false,
+    this.newLineAsBreaks = false,
     this.style,
     @required this.styles,
     this.textAlign = TextAlign.start,
@@ -213,7 +218,7 @@ class _StyledTextState extends State<StyledText> {
     if (_text != widget.text) {
       _text = widget.text;
 
-      if (widget.isNewLineAsBreaks) {
+      if (widget.newLineAsBreaks || widget.isNewLineAsBreaks) {
         _text = _text.replaceAll("\n", '<br/>');
       }
 

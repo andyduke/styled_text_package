@@ -1,3 +1,7 @@
+## 1.0.1+1
+
+* The parameter isNewLineAsBreaks has been renamed to newLineAsBreaks, isNewLineAsBreaks is deprecated.
+
 ## 1.0.1
 
 * The parameter isNewLineAsBreaks has been added, indicating not to ignore line breaks in the source text.

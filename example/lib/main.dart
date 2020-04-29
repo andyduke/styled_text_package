@@ -103,7 +103,7 @@ class DemoPage extends StatelessWidget {
             StyledText(
               text: """Multiline text
 (with breaks)""",
-              isNewLineAsBreaks: true,
+              newLineAsBreaks: true,
               styles: {
                 'b': TextStyle(fontWeight: FontWeight.bold),
               },
