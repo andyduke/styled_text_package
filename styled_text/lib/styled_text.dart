@@ -208,29 +208,35 @@ class _StyledTextState extends State<StyledText> {
     super.didUpdateWidget(oldWidget);
 
     if ((widget.text != oldWidget.text) ||
-        (widget.styles != oldWidget.styles)) {
-      _updateTextSpans();
+        (widget.styles != oldWidget.styles) ||
+        (widget.style != oldWidget.style) ||
+        (widget.newLineAsBreaks != oldWidget.newLineAsBreaks) ||
+        (widget.isNewLineAsBreaks != oldWidget.isNewLineAsBreaks)) {
+      _updateTextSpans(force: true);
     }
   }
 
   // Parse text
-  void _updateTextSpans() {
-    if (_text != widget.text) {
+  void _updateTextSpans({bool force = false}) {
+    if (_text != widget.text || force) {
       _text = widget.text;
 
+      String textValue = _text;
+
       if (widget.newLineAsBreaks || widget.isNewLineAsBreaks) {
-        _text = _text.replaceAll("\n", '<br/>');
+        textValue = textValue.replaceAll("\n", '<br/>');
       }
 
       _textSpans = null;
-      TextStyle defaultStyle =
-          widget.style ?? DefaultTextStyle.of(context).style;
+      TextStyle defaultStyle = (widget.style != null)
+          ? DefaultTextStyle.of(context).style.merge(widget.style)
+          : DefaultTextStyle.of(context).style;
       TextSpan node = TextSpan(style: defaultStyle, children: []);
       ListQueue<TextSpan> textQueue = ListQueue();
       Map<String, String> attributes;
 
       var xmlStreamer = new XmlStreamer(
-          '<?xml version="1.0" encoding="UTF-8"?><root>' + _text + '</root>');
+          '<?xml version="1.0" encoding="UTF-8"?><root>' + textValue + '</root>');
       xmlStreamer.read().listen((e) {
         switch (e.state) {
           case XmlState.Text:

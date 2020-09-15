@@ -1,3 +1,8 @@
+## 1.0.1+2
+
+* Improved support for DefaultTextSyle, now `style` property is merging with DefaultTextSyle.
+* Fixed a bug where no redrawing occurred when changing `style` property.
+
 ## 1.0.1+1
 
 * The parameter isNewLineAsBreaks has been renamed to newLineAsBreaks, isNewLineAsBreaks is deprecated.
