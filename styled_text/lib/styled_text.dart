@@ -227,7 +227,6 @@ class _StyledTextState extends State<StyledText> {
         textValue = textValue.replaceAll("\n", '<br/>');
       }
 
-      _textSpans = null;
       TextStyle defaultStyle = (widget.style != null)
           ? DefaultTextStyle.of(context).style.merge(widget.style)
           : DefaultTextStyle.of(context).style;
@@ -310,6 +309,8 @@ class _StyledTextState extends State<StyledText> {
           setState(() {
             _textSpans = node;
           });
+        } else {
+          _textSpans = node;
         }
       });
     }

@@ -1,3 +1,7 @@
+## 1.0.1+3
+
+* Fixed flickering when changing style, styles and text.
+
 ## 1.0.1+2
 
 * Improved support for DefaultTextSyle, now `style` property is merging with DefaultTextSyle.
