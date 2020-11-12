@@ -13,7 +13,7 @@ In your flutter project add the dependency:
 ```dart
 dependencies:
   ...
-  styled_text: ^1.0.0
+  styled_text: ^1.0.2
 ```
 
 Import package:
@@ -79,3 +79,15 @@ StyledText(
 )
 ```
 ![](https://github.com/andyduke/styled_text_package/blob/master/screenshots/4-link.png)
+
+---
+
+An example of using a widget with the ability to select rich text:
+```dart
+StyledText.selectable(
+  text: 'Test: <bold>bold</bold> text.',
+  styles: {
+    'bold': TextStyle(fontWeight: FontWeight.bold),
+  },
+)
+```
