@@ -1,4 +1,4 @@
-## 1.0.2
+## 1.0.2+1
 
 * Added the `StyledText.selectable` constructor to create selectable text.
 * Added guidance on escaping XML special characters in text.
