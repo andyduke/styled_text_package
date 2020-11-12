@@ -1,3 +1,9 @@
+## 1.0.2
+
+* Added the `StyledText.selectable` constructor to create selectable text.
+* Added guidance on escaping XML special characters in text.
+* The deprecated `isNewLineAsBreaks` parameter has been removed.
+
 ## 1.0.1+3
 
 * Fixed flickering when changing style, styles and text.

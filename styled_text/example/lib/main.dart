@@ -112,8 +112,7 @@ class DemoPage extends StatelessWidget {
               text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
               styles: {
                 'bold': TextStyle(fontWeight: FontWeight.bold),
-                'red':
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                'red': TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
               },
             ),
 
@@ -141,13 +140,21 @@ class DemoPage extends StatelessWidget {
             // Text with link
             const SizedBox(height: 20),
             StyledText(
-              text:
-                  'Text with <link href="https://flutter.dev">link</link> inside.',
+              text: 'Text with <link href="https://flutter.dev">link</link> inside.',
               styles: {
                 'link': ActionTextStyle(
                   decoration: TextDecoration.underline,
                   onTap: (_, attrs) => _openLink(context, attrs),
                 ),
+              },
+            ),
+
+            const Divider(height: 40),
+
+            StyledText.selectable(
+              text: 'Test: selectable <b>bold</b> text.',
+              styles: {
+                'b': TextStyle(fontWeight: FontWeight.bold),
               },
             ),
           ],
