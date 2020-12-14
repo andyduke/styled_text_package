@@ -4,81 +4,28 @@ import 'dart:collection';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:styled_text/action_text_style.dart';
+import 'package:styled_text/custom_text_style.dart';
 import 'package:xmlstream/xmlstream.dart';
 
-typedef ActionTappedCallback = void Function(
-    TextSpan text, Map<String, String> attributes);
+export 'custom_text_style.dart';
+export 'action_text_style.dart';
 
-class _StyledTextRecoginzer extends TapGestureRecognizer {
-  ActionTappedCallback onTextTap;
-  TextSpan text;
-  Map<String, String> attributes;
-
-  _StyledTextRecoginzer({
-    this.text,
-    this.attributes,
-    this.onTextTap,
-  }) : super() {
-    this.onTap = _textTap;
-  }
-
-  void _textTap() {
-    if (onTextTap != null) {
-      onTextTap(text, attributes);
-    }
-  }
-}
-
-class ActionTextStyle extends TextStyle {
-  final ActionTappedCallback onTap;
-
-  ActionTextStyle({
-    bool inherit = true,
-    Color color,
-    double fontSize,
-    FontWeight fontWeight,
-    FontStyle fontStyle,
-    double letterSpacing,
-    double wordSpacing,
-    TextBaseline textBaseline,
-    double height,
-    Locale locale,
-    Paint foreground,
-    Paint background,
-    List<Shadow> shadows,
-    TextDecoration decoration,
-    Color decorationColor,
-    TextDecorationStyle decorationStyle,
-    String debugLabel,
-    String fontFamily,
-    List<String> fontFamilyFallback,
-    String package,
-    this.onTap,
-  }) : super(
-          inherit: inherit,
-          color: color,
-          fontSize: fontSize,
-          fontWeight: fontWeight,
-          fontStyle: fontStyle,
-          letterSpacing: letterSpacing,
-          wordSpacing: wordSpacing,
-          textBaseline: textBaseline,
-          height: height,
-          locale: locale,
-          foreground: foreground,
-          background: background,
-          shadows: shadows,
-          decoration: decoration,
-          decorationColor: decorationColor,
-          decorationStyle: decorationStyle,
-          debugLabel: debugLabel,
-          fontFamily: fontFamily,
-          fontFamilyFallback: fontFamilyFallback,
-          package: package,
-        );
-}
-
+///
+/// The style to insert the icon into styled text.
+///
+/// Example:
+/// ```dart
+/// StyledText(
+///   text: 'Text with alarm <alarm/> icon.',
+///   styles: {
+///     'alarm': IconStyle(Icons.alarm),
+///   },
+/// )
+/// ```
+///
 class IconStyle extends TextStyle {
+  /// Icon to insert into text
   final IconData icon;
 
   IconStyle(this.icon);
@@ -105,6 +52,7 @@ class IconStyle extends TextStyle {
 class StyledText extends StatefulWidget {
   /// The text to display in this widget. The text must be valid xml.
   ///
+  /// Tag attributes must be enclosed in double quotes.
   /// You need to escape specific XML characters in text:
   ///
   /// ```
@@ -321,10 +269,7 @@ class _StyledTextState extends State<StyledText> {
       ListQueue<TextSpan> textQueue = ListQueue();
       Map<String, String> attributes;
 
-      var xmlStreamer = new XmlStreamer(
-          '<?xml version="1.0" encoding="UTF-8"?><root>' +
-              textValue +
-              '</root>');
+      var xmlStreamer = new XmlStreamer('<?xml version="1.0" encoding="UTF-8"?><root>' + textValue + '</root>');
       xmlStreamer.read().listen((e) {
         switch (e.state) {
           case XmlState.Text:
@@ -345,7 +290,7 @@ class _StyledTextState extends State<StyledText> {
             if (e.value == 'br') {
               node = TextSpan(text: "\n");
             } else {
-              final TextStyle style = widget.styles[e.value];
+              TextStyle style = widget.styles[e.value];
               attributes = {};
 
               if (style is IconStyle) {
@@ -357,13 +302,11 @@ class _StyledTextState extends State<StyledText> {
                   ),
                 );
               } else {
-                final _StyledTextRecoginzer recognizer =
-                    ((style is ActionTextStyle) && style.onTap != null)
-                        ? _StyledTextRecoginzer(onTextTap: style.onTap)
-                        : null;
+                final _StyledTextRecoginzer recognizer = ((style is ActionTextStyle) && style.onTap != null)
+                    ? _StyledTextRecoginzer(onTextTap: style.onTap)
+                    : null;
 
-                node = TextSpan(
-                    style: style, children: [], recognizer: recognizer);
+                node = TextSpan(style: style, children: [], recognizer: recognizer);
               }
             }
 
@@ -374,6 +317,10 @@ class _StyledTextState extends State<StyledText> {
               (node.recognizer as _StyledTextRecoginzer)
                 ..text = node
                 ..attributes = attributes;
+            }
+
+            if (node.style is CustomTextStyle) {
+              (node.style as CustomTextStyle).configure(attributes);
             }
 
             final TextSpan child = node;
@@ -415,8 +362,7 @@ class _StyledTextState extends State<StyledText> {
         textDirection: widget.textDirection,
         softWrap: widget.softWrap,
         overflow: widget.overflow,
-        textScaleFactor:
-            widget.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
+        textScaleFactor: widget.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
         maxLines: widget.maxLines,
         locale: widget.locale,
         strutStyle: widget.strutStyle,
@@ -443,12 +389,31 @@ class _StyledTextState extends State<StyledText> {
         textDirection: widget.textDirection,
         // softWrap
         // overflow
-        textScaleFactor:
-            widget.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
+        textScaleFactor: widget.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
         maxLines: widget.maxLines,
         // locale
         strutStyle: widget.strutStyle,
       );
+    }
+  }
+}
+
+class _StyledTextRecoginzer extends TapGestureRecognizer {
+  ActionTappedCallback onTextTap;
+  TextSpan text;
+  Map<String, String> attributes;
+
+  _StyledTextRecoginzer({
+    this.text,
+    this.attributes,
+    this.onTextTap,
+  }) : super() {
+    this.onTap = _textTap;
+  }
+
+  void _textTap() {
+    if (onTextTap != null) {
+      onTextTap(text, attributes);
     }
   }
 }

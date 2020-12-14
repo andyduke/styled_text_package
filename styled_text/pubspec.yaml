@@ -1,6 +1,6 @@
 name: styled_text
 description: Text widget with formatting via tags. Makes it easier to use formatted text in multilingual applications.
-version: 1.0.2+1
+version: 1.0.3
 author: Andy Chentsov <chentsov@gmail.com>
 homepage: https://github.com/andyduke/styled_text_package/tree/master/styled_text
 repository: https://github.com/andyduke/styled_text_package
