@@ -269,7 +269,10 @@ class _StyledTextState extends State<StyledText> {
       ListQueue<TextSpan> textQueue = ListQueue();
       Map<String, String> attributes;
 
-      var xmlStreamer = new XmlStreamer('<?xml version="1.0" encoding="UTF-8"?><root>' + textValue + '</root>');
+      var xmlStreamer = new XmlStreamer(
+          '<?xml version="1.0" encoding="UTF-8"?><root>' +
+              textValue +
+              '</root>');
       xmlStreamer.read().listen((e) {
         switch (e.state) {
           case XmlState.Text:
@@ -302,11 +305,13 @@ class _StyledTextState extends State<StyledText> {
                   ),
                 );
               } else {
-                final _StyledTextRecoginzer recognizer = ((style is ActionTextStyle) && style.onTap != null)
-                    ? _StyledTextRecoginzer(onTextTap: style.onTap)
-                    : null;
+                final _StyledTextRecoginzer recognizer =
+                    ((style is ActionTextStyle) && style.onTap != null)
+                        ? _StyledTextRecoginzer(onTextTap: style.onTap)
+                        : null;
 
-                node = TextSpan(style: style, children: [], recognizer: recognizer);
+                node = TextSpan(
+                    style: style, children: [], recognizer: recognizer);
               }
             }
 
@@ -362,7 +367,8 @@ class _StyledTextState extends State<StyledText> {
         textDirection: widget.textDirection,
         softWrap: widget.softWrap,
         overflow: widget.overflow,
-        textScaleFactor: widget.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
+        textScaleFactor:
+            widget.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
         maxLines: widget.maxLines,
         locale: widget.locale,
         strutStyle: widget.strutStyle,
@@ -389,7 +395,8 @@ class _StyledTextState extends State<StyledText> {
         textDirection: widget.textDirection,
         // softWrap
         // overflow
-        textScaleFactor: widget.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
+        textScaleFactor:
+            widget.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
         maxLines: widget.maxLines,
         // locale
         strutStyle: widget.strutStyle,

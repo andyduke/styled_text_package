@@ -1,9 +1,8 @@
-library styled_text;
-
 import 'dart:ui' as ui show TextStyle, ParagraphStyle, FontFeature;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+/// @nodoc
 class CustomStyle with Diagnosticable implements TextStyle {
   /// Basic text style.
   final TextStyle baseStyle;

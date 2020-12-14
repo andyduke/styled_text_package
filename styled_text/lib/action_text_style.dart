@@ -1,5 +1,3 @@
-library styled_text;
-
 import 'package:flutter/material.dart';
 
 typedef ActionTappedCallback = void Function(TextSpan text, Map<String, String> attributes);

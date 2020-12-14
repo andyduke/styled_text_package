@@ -1,5 +1,3 @@
-library styled_text;
-
 import 'package:flutter/material.dart';
 import 'package:styled_text/custom_style.dart';
 

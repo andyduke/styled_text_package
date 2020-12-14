@@ -13,7 +13,7 @@ In your flutter project add the dependency:
 ```dart
 dependencies:
   ...
-  styled_text: ^1.0.2
+  styled_text: ^[version]
 ```
 
 Import package:

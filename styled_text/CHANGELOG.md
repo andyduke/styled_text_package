@@ -1,4 +1,4 @@
-## 1.0.3
+## 1.0.3+1
 
 * Added `CustomTextStyle` text style, for which you can specify handling of tag attributes.
 

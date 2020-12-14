@@ -113,7 +113,8 @@ class DemoPage extends StatelessWidget {
                 text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
                 styles: {
                   'bold': TextStyle(fontWeight: FontWeight.bold),
-                  'red': TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                  'red':
+                      TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
                 },
               ),
 
@@ -141,7 +142,8 @@ class DemoPage extends StatelessWidget {
               // Text with link
               const SizedBox(height: 20),
               StyledText(
-                text: 'Text with <link href="https://flutter.dev">link</link> inside.',
+                text:
+                    'Text with <link href="https://flutter.dev">link</link> inside.',
                 styles: {
                   'link': ActionTextStyle(
                     decoration: TextDecoration.underline,
@@ -164,7 +166,8 @@ class DemoPage extends StatelessWidget {
 
               // Text with custom color tag
               StyledText(
-                text: 'Text with custom <color text="#ff5500">color</color> text.',
+                text:
+                    'Text with custom <color text="#ff5500">color</color> text.',
                 styles: {
                   'color': CustomTextStyle(
                       baseStyle: TextStyle(fontStyle: FontStyle.italic),
@@ -172,9 +175,13 @@ class DemoPage extends StatelessWidget {
                         if (attributes.containsKey('text') &&
                             (attributes['text'].substring(0, 1) == '#') &&
                             attributes['text'].length >= 6) {
-                          final String hexColor = attributes['text'].substring(1);
-                          final String alphaChannel = (hexColor.length == 8) ? hexColor.substring(6, 8) : 'FF';
-                          final Color color = Color(int.parse('0x$alphaChannel' + hexColor.substring(0, 6)));
+                          final String hexColor =
+                              attributes['text'].substring(1);
+                          final String alphaChannel = (hexColor.length == 8)
+                              ? hexColor.substring(6, 8)
+                              : 'FF';
+                          final Color color = Color(int.parse(
+                              '0x$alphaChannel' + hexColor.substring(0, 6)));
                           return baseStyle.copyWith(color: color);
                         } else {
                           return baseStyle;
