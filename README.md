@@ -82,6 +82,31 @@ StyledText(
 
 ---
 
+Example of using a custom tag attributes handler, highlights text with the color specified in the "text" attribute of the tag:
+```dart
+StyledText(
+  text: 'Text with custom <color text="#ff5500">color</color> text.',
+  styles: {
+    'color': CustomTextStyle(
+        baseStyle: TextStyle(fontStyle: FontStyle.italic),
+        parse: (baseStyle, attributes) {
+          if (attributes.containsKey('text') &&
+              (attributes['text'].substring(0, 1) == '#') &&
+              attributes['text'].length >= 6) {
+            final String hexColor = attributes['text'].substring(1);
+            final String alphaChannel = (hexColor.length == 8) ? hexColor.substring(6, 8) : 'FF';
+            final Color color = Color(int.parse('0x$alphaChannel' + hexColor.substring(0, 6)));
+            return baseStyle.copyWith(color: color);
+          } else {
+            return baseStyle;
+          }
+        }),
+  },
+)
+```
+
+---
+
 An example of using a widget with the ability to select rich text:
 ```dart
 StyledText.selectable(
