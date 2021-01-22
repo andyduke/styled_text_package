@@ -1,3 +1,8 @@
+## 1.0.3+2
+
+* Made a workaround to keep whitespace between tags: `<b>bold</b>&space;<i>italic</i>`.
+* Added `size`, `color` and `backgroundColor` parameters to `IconStyle` class.
+
 ## 1.0.3+1
 
 * Added `CustomTextStyle` text style, for which you can specify handling of tag attributes.
