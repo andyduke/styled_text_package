@@ -63,6 +63,7 @@ class StyledText extends StatefulWidget {
   /// &                   &amp;
   /// <                   &lt;
   /// >                   &gt;
+  /// <space>             &space;
   /// ```
   ///
   final String text;
@@ -279,6 +280,8 @@ class _StyledTextState extends State<StyledText> {
           case XmlState.CDATA:
             node.children.add(TextSpan(
                 text: e.value
+                    .replaceAll('&space;', ' ')
+                    .replaceAll('&nbsp;', ' ')
                     .replaceAll('&quot;', '"')
                     .replaceAll('&apos;', "'")
                     .replaceAll('&amp;', '&')

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-typedef ActionTappedCallback = void Function(TextSpan text, Map<String, String> attributes);
+typedef ActionTappedCallback = void Function(
+    TextSpan text, Map<String, String> attributes);
 
 ///
 /// A text style to make the text tappable.
