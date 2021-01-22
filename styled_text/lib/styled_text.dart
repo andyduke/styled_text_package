@@ -28,7 +28,21 @@ class IconStyle extends TextStyle {
   /// Icon to insert into text
   final IconData icon;
 
-  IconStyle(this.icon);
+  /// Icon color
+  final Color color;
+
+  /// Icon size
+  final double size;
+
+  /// Icon background color
+  final Color backgroundColor;
+
+  IconStyle(
+    this.icon, {
+    this.color,
+    this.size,
+    this.backgroundColor,
+  });
 }
 
 ///
@@ -305,6 +319,9 @@ class _StyledTextState extends State<StyledText> {
                   style: TextStyle(
                     fontFamily: style.icon.fontFamily,
                     package: style.icon.fontPackage,
+                    color: style.color,
+                    fontSize: style.size,
+                    backgroundColor: style.backgroundColor,
                   ),
                 );
               } else {
