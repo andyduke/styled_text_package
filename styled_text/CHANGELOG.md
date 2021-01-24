@@ -1,3 +1,7 @@
+## 1.0.3+3
+
+* Fixed a bug when the space between two tags was eaten.
+
 ## 1.0.3+2
 
 * Made a workaround to keep whitespace between tags: `<b>bold</b>&space;<i>italic</i>`.

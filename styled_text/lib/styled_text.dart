@@ -287,7 +287,8 @@ class _StyledTextState extends State<StyledText> {
       var xmlStreamer = new XmlStreamer(
           '<?xml version="1.0" encoding="UTF-8"?><root>' +
               textValue +
-              '</root>');
+              '</root>',
+          trimSpaces: false);
       xmlStreamer.read().listen((e) {
         switch (e.state) {
           case XmlState.Text:
