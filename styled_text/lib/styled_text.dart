@@ -349,9 +349,11 @@ class _StyledTextState extends State<StyledText> {
               (node.style as CustomTextStyle).configure(attributes);
             }
 
-            final TextSpan child = node;
-            node = textQueue.removeLast();
-            node.children.add(child);
+            if (textQueue.isNotEmpty) {
+              final TextSpan child = node;
+              node = textQueue.removeLast();
+              node.children.add(child);
+            }
 
             break;
 

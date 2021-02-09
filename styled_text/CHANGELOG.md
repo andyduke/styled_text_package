@@ -1,3 +1,7 @@
+## 1.0.3+4
+
+* Improved handling of broken xml.
+
 ## 1.0.3+3
 
 * Fixed a bug when the space between two tags was eaten.
