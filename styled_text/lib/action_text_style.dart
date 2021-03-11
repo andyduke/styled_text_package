@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-typedef ActionTappedCallback = void Function(
-    TextSpan text, Map<String, String> attributes);
+typedef ActionTappedCallback = void Function(TextSpan? text, Map<String?, String?> attributes);
 
 ///
 /// A text style to make the text tappable.
@@ -24,29 +23,29 @@ typedef ActionTappedCallback = void Function(
 ///
 class ActionTextStyle extends TextStyle {
   /// Called when the text is tapped or otherwise activated.
-  final ActionTappedCallback onTap;
+  final ActionTappedCallback? onTap;
 
   ActionTextStyle({
     bool inherit = true,
-    Color color,
-    double fontSize,
-    FontWeight fontWeight,
-    FontStyle fontStyle,
-    double letterSpacing,
-    double wordSpacing,
-    TextBaseline textBaseline,
-    double height,
-    Locale locale,
-    Paint foreground,
-    Paint background,
-    List<Shadow> shadows,
-    TextDecoration decoration,
-    Color decorationColor,
-    TextDecorationStyle decorationStyle,
-    String debugLabel,
-    String fontFamily,
-    List<String> fontFamilyFallback,
-    String package,
+    Color? color,
+    double? fontSize,
+    FontWeight? fontWeight,
+    FontStyle? fontStyle,
+    double? letterSpacing,
+    double? wordSpacing,
+    TextBaseline? textBaseline,
+    double? height,
+    Locale? locale,
+    Paint? foreground,
+    Paint? background,
+    List<Shadow>? shadows,
+    TextDecoration? decoration,
+    Color? decorationColor,
+    TextDecorationStyle? decorationStyle,
+    String? debugLabel,
+    String? fontFamily,
+    List<String>? fontFamilyFallback,
+    String? package,
     this.onTap,
   }) : super(
           inherit: inherit,

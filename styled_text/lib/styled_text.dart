@@ -29,13 +29,13 @@ class IconStyle extends TextStyle {
   final IconData icon;
 
   /// Icon color
-  final Color color;
+  final Color? color;
 
   /// Icon size
-  final double size;
+  final double? size;
 
   /// Icon background color
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   IconStyle(
     this.icon, {
@@ -89,7 +89,7 @@ class StyledText extends StatefulWidget {
   final bool selectable;
 
   /// Default text style.
-  final TextStyle style;
+  final TextStyle? style;
 
   /// Style map for tags in text.
   ///
@@ -108,7 +108,7 @@ class StyledText extends StatefulWidget {
   final TextAlign textAlign;
 
   /// The directionality of the text.
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
 
   /// Whether the text should break at soft line breaks.
   ///
@@ -130,7 +130,7 @@ class StyledText extends StatefulWidget {
   ///
   /// If this is 1, text will not wrap. Otherwise, text will be wrapped at the
   /// edge of the box.
-  final int maxLines;
+  final int? maxLines;
 
   /// Used to select a font when the same Unicode character can
   /// be rendered differently, depending on the locale.
@@ -139,24 +139,24 @@ class StyledText extends StatefulWidget {
   /// is inherited from the enclosing app with `Localizations.localeOf(context)`.
   ///
   /// See [RenderParagraph.locale] for more information.
-  final Locale locale;
+  final Locale? locale;
 
   /// {@macro flutter.painting.textPainter.strutStyle}
-  final StrutStyle strutStyle;
+  final StrutStyle? strutStyle;
 
   /// Create a text widget with formatting via tags.
   ///
   StyledText({
-    Key key,
-    @required this.text,
+    Key? key,
+    required this.text,
     this.newLineAsBreaks = false,
     this.style,
-    @required this.styles,
+    required this.styles,
     this.textAlign = TextAlign.start,
     this.textDirection,
     this.softWrap = true,
     this.overflow = TextOverflow.clip,
-    this.textScaleFactor,
+    this.textScaleFactor = 1.0,
     this.maxLines,
     this.locale,
     this.strutStyle,
@@ -181,30 +181,30 @@ class StyledText extends StatefulWidget {
   ///
   /// See [SelectableText.rich] for more options.
   StyledText.selectable(
-      {Key key,
-      @required this.text,
+      {Key? key,
+      required this.text,
       this.newLineAsBreaks = false,
       this.style,
-      @required this.styles,
+      required this.styles,
       this.textAlign = TextAlign.start,
       this.textDirection,
-      this.textScaleFactor,
+      this.textScaleFactor = 1.0,
       this.maxLines,
       this.strutStyle,
-      FocusNode focusNode,
+      FocusNode? focusNode,
       bool showCursor = false,
       bool autofocus = false,
-      ToolbarOptions toolbarOptions,
+      ToolbarOptions? toolbarOptions,
       double cursorWidth = 2.0,
-      double cursorHeight,
-      Radius cursorRadius,
-      Color cursorColor,
+      double? cursorHeight,
+      Radius? cursorRadius,
+      Color? cursorColor,
       DragStartBehavior dragStartBehavior = DragStartBehavior.start,
       bool enableInteractiveSelection = true,
-      GestureTapCallback onTap,
-      ScrollPhysics scrollPhysics,
-      TextHeightBehavior textHeightBehavior,
-      TextWidthBasis textWidthBasis})
+      GestureTapCallback? onTap,
+      ScrollPhysics? scrollPhysics,
+      TextHeightBehavior? textHeightBehavior,
+      TextWidthBasis? textWidthBasis})
       : this.selectable = true,
         this.softWrap = true,
         this.overflow = TextOverflow.clip,
@@ -212,7 +212,11 @@ class StyledText extends StatefulWidget {
         this._focusNode = focusNode,
         this._showCursor = showCursor,
         this._autofocus = autofocus,
-        this._toolbarOptions = toolbarOptions,
+        this._toolbarOptions = toolbarOptions ??
+            const ToolbarOptions(
+              selectAll: true,
+              copy: true,
+            ),
         this._cursorWidth = cursorWidth,
         this._cursorHeight = cursorHeight,
         this._cursorRadius = cursorRadius,
@@ -225,28 +229,28 @@ class StyledText extends StatefulWidget {
         this._textWidthBasis = textWidthBasis,
         super(key: key);
 
-  final FocusNode _focusNode;
+  final FocusNode? _focusNode;
   final bool _showCursor;
   final bool _autofocus;
-  final ToolbarOptions _toolbarOptions;
-  final double _cursorWidth;
-  final double _cursorHeight;
-  final Radius _cursorRadius;
-  final Color _cursorColor;
+  final ToolbarOptions? _toolbarOptions;
+  final double? _cursorWidth;
+  final double? _cursorHeight;
+  final Radius? _cursorRadius;
+  final Color? _cursorColor;
   final DragStartBehavior _dragStartBehavior;
   final bool _enableInteractiveSelection;
-  final GestureTapCallback _onTap;
-  final ScrollPhysics _scrollPhysics;
-  final TextHeightBehavior _textHeightBehavior;
-  final TextWidthBasis _textWidthBasis;
+  final GestureTapCallback? _onTap;
+  final ScrollPhysics? _scrollPhysics;
+  final TextHeightBehavior? _textHeightBehavior;
+  final TextWidthBasis? _textWidthBasis;
 
   @override
   _StyledTextState createState() => _StyledTextState();
 }
 
 class _StyledTextState extends State<StyledText> {
-  String _text;
-  TextSpan _textSpans;
+  String? _text;
+  TextSpan? _textSpans;
 
   @override
   void didChangeDependencies() {
@@ -271,7 +275,8 @@ class _StyledTextState extends State<StyledText> {
     if (_text != widget.text || force) {
       _text = widget.text;
 
-      String textValue = _text;
+      String? textValue = _text;
+      if (textValue == null) return;
 
       if (widget.newLineAsBreaks) {
         textValue = textValue.replaceAll("\n", '<br/>');
@@ -282,27 +287,28 @@ class _StyledTextState extends State<StyledText> {
           : DefaultTextStyle.of(context).style;
       TextSpan node = TextSpan(style: defaultStyle, children: []);
       ListQueue<TextSpan> textQueue = ListQueue();
-      Map<String, String> attributes;
+      Map<String?, String?>? attributes;
 
-      var xmlStreamer = new XmlStreamer(
-          '<?xml version="1.0" encoding="UTF-8"?><root>' +
-              textValue +
-              '</root>',
-          trimSpaces: false);
+      var xmlStreamer =
+          new XmlStreamer('<?xml version="1.0" encoding="UTF-8"?><root>' + textValue + '</root>', trimSpaces: false);
       xmlStreamer.read().listen((e) {
         switch (e.state) {
           case XmlState.Text:
           case XmlState.CDATA:
-            node.children.add(TextSpan(
-                text: e.value
-                    .replaceAll('&space;', ' ')
-                    .replaceAll('&nbsp;', ' ')
-                    .replaceAll('&quot;', '"')
-                    .replaceAll('&apos;', "'")
-                    .replaceAll('&amp;', '&')
-                    .replaceAll('&lt;', "<")
-                    .replaceAll('&gt;', ">"),
-                recognizer: node.recognizer));
+            if (node.children != null) {
+              node.children!.add(TextSpan(
+                  text: (e.value != null)
+                      ? e.value!
+                          .replaceAll('&space;', ' ')
+                          .replaceAll('&nbsp;', ' ')
+                          .replaceAll('&quot;', '"')
+                          .replaceAll('&apos;', "'")
+                          .replaceAll('&amp;', '&')
+                          .replaceAll('&lt;', "<")
+                          .replaceAll('&gt;', ">")
+                      : e.value,
+                  recognizer: node.recognizer));
+            }
             break;
 
           case XmlState.Open:
@@ -311,7 +317,7 @@ class _StyledTextState extends State<StyledText> {
             if (e.value == 'br') {
               node = TextSpan(text: "\n");
             } else {
-              TextStyle style = widget.styles[e.value];
+              TextStyle? style = (e.value != null) ? widget.styles[e.value!] : null;
               attributes = {};
 
               if (style is IconStyle) {
@@ -326,13 +332,11 @@ class _StyledTextState extends State<StyledText> {
                   ),
                 );
               } else {
-                final _StyledTextRecoginzer recognizer =
-                    ((style is ActionTextStyle) && style.onTap != null)
-                        ? _StyledTextRecoginzer(onTextTap: style.onTap)
-                        : null;
+                final _StyledTextRecoginzer? recognizer = ((style is ActionTextStyle) && style.onTap != null)
+                    ? _StyledTextRecoginzer(onTextTap: style.onTap)
+                    : null;
 
-                node = TextSpan(
-                    style: style, children: [], recognizer: recognizer);
+                node = TextSpan(style: style, children: [], recognizer: recognizer);
               }
             }
 
@@ -352,13 +356,15 @@ class _StyledTextState extends State<StyledText> {
             if (textQueue.isNotEmpty) {
               final TextSpan child = node;
               node = textQueue.removeLast();
-              node.children.add(child);
+              node.children?.add(child);
             }
 
             break;
 
           case XmlState.Attribute:
-            attributes[e.key] = e.value;
+            if (e.key != null && attributes != null) {
+              attributes![e.key] = e.value;
+            }
             break;
 
           case XmlState.Comment:
@@ -390,21 +396,20 @@ class _StyledTextState extends State<StyledText> {
         textDirection: widget.textDirection,
         softWrap: widget.softWrap,
         overflow: widget.overflow,
-        textScaleFactor:
-            widget.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
+        textScaleFactor: widget.textScaleFactor,
         maxLines: widget.maxLines,
         locale: widget.locale,
         strutStyle: widget.strutStyle,
-        text: _textSpans,
+        text: _textSpans!,
       );
     } else {
       return SelectableText.rich(
-        _textSpans,
+        _textSpans!,
         focusNode: widget._focusNode,
         showCursor: widget._showCursor,
         autofocus: widget._autofocus,
         toolbarOptions: widget._toolbarOptions,
-        cursorWidth: widget._cursorWidth,
+        cursorWidth: widget._cursorWidth!,
         cursorHeight: widget._cursorHeight,
         cursorRadius: widget._cursorRadius,
         cursorColor: widget._cursorColor,
@@ -418,8 +423,7 @@ class _StyledTextState extends State<StyledText> {
         textDirection: widget.textDirection,
         // softWrap
         // overflow
-        textScaleFactor:
-            widget.textScaleFactor ?? MediaQuery.of(context).textScaleFactor,
+        textScaleFactor: widget.textScaleFactor,
         maxLines: widget.maxLines,
         // locale
         strutStyle: widget.strutStyle,
@@ -429,9 +433,9 @@ class _StyledTextState extends State<StyledText> {
 }
 
 class _StyledTextRecoginzer extends TapGestureRecognizer {
-  ActionTappedCallback onTextTap;
-  TextSpan text;
-  Map<String, String> attributes;
+  ActionTappedCallback? onTextTap;
+  TextSpan? text;
+  Map<String?, String?>? attributes;
 
   _StyledTextRecoginzer({
     this.text,
@@ -442,8 +446,6 @@ class _StyledTextRecoginzer extends TapGestureRecognizer {
   }
 
   void _textTap() {
-    if (onTextTap != null) {
-      onTextTap(text, attributes);
-    }
+    onTextTap?.call(text, attributes ?? const {});
   }
 }

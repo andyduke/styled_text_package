@@ -1,3 +1,7 @@
+## 2.0.0-nullsafety.0
+
+* Migrate to null safety.
+
 ## 1.0.3+4
 
 * Improved handling of broken xml.

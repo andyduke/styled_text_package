@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:styled_text/custom_style.dart';
 
-typedef CustomTextStyleCallback = TextStyle Function(
-    TextStyle baseStyle, Map<String, String> attributes);
+typedef CustomTextStyleCallback = TextStyle? Function(TextStyle? baseStyle, Map<String?, String?> attributes);
 
 ///
 /// A custom text style, for which you can specify the processing of attributes of the tag.
@@ -34,27 +33,31 @@ class CustomTextStyle extends CustomStyle {
   /// Called when parsing the attributes of a tag.
   final CustomTextStyleCallback parse;
 
-  final Map<String, String> _attributes = {};
+  final Map<String?, String?> _attributes = {};
   final _Holder<TextStyle> _style = _Holder<TextStyle>();
 
-  CustomTextStyle({this.parse, TextStyle baseStyle})
-      : super(baseStyle: baseStyle);
+  CustomTextStyle({
+    required this.parse,
+    TextStyle? baseStyle,
+  }) : super(baseStyle: baseStyle);
 
-  void configure(Map<String, String> attributes) {
-    this._attributes.addAll(attributes);
+  void configure(Map<String?, String?>? attributes) {
+    if (attributes != null && attributes.isNotEmpty) {
+      this._attributes.addAll(attributes);
+    }
   }
 
   TextStyle get style {
     if (_style.object == null) {
-      final TextStyle _baseStyle = super.baseStyle;
+      final TextStyle? _baseStyle = super.baseStyle;
       _style.object = this.parse(_baseStyle, _attributes) ?? _baseStyle;
     }
-    return _style.object;
+    return _style.object ?? const TextStyle();
   }
 }
 
 class _Holder<T> {
-  T object;
+  T? object;
 
   _Holder({this.object});
 }

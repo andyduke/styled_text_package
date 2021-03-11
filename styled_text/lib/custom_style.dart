@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// @nodoc
 class CustomStyle with Diagnosticable implements TextStyle {
   /// Basic text style.
-  final TextStyle baseStyle;
+  final TextStyle? baseStyle;
 
   CustomStyle({this.baseStyle});
 
@@ -13,30 +13,30 @@ class CustomStyle with Diagnosticable implements TextStyle {
 
   @override
   TextStyle apply(
-      {Color color,
-      Color backgroundColor,
-      TextDecoration decoration,
-      Color decorationColor,
-      TextDecorationStyle decorationStyle,
+      {Color? color,
+      Color? backgroundColor,
+      TextDecoration? decoration,
+      Color? decorationColor,
+      TextDecorationStyle? decorationStyle,
       double decorationThicknessFactor = 1.0,
       double decorationThicknessDelta = 0.0,
-      String fontFamily,
-      List<String> fontFamilyFallback,
+      String? fontFamily,
+      List<String>? fontFamilyFallback,
       double fontSizeFactor = 1.0,
       double fontSizeDelta = 0.0,
       int fontWeightDelta = 0,
-      FontStyle fontStyle,
+      FontStyle? fontStyle,
       double letterSpacingFactor = 1.0,
       double letterSpacingDelta = 0.0,
       double wordSpacingFactor = 1.0,
       double wordSpacingDelta = 0.0,
       double heightFactor = 1.0,
       double heightDelta = 0.0,
-      TextBaseline textBaseline,
-      Locale locale,
-      List<Shadow> shadows,
-      List<ui.FontFeature> fontFeatures}) {
-    throw style.apply(
+      TextBaseline? textBaseline,
+      Locale? locale,
+      List<Shadow>? shadows,
+      List<ui.FontFeature>? fontFeatures}) {
+    return style.apply(
       color: color,
       backgroundColor: backgroundColor,
       decoration: decoration,
@@ -64,13 +64,13 @@ class CustomStyle with Diagnosticable implements TextStyle {
   }
 
   @override
-  Paint get background => style.background;
+  Paint? get background => style.background;
 
   @override
-  Color get backgroundColor => style.backgroundColor;
+  Color? get backgroundColor => style.backgroundColor;
 
   @override
-  Color get color => style.color;
+  Color? get color => style.color;
 
   @override
   RenderComparison compareTo(TextStyle other) {
@@ -79,28 +79,28 @@ class CustomStyle with Diagnosticable implements TextStyle {
 
   @override
   TextStyle copyWith(
-      {bool inherit,
-      Color color,
-      Color backgroundColor,
-      String fontFamily,
-      List<String> fontFamilyFallback,
-      double fontSize,
-      FontWeight fontWeight,
-      FontStyle fontStyle,
-      double letterSpacing,
-      double wordSpacing,
-      TextBaseline textBaseline,
-      double height,
-      Locale locale,
-      Paint foreground,
-      Paint background,
-      List<Shadow> shadows,
-      List<ui.FontFeature> fontFeatures,
-      TextDecoration decoration,
-      Color decorationColor,
-      TextDecorationStyle decorationStyle,
-      double decorationThickness,
-      String debugLabel}) {
+      {bool? inherit,
+      Color? color,
+      Color? backgroundColor,
+      String? fontFamily,
+      List<String>? fontFamilyFallback,
+      double? fontSize,
+      FontWeight? fontWeight,
+      FontStyle? fontStyle,
+      double? letterSpacing,
+      double? wordSpacing,
+      TextBaseline? textBaseline,
+      double? height,
+      Locale? locale,
+      Paint? foreground,
+      Paint? background,
+      List<Shadow>? shadows,
+      List<ui.FontFeature>? fontFeatures,
+      TextDecoration? decoration,
+      Color? decorationColor,
+      TextDecorationStyle? decorationStyle,
+      double? decorationThickness,
+      String? debugLabel}) {
     return style.copyWith(
       inherit: inherit,
       color: color,
@@ -128,63 +128,62 @@ class CustomStyle with Diagnosticable implements TextStyle {
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties,
-      {String prefix = ''}) {
+  void debugFillProperties(DiagnosticPropertiesBuilder properties, {String prefix = ''}) {
     super.debugFillProperties(properties);
     style.debugFillProperties(properties, prefix: prefix);
   }
 
   @override
-  String get debugLabel => style.debugLabel;
+  String? get debugLabel => style.debugLabel;
 
   @override
-  TextDecoration get decoration => style.decoration;
+  TextDecoration? get decoration => style.decoration;
 
   @override
-  Color get decorationColor => style.decorationColor;
+  Color? get decorationColor => style.decorationColor;
 
   @override
-  TextDecorationStyle get decorationStyle => style.decorationStyle;
+  TextDecorationStyle? get decorationStyle => style.decorationStyle;
 
   @override
-  double get decorationThickness => style.decorationThickness;
+  double? get decorationThickness => style.decorationThickness;
 
   @override
-  String get fontFamily => style.fontFamily;
+  String? get fontFamily => style.fontFamily;
 
   @override
-  List<String> get fontFamilyFallback => style.fontFamilyFallback;
+  List<String>? get fontFamilyFallback => style.fontFamilyFallback;
 
   @override
-  List<ui.FontFeature> get fontFeatures => style.fontFeatures;
+  List<ui.FontFeature>? get fontFeatures => style.fontFeatures;
 
   @override
-  double get fontSize => style.fontSize;
+  double? get fontSize => style.fontSize;
 
   @override
-  FontStyle get fontStyle => style.fontStyle;
+  FontStyle? get fontStyle => style.fontStyle;
 
   @override
-  FontWeight get fontWeight => style.fontWeight;
+  FontWeight? get fontWeight => style.fontWeight;
 
   @override
-  Paint get foreground => style.foreground;
+  Paint? get foreground => style.foreground;
 
   @override
   ui.ParagraphStyle getParagraphStyle(
-      {TextAlign textAlign,
-      TextDirection textDirection,
+      {TextAlign? textAlign,
+      TextDirection? textDirection,
       double textScaleFactor = 1.0,
-      String ellipsis,
-      int maxLines,
-      TextHeightBehavior textHeightBehavior,
-      Locale locale,
-      String fontFamily,
-      double fontSize,
-      FontWeight fontWeight,
-      FontStyle fontStyle,
-      double height,
-      StrutStyle strutStyle}) {
+      String? ellipsis,
+      int? maxLines,
+      TextHeightBehavior? textHeightBehavior,
+      Locale? locale,
+      String? fontFamily,
+      double? fontSize,
+      FontWeight? fontWeight,
+      FontStyle? fontStyle,
+      double? height,
+      StrutStyle? strutStyle}) {
     return style.getParagraphStyle(
       textAlign: textAlign,
       textDirection: textDirection,
@@ -203,33 +202,32 @@ class CustomStyle with Diagnosticable implements TextStyle {
   }
 
   @override
-  ui.TextStyle getTextStyle({double textScaleFactor = 1.0}) =>
-      style.getTextStyle(textScaleFactor: textScaleFactor);
+  ui.TextStyle getTextStyle({double textScaleFactor = 1.0}) => style.getTextStyle(textScaleFactor: textScaleFactor);
 
   @override
-  double get height => style.height;
+  double? get height => style.height;
 
   @override
   bool get inherit => style.inherit;
 
   @override
-  double get letterSpacing => style.letterSpacing;
+  double? get letterSpacing => style.letterSpacing;
 
   @override
-  Locale get locale => style.locale;
+  Locale? get locale => style.locale;
 
   @override
-  TextStyle merge(TextStyle other) => style.merge(other);
+  TextStyle merge(TextStyle? other) => style.merge(other);
 
   @override
-  List<Shadow> get shadows => style.shadows;
+  List<Shadow>? get shadows => style.shadows;
 
   @override
-  TextBaseline get textBaseline => style.textBaseline;
+  TextBaseline? get textBaseline => style.textBaseline;
 
   @override
   String toStringShort() => style.toStringShort();
 
   @override
-  double get wordSpacing => style.wordSpacing;
+  double? get wordSpacing => style.wordSpacing;
 }

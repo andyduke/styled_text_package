@@ -1,10 +1,30 @@
-# styled_text
+# StyledText
 
-Text widget with formatting via tags. Makes it easier to use formatted text in multilingual applications.
+Text widget with formatted text using tags. Makes it easier to use formatted text in multilingual applications.
 
-Formatting is set in the text using xml tags, for which styles are defined separately. It is also possible to insert icons through tags for which icons are set in styles.
+Formatting is set in the text using **xml tags**, for which styles are defined separately. It is also possible to insert icons through tags for which icons are set in styles.
 
-You can set the click handler for the tag, through a special style ActionTextStyle.
+### Escaping & special characters
+
+Tag attributes must be enclosed in double quotes, for example: `<link href="https://flutter.dev">`.
+
+You need to escape specific XML characters in text:
+```
+Original character  Escaped character
+------------------  -----------------
+"                   &quot;
+'                   &apos;
+&                   &amp;
+<                   &lt;
+>                   &gt;
+<space>             &space;
+```
+
+### Line breaks
+
+To force the text to wrap on a new line, you must use the `<br/>` tag (as in HTML). An alternative would be to set the `newLineAsBreaks = true` parameter in the constructor, then all line breaks `\n` will be automatically converted to `<br/>`.
+
+You can set the click handler for the tag, through a special style `ActionTextStyle`.
 
 ## Getting Started
 
@@ -21,7 +41,7 @@ Import package:
 import 'package:styled_text/styled_text.dart';
 ```
 
-## Usage example
+## Usage examples
 
 An example of making parts of text bold:
 ```dart

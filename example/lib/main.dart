@@ -24,7 +24,7 @@ class DemoPage extends StatelessWidget {
         return AlertDialog(
           title: Text('Tapped'),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -46,7 +46,7 @@ class DemoPage extends StatelessWidget {
           title: Text('Open Link'),
           content: Text(link),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -70,7 +70,6 @@ class DemoPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-
             // Simple formatted text
             StyledText(
               text: 'Test: <b>bold</b> text.',
@@ -115,8 +114,7 @@ class DemoPage extends StatelessWidget {
               text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
               styles: {
                 'bold': TextStyle(fontWeight: FontWeight.bold),
-                'red':
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                'red': TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
               },
             ),
 
@@ -144,8 +142,7 @@ class DemoPage extends StatelessWidget {
             // Link
             const SizedBox(height: 20),
             StyledText(
-              text:
-                  'Text with <link href="https://flutter.dev">link</link> inside.',
+              text: 'Text with <link href="https://flutter.dev">link</link> inside.',
               styles: {
                 'link': ActionTextStyle(
                   decoration: TextDecoration.underline,
