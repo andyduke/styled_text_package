@@ -6,4 +6,4 @@ Formatting is set in the text using **xml tags**, for which styles are defined s
 
 You can set the click handler for the tag, through a special style ActionTextStyle.
 
-[See more](package/README.md)
+[See more](styled_text/README.md)
