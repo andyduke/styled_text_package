@@ -289,8 +289,11 @@ class _StyledTextState extends State<StyledText> {
       ListQueue<TextSpan> textQueue = ListQueue();
       Map<String?, String?>? attributes;
 
-      var xmlStreamer =
-          new XmlStreamer('<?xml version="1.0" encoding="UTF-8"?><root>' + textValue + '</root>', trimSpaces: false);
+      var xmlStreamer = new XmlStreamer(
+          '<?xml version="1.0" encoding="UTF-8"?><root>' +
+              textValue +
+              '</root>',
+          trimSpaces: false);
       xmlStreamer.read().listen((e) {
         switch (e.state) {
           case XmlState.Text:
@@ -317,7 +320,8 @@ class _StyledTextState extends State<StyledText> {
             if (e.value == 'br') {
               node = TextSpan(text: "\n");
             } else {
-              TextStyle? style = (e.value != null) ? widget.styles[e.value!] : null;
+              TextStyle? style =
+                  (e.value != null) ? widget.styles[e.value!] : null;
               attributes = {};
 
               if (style is IconStyle) {
@@ -332,11 +336,13 @@ class _StyledTextState extends State<StyledText> {
                   ),
                 );
               } else {
-                final _StyledTextRecoginzer? recognizer = ((style is ActionTextStyle) && style.onTap != null)
-                    ? _StyledTextRecoginzer(onTextTap: style.onTap)
-                    : null;
+                final _StyledTextRecoginzer? recognizer =
+                    ((style is ActionTextStyle) && style.onTap != null)
+                        ? _StyledTextRecoginzer(onTextTap: style.onTap)
+                        : null;
 
-                node = TextSpan(style: style, children: [], recognizer: recognizer);
+                node = TextSpan(
+                    style: style, children: [], recognizer: recognizer);
               }
             }
 

@@ -4,6 +4,8 @@ Text widget with formatted text using tags. Makes it easier to use formatted tex
 
 Formatting is set in the text using **xml tags**, for which styles are defined separately. It is also possible to insert icons through tags for which icons are set in styles.
 
+You can set the click handler for the tag, through a special style `ActionTextStyle`.
+
 ### Escaping & special characters
 
 Tag attributes must be enclosed in double quotes, for example: `<link href="https://flutter.dev">`.
@@ -23,8 +25,6 @@ Original character  Escaped character
 ### Line breaks
 
 To force the text to wrap on a new line, you must use the `<br/>` tag (as in HTML). An alternative would be to set the `newLineAsBreaks = true` parameter in the constructor, then all line breaks `\n` will be automatically converted to `<br/>`.
-
-You can set the click handler for the tag, through a special style `ActionTextStyle`.
 
 ## Getting Started
 
