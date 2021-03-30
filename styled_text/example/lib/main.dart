@@ -189,6 +189,39 @@ class DemoPage extends StatelessWidget {
                       }),
                 },
               ),
+
+              const Divider(height: 40),
+
+              // Widget inside text
+              StyledText(
+                  text:
+                      'Include a widget <my-widget name="Sample widget" avatar="Test"></my-widget> in your text.',
+                  styles: {},
+                  widgets: {
+                    'my-widget': (args) => Container(
+                          child: Row(mainAxisSize: MainAxisSize.min, children: [
+                            CircleAvatar(
+                              child: Text(args!['avatar']!.characters.first,
+                                  style: TextStyle(color: Colors.blueGrey)),
+                              backgroundColor: Colors.white,
+                            ),
+                            Padding(
+                              child: Text(
+                                args['name']!,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                            )
+                          ]),
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                              color: Colors.blueGrey,
+                              borderRadius: BorderRadius.circular(32)),
+                        )
+                  })
             ],
           ),
         ),

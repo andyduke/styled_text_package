@@ -104,6 +104,25 @@ class StyledText extends StatefulWidget {
   /// ```
   final Map<String, TextStyle> styles;
 
+  /// Widget builder map for tags in text.
+  ///
+  /// Example:
+  /// ```dart
+  ///  StyledText(
+  ///    text:
+  ///        'Include a widget <widget name="Sample widget" avatar="tutu"></widget> in your text.',
+  ///    styles: {},
+  ///    widgets: {
+  ///      'widget': (args) => CircleAvatar(
+  ///            child: Text(args!['avatar']!.characters.first,
+  ///                style: TextStyle(color: Colors.white)),
+  ///            backgroundColor: Colors.blueGrey,
+  ///          )
+  ///    },
+  ///  )
+  /// ```
+  final Map<String, Widget Function(Map<String?, String?>?)>? widgets;
+
   /// How the text should be aligned horizontally.
   final TextAlign textAlign;
 
@@ -146,21 +165,22 @@ class StyledText extends StatefulWidget {
 
   /// Create a text widget with formatting via tags.
   ///
-  StyledText({
-    Key? key,
-    required this.text,
-    this.newLineAsBreaks = false,
-    this.style,
-    required this.styles,
-    this.textAlign = TextAlign.start,
-    this.textDirection,
-    this.softWrap = true,
-    this.overflow = TextOverflow.clip,
-    this.textScaleFactor = 1.0,
-    this.maxLines,
-    this.locale,
-    this.strutStyle,
-  })  : this.selectable = false,
+  StyledText(
+      {Key? key,
+      required this.text,
+      this.newLineAsBreaks = false,
+      this.style,
+      required this.styles,
+      this.textAlign = TextAlign.start,
+      this.textDirection,
+      this.softWrap = true,
+      this.overflow = TextOverflow.clip,
+      this.textScaleFactor = 1.0,
+      this.maxLines,
+      this.locale,
+      this.strutStyle,
+      this.widgets})
+      : this.selectable = false,
         this._focusNode = null,
         this._showCursor = false,
         this._autofocus = false,
@@ -186,6 +206,7 @@ class StyledText extends StatefulWidget {
       this.newLineAsBreaks = false,
       this.style,
       required this.styles,
+      this.widgets,
       this.textAlign = TextAlign.start,
       this.textDirection,
       this.textScaleFactor = 1.0,
@@ -288,6 +309,7 @@ class _StyledTextState extends State<StyledText> {
       TextSpan node = TextSpan(style: defaultStyle, children: []);
       ListQueue<TextSpan> textQueue = ListQueue();
       Map<String?, String?>? attributes;
+      Widget Function(Map<String?, String?>?)? innerWidgetBuilder;
 
       var xmlStreamer = new XmlStreamer(
           '<?xml version="1.0" encoding="UTF-8"?><root>' +
@@ -322,6 +344,7 @@ class _StyledTextState extends State<StyledText> {
             } else {
               TextStyle? style =
                   (e.value != null) ? widget.styles[e.value!] : null;
+              innerWidgetBuilder = widget.widgets?[e.value!];
               attributes = {};
 
               if (style is IconStyle) {
@@ -349,6 +372,14 @@ class _StyledTextState extends State<StyledText> {
             break;
 
           case XmlState.Closed:
+            if (innerWidgetBuilder != null) {
+              if (textQueue.isNotEmpty) {
+                final WidgetSpan child =
+                    WidgetSpan(child: innerWidgetBuilder!.call(attributes));
+                node = textQueue.removeLast();
+                node.children?.add(child);
+              }
+            }
             if (node.recognizer is _StyledTextRecoginzer) {
               (node.recognizer as _StyledTextRecoginzer)
                 ..text = node
