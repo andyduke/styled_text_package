@@ -378,6 +378,7 @@ class _StyledTextState extends State<StyledText> {
                     WidgetSpan(child: innerWidgetBuilder!.call(attributes));
                 node = textQueue.removeLast();
                 node.children?.add(child);
+                innerWidgetBuilder = null;
               }
             }
             if (node.recognizer is _StyledTextRecoginzer) {
