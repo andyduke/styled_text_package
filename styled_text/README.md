@@ -52,7 +52,7 @@ StyledText(
   },
 )
 ```
-![](https://github.com/andyduke/styled_text_package/blob/master/screenshots/1-bold.png)
+![](https://github.com/andyduke/styled_text_package/raw/master/screenshots/1-bold.png)
 
 ---
 
@@ -66,7 +66,7 @@ StyledText(
   },
 )
 ```
-![](https://github.com/andyduke/styled_text_package/blob/master/screenshots/2-bold-and-color.png)
+![](https://github.com/andyduke/styled_text_package/raw/master/screenshots/2-bold-and-color.png)
 
 ---
 
@@ -79,7 +79,7 @@ StyledText(
   },
 )
 ```
-![](https://github.com/andyduke/styled_text_package/blob/master/screenshots/3-icon.png)
+![](https://github.com/andyduke/styled_text_package/raw/master/screenshots/3-icon.png)
 
 ---
 
@@ -98,7 +98,7 @@ StyledText(
   },
 )
 ```
-![](https://github.com/andyduke/styled_text_package/blob/master/screenshots/4-link.png)
+![](https://github.com/andyduke/styled_text_package/raw/master/screenshots/4-link.png)
 
 ---
 

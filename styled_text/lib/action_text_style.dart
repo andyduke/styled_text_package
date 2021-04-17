@@ -13,7 +13,7 @@ typedef ActionTappedCallback = void Function(
 ///   styles: {
 ///     'link': ActionTextStyle(
 ///       decoration: TextDecoration.underline,
-///       onTap: (TextSpan text, Map<String, String> attrs) => {
+///       onTap: (TextSpan text, Map<String, String> attrs) {
 ///         final String link = attrs['href'];
 ///         print('The "$link" link is tapped.');
 ///       },
