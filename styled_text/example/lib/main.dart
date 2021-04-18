@@ -72,10 +72,69 @@ class DemoPage extends StatelessWidget {
               // Simple formatted text
               StyledText(
                 text: 'Test: <b>bold</b> text.',
-                styles: {
-                  'b': TextStyle(fontWeight: FontWeight.bold),
+                tags: {
+                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
                 },
               ),
+
+              StyledText(
+                text: 'Test: <b>bold <i>italic</i> bold</b> text.',
+                tags: {
+                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                  'i': StyledTextTag(style: TextStyle(fontStyle: FontStyle.italic)),
+                },
+              ),
+
+              // Multiline text without breaks
+              const SizedBox(height: 20),
+              StyledText(
+                text: """Multiline text 
+(wo breaks)""",
+                tags: {
+                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                },
+              ),
+
+              // Multiline text with breaks
+              const SizedBox(height: 20),
+              StyledText(
+                text: """Multiline text
+(with breaks)""",
+                newLineAsBreaks: true,
+                tags: {
+                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                },
+              ),
+
+              // Text with icon
+              const SizedBox(height: 20),
+              StyledText(
+                text: 'Text with alarm <alarm/> icon.',
+                tags: {
+                  'alarm': StyledTextTagIcon(Icons.alarm),
+                },
+              ),
+
+              // Text with action
+              const SizedBox(height: 20),
+              StyledText(
+                text: 'Text with <action><red>red</red> action</action> inside.',
+                tags: {
+                  'red': StyledTextTag(style: TextStyle(color: Colors.red)),
+                  'action': StyledTextTagAction(
+                    // (_, __) => _alert(context),
+                    (text, attrs) {
+                      debugPrint('Tap: $text, $attrs');
+                      _alert(context);
+                    },
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                },
+              ),
+
+              /*
 
               // Text with quotes
               const SizedBox(height: 20),
@@ -113,8 +172,7 @@ class DemoPage extends StatelessWidget {
                 text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
                 styles: {
                   'bold': TextStyle(fontWeight: FontWeight.bold),
-                  'red':
-                      TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                  'red': TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
                 },
               ),
 
@@ -142,8 +200,7 @@ class DemoPage extends StatelessWidget {
               // Text with link
               const SizedBox(height: 20),
               StyledText(
-                text:
-                    'Text with <link href="https://flutter.dev">link</link> inside.',
+                text: 'Text with <link href="https://flutter.dev">link</link> inside.',
                 styles: {
                   'link': ActionTextStyle(
                     decoration: TextDecoration.underline,
@@ -166,8 +223,7 @@ class DemoPage extends StatelessWidget {
 
               // Text with custom color tag
               StyledText(
-                text:
-                    'Text with custom <color text="#ff5500">color</color> text.',
+                text: 'Text with custom <color text="#ff5500">color</color> text.',
                 styles: {
                   'color': CustomTextStyle(
                       baseStyle: TextStyle(fontStyle: FontStyle.italic),
@@ -175,13 +231,9 @@ class DemoPage extends StatelessWidget {
                         if (attributes.containsKey('text') &&
                             (attributes['text']!.substring(0, 1) == '#') &&
                             attributes['text']!.length >= 6) {
-                          final String hexColor =
-                              attributes['text']!.substring(1);
-                          final String alphaChannel = (hexColor.length == 8)
-                              ? hexColor.substring(6, 8)
-                              : 'FF';
-                          final Color color = Color(int.parse(
-                              '0x$alphaChannel' + hexColor.substring(0, 6)));
+                          final String hexColor = attributes['text']!.substring(1);
+                          final String alphaChannel = (hexColor.length == 8) ? hexColor.substring(6, 8) : 'FF';
+                          final Color color = Color(int.parse('0x$alphaChannel' + hexColor.substring(0, 6)));
                           return baseStyle?.copyWith(color: color);
                         } else {
                           return baseStyle;
@@ -189,6 +241,7 @@ class DemoPage extends StatelessWidget {
                       }),
                 },
               ),
+              */
             ],
           ),
         ),
