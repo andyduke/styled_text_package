@@ -11,6 +11,7 @@ class StyledTextTag extends StyledTextTagBase {
 
   @override
   InlineSpan createSpan({
+    required BuildContext context,
     String? text,
     List<InlineSpan>? children,
     required Map<String?, String?> attributes,
@@ -21,7 +22,6 @@ class StyledTextTag extends StyledTextTagBase {
       style: style,
       children: children,
       recognizer: recognizer,
-      // recognizer: recognizer(text, attributes),
     );
     return span;
   }

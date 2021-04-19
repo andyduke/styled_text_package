@@ -14,23 +14,4 @@ class StyledTextTagAction extends StyledTextTag {
   GestureRecognizer? createRecognizer(String? text, Map<String?, String?> attributes) {
     return TapGestureRecognizer()..onTap = () => onTap(text, attributes);
   }
-
-  /*
-  @override
-  InlineSpan createSpan({
-    String? text,
-    List<InlineSpan>? children,
-    required Map<String?, String?> attributes,
-  }) {
-    final TextSpan span = TextSpan(
-      // text: text,
-      text: '!!!',
-      style: style,
-      children: children,
-      recognizer: StyledTextRecoginzer(text: text, attributes: attributes, onTextTap: onTap),
-      // recognizer: TapGestureRecognizer()..onTap = () => debugPrint('TAP!'),
-    );
-    return span;
-  }
-  */
 }

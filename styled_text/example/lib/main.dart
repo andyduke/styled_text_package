@@ -17,15 +17,15 @@ class MyApp extends StatelessWidget {
 }
 
 class DemoPage extends StatelessWidget {
-  void _alert(BuildContext context) {
+  void _alert(BuildContext context, {String text = 'Tapped'}) {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Tapped'),
+          content: Text(text),
           actions: <Widget>[
             TextButton(
-              child: Text('Ok'),
+              child: Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -111,7 +111,35 @@ class DemoPage extends StatelessWidget {
               StyledText(
                 text: 'Text with alarm <alarm/> icon.',
                 tags: {
-                  'alarm': StyledTextTagIcon(Icons.alarm),
+                  'alarm': StyledTextTagIcon(
+                    Icons.alarm,
+                    color: Colors.teal,
+                    size: 18,
+                    // onTap: (text, attributes) => _alert(context, text: 'Alarm Tapped'),
+                    onTap: (text, attributes) {
+                      debugPrint('Tap: $text, $attributes');
+                      _alert(context, text: 'Alarm Tapped');
+                    },
+                  ),
+                },
+              ),
+
+              // Text with icon
+              const SizedBox(height: 20),
+              StyledText(
+                text: 'Text with <red>alarm <alarm/> icon</red>.',
+                tags: {
+                  'red': StyledTextTag(style: TextStyle(color: Colors.red)),
+                  'alarm': StyledTextTagIcon(
+                    Icons.alarm,
+                    color: Colors.teal,
+                    size: 18,
+                    // onTap: (text, attributes) => _alert(context, text: 'Alarm Tapped'),
+                    onTap: (text, attributes) {
+                      debugPrint('Tap: $text, $attributes');
+                      _alert(context, text: 'Alarm Tapped');
+                    },
+                  ),
                 },
               ),
 
@@ -130,6 +158,23 @@ class DemoPage extends StatelessWidget {
                     style: TextStyle(
                       decoration: TextDecoration.underline,
                     ),
+                  ),
+                },
+              ),
+
+              // Text with widget
+              const SizedBox(height: 20),
+              StyledText(
+                text: 'Text with <input/> inside.',
+                tags: {
+                  'input': StyledTextTagWidget(
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Input',
+                      ),
+                    ),
+                    size: Size.fromWidth(200),
+                    constraints: BoxConstraints.tight(Size(100, 50)),
                   ),
                 },
               ),
