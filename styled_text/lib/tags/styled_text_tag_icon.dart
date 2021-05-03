@@ -5,7 +5,7 @@ import 'package:styled_text/tags/styled_text_tag_base.dart';
 
 /// The class with which you can specify the icon for the tag.
 ///
-class StyledTextTagIcon extends StyledTextTagBase {
+class StyledTextIconTag extends StyledTextTagBase {
   /// Icon to insert into text
   final IconData icon;
 
@@ -30,7 +30,7 @@ class StyledTextTagIcon extends StyledTextTagBase {
   /// Called when the text is tapped or otherwise activated.
   final StyledTextTagActionCallback? onTap;
 
-  StyledTextTagIcon(
+  StyledTextIconTag(
     this.icon, {
     this.color,
     this.size,

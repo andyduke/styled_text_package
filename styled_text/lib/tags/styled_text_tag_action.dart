@@ -6,11 +6,11 @@ import 'package:styled_text/tags/styled_text_tag.dart';
 /// A class that you can use to specify a callback
 /// that will be called when the tag is tapped.
 ///
-class StyledTextTagAction extends StyledTextTag {
+class StyledTextActionTag extends StyledTextTag {
   /// A callback to be called when the tag is tapped.
   final StyledTextTagActionCallback onTap;
 
-  StyledTextTagAction(
+  StyledTextActionTag(
     this.onTap, {
     TextStyle? style,
   }) : super(style: style);

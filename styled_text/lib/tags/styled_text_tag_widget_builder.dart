@@ -10,7 +10,7 @@ import 'package:styled_text/tags/styled_text_tag_base.dart';
 /// StyledText(
 ///   text: 'Text with <input/> inside.',
 ///   tags: {
-///     'input': StyledTextTagWidgetBuilder(
+///     'input': StyledTextWidgetBuilderTag(
 ///       () => TextField(
 ///         decoration: InputDecoration(
 ///           hintText: 'Input',
@@ -22,7 +22,7 @@ import 'package:styled_text/tags/styled_text_tag_base.dart';
 ///   },
 /// )
 /// ```
-class StyledTextTagWidgetBuilder extends StyledTextTagBase {
+class StyledTextWidgetBuilderTag extends StyledTextTagBase {
   /// Widget builder to insert in place of the tag.
   final WidgetBuilder builder;
 
@@ -43,7 +43,7 @@ class StyledTextTagWidgetBuilder extends StyledTextTagBase {
   /// This is ignored when using other alignment modes.
   final TextBaseline? baseline;
 
-  StyledTextTagWidgetBuilder(
+  StyledTextWidgetBuilderTag(
     this.builder, {
     this.size,
     this.constraints,

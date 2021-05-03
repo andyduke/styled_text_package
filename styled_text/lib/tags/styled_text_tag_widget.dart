@@ -8,7 +8,7 @@ import 'package:styled_text/tags/styled_text_tag_widget_builder.dart';
 /// StyledText(
 ///   text: 'Text with <input/> inside.',
 ///   tags: {
-///     'input': StyledTextTagWidget(
+///     'input': StyledTextWidgetTag(
 ///       TextField(
 ///         decoration: InputDecoration(
 ///           hintText: 'Input',
@@ -20,8 +20,8 @@ import 'package:styled_text/tags/styled_text_tag_widget_builder.dart';
 ///   },
 /// )
 /// ```
-class StyledTextTagWidget extends StyledTextTagWidgetBuilder {
-  StyledTextTagWidget(
+class StyledTextWidgetTag extends StyledTextWidgetBuilderTag {
+  StyledTextWidgetTag(
     Widget child, {
     Size? size,
     BoxConstraints? constraints,

@@ -111,7 +111,7 @@ class DemoPage extends StatelessWidget {
               StyledText(
                 text: 'Text with alarm <alarm/> icon.',
                 tags: {
-                  'alarm': StyledTextTagIcon(
+                  'alarm': StyledTextIconTag(
                     Icons.alarm,
                     color: Colors.teal,
                     size: 18,
@@ -130,7 +130,7 @@ class DemoPage extends StatelessWidget {
                 text: 'Text with <red>alarm <alarm/> icon</red>.',
                 tags: {
                   'red': StyledTextTag(style: TextStyle(color: Colors.red)),
-                  'alarm': StyledTextTagIcon(
+                  'alarm': StyledTextIconTag(
                     Icons.alarm,
                     color: Colors.teal,
                     size: 18,
@@ -149,7 +149,7 @@ class DemoPage extends StatelessWidget {
                 text: 'Text with <action><red>red</red> action</action> inside.',
                 tags: {
                   'red': StyledTextTag(style: TextStyle(color: Colors.red)),
-                  'action': StyledTextTagAction(
+                  'action': StyledTextActionTag(
                     // (_, __) => _alert(context),
                     (text, attrs) {
                       debugPrint('Tap: $text, $attrs');
@@ -167,7 +167,7 @@ class DemoPage extends StatelessWidget {
               StyledText(
                 text: 'Text with <input/> inside.',
                 tags: {
-                  'input': StyledTextTagWidget(
+                  'input': StyledTextWidgetTag(
                     TextField(
                       decoration: InputDecoration(
                         hintText: 'Input',
