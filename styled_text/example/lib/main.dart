@@ -179,6 +179,39 @@ class DemoPage extends StatelessWidget {
                 },
               ),
 
+              const Divider(height: 40),
+
+              // Selectable text
+              StyledText.selectable(
+                text: 'Test: selectable <b>bold</b> text.',
+                tags: {
+                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                },
+              ),
+
+              const Divider(height: 40),
+
+              // Text with custom color tag
+              StyledText(
+                text: 'Text with custom <color text="#ff5500">color</color> text.',
+                tags: {
+                  'color': StyledTextCustomTag(
+                      baseStyle: TextStyle(fontStyle: FontStyle.italic),
+                      parse: (baseStyle, attributes) {
+                        if (attributes.containsKey('text') &&
+                            (attributes['text']!.substring(0, 1) == '#') &&
+                            attributes['text']!.length >= 6) {
+                          final String hexColor = attributes['text']!.substring(1);
+                          final String alphaChannel = (hexColor.length == 8) ? hexColor.substring(6, 8) : 'FF';
+                          final Color color = Color(int.parse('0x$alphaChannel' + hexColor.substring(0, 6)));
+                          return baseStyle?.copyWith(color: color);
+                        } else {
+                          return baseStyle;
+                        }
+                      }),
+                },
+              ),
+
               /*
 
               // Text with quotes

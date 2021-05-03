@@ -4,10 +4,11 @@ import 'dart:collection';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:xmlstream/xmlstream.dart';
 import 'package:styled_text/tags/styled_text_tag.dart';
 import 'package:styled_text/tags/styled_text_tag_base.dart';
-import 'package:xmlstream/xmlstream.dart';
 
+export 'icon_style.dart';
 export 'custom_text_style.dart';
 export 'action_text_style.dart';
 
@@ -17,52 +18,19 @@ export 'tags/styled_text_tag_icon.dart';
 export 'tags/styled_text_tag_action.dart';
 export 'tags/styled_text_tag_widget.dart';
 export 'tags/styled_text_tag_widget_builder.dart';
-
-///
-/// The style to insert the icon into styled text.
-///
-/// Example:
-/// ```dart
-/// StyledText(
-///   text: 'Text with alarm <alarm/> icon.',
-///   styles: {
-///     'alarm': IconStyle(Icons.alarm),
-///   },
-/// )
-/// ```
-///
-class IconStyle extends TextStyle {
-  /// Icon to insert into text
-  final IconData icon;
-
-  /// Icon color
-  final Color? color;
-
-  /// Icon size
-  final double? size;
-
-  /// Icon background color
-  final Color? backgroundColor;
-
-  IconStyle(
-    this.icon, {
-    this.color,
-    this.size,
-    this.backgroundColor,
-  });
-}
+export 'tags/styled_text_tag_custom.dart';
 
 ///
 /// Text widget with formatting via tags.
 ///
-/// Formatting is specified as xml tags. For each tag, you can specify a style in the [styles] parameter.
+/// Formatting is specified as xml tags. For each tag, you can specify a style, icon, etc. in the [tags] parameter.
 ///
 /// Example:
 /// ```dart
 /// StyledText(
 ///   text: '<red>Red</red> text.',
-///   styles: [
-///     'red': TextStyle(color: Colors.red),
+///   tags: [
+///     'red': StyledTextTag(style: TextStyle(color: Colors.red)),
 ///   ],
 /// )
 /// ```

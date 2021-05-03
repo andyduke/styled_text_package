@@ -2,7 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:styled_text/tags/styled_text_tag_base.dart';
 
+/// The class that you can use to specify the text style for the tag.
+///
 class StyledTextTag extends StyledTextTagBase {
+  /// The TextStyle to apply to this tag.
   final TextStyle? style;
 
   StyledTextTag({

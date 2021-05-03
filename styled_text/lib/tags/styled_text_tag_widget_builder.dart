@@ -2,15 +2,39 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:styled_text/tags/styled_text_tag_base.dart';
 
+/// A class in which you can specify the widget builder to
+/// insert in place of the tag.
+///
+/// In the example below, an input field is inserted in place of the tag:
+/// ```dart
+/// StyledText(
+///   text: 'Text with <input/> inside.',
+///   tags: {
+///     'input': StyledTextTagWidgetBuilder(
+///       () => TextField(
+///         decoration: InputDecoration(
+///           hintText: 'Input',
+///         ),
+///       ),
+///       size: Size.fromWidth(200),
+///       constraints: BoxConstraints.tight(Size(100, 50)),
+///     ),
+///   },
+/// )
+/// ```
 class StyledTextTagWidgetBuilder extends StyledTextTagBase {
-  /// Widget to insert into text
+  /// Widget builder to insert in place of the tag.
   final WidgetBuilder builder;
 
+  /// The size of the available space for the widget,
+  /// if not specified, the widget will take up
+  /// all the available space.
   final Size? size;
 
+  /// Additional constraints to apply to the widget.
   final BoxConstraints? constraints;
 
-  /// Aligning the icon relative to the text
+  /// Aligning the widget relative to the text.
   final PlaceholderAlignment alignment;
 
   /// The [TextBaseline] to align against when using [ui.PlaceholderAlignment.baseline],

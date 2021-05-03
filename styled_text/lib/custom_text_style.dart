@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:styled_text/custom_style.dart';
 
-typedef CustomTextStyleCallback = TextStyle? Function(
-    TextStyle? baseStyle, Map<String?, String?> attributes);
+typedef CustomTextStyleCallback = TextStyle? Function(TextStyle? baseStyle, Map<String?, String?> attributes);
 
 ///
 /// A custom text style, for which you can specify the processing of attributes of the tag.
@@ -30,6 +29,7 @@ typedef CustomTextStyleCallback = TextStyle? Function(
 /// )
 /// ```
 ///
+@deprecated
 class CustomTextStyle extends CustomStyle {
   /// Called when parsing the attributes of a tag.
   final CustomTextStyleCallback parse;
