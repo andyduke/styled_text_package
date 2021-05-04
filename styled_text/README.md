@@ -6,7 +6,7 @@ Formatting is set in the text using **xml tags**, for which styles and other beh
 
 You can set the click handler for the tag, through a tag definition class `StyledTextActionTag`.
 
-**Attention!** The way of specifying the styles and behavior of tags has changed. See how to [migrate from version 2.0](#migration-from-version-2.0).
+**Attention!** The way of specifying the styles and behavior of tags has changed. See how to [migrate from version 2.0](#migration-from-version-20).
 
 **Attention!** The default value of the "newLineAsBreaks" parameter has been changed, now it is enabled by default and line breaks are not ignored in the text.
 
@@ -16,7 +16,7 @@ You can set the click handler for the tag, through a tag definition class `Style
   - [Escaping & special characters](#escaping--special-characters)
   - [Line breaks](#line-breaks)
 - [Usage examples](#usage-examples)
-- [Migration from version 2.0](#migration-from-version-2.0)
+- [Migration from version 2.0](#migration-from-version-20)
 
 ## Getting Started
 
@@ -194,6 +194,7 @@ StyledText(
   },
 )
 ```
+---
 
 ### Specifying the icon
 
@@ -216,6 +217,7 @@ StyledText(
   },
 )
 ```
+---
 
 ### Specifying a tap handler 
 
@@ -244,6 +246,7 @@ StyledText(
   },
 )
 ```
+---
 
 ### Specifying a custom parser for attributes and creating a style
 
