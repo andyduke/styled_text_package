@@ -155,7 +155,8 @@ class StyledText extends StatefulWidget {
           styles != null || tags != null,
           'Styles and tags cannot be used at the same time. Use styles for compatibility only. They will be removed in future versions.',
         ),
-        this.styles = styles ?? const {},
+        this.styles = styles ??
+            const {}, // ignore: deprecated_member_use_from_same_package
         this.tags = tags ?? const {},
         this.selectable = false,
         this._focusNode = null,
@@ -208,7 +209,8 @@ class StyledText extends StatefulWidget {
           styles != null || tags != null,
           'Styles and tags cannot be used at the same time. Use styles for compatibility only. They will be removed in future versions.',
         ),
-        this.styles = styles ?? const {},
+        this.styles = styles ??
+            const {}, // ignore: deprecated_member_use_from_same_package
         this.tags = tags ?? const {},
         this.selectable = true,
         this.softWrap = true,
@@ -270,7 +272,9 @@ class _StyledTextState extends State<StyledText> {
 
     if ((widget.text != oldWidget.text) ||
         (widget.tags != oldWidget.tags) ||
-        (widget.styles != oldWidget.styles) ||
+        (widget.styles !=
+            oldWidget
+                .styles) || // ignore: deprecated_member_use_from_same_package
         (widget.style != oldWidget.style) ||
         (widget.newLineAsBreaks != oldWidget.newLineAsBreaks)) {
       _updateTextSpans(force: true);
@@ -284,8 +288,11 @@ class _StyledTextState extends State<StyledText> {
       return widget.tags[tagName];
     }
 
+    // ignore: deprecated_member_use_from_same_package
     if (widget.styles.containsKey(tagName)) {
-      return StyledTextTag(style: widget.styles[tagName]);
+      return StyledTextTag(
+          style: widget.styles[
+              tagName]); // ignore: deprecated_member_use_from_same_package
     }
 
     return null;
