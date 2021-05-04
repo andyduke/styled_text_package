@@ -3,7 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:styled_text/tags/styled_text_tag_base.dart';
 
 /// The signature of the tag attribute parser.
-typedef StyledTextCustomTagParser = TextStyle? Function(TextStyle? baseStyle, Map<String?, String?> attributes);
+typedef StyledTextCustomTagParser = TextStyle? Function(
+    TextStyle? baseStyle, Map<String?, String?> attributes);
 
 /// A custom text style, for which you can specify the processing of attributes of the tag.
 ///

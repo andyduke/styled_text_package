@@ -129,7 +129,8 @@ class CustomStyle with Diagnosticable implements TextStyle {
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties, {String prefix = ''}) {
+  void debugFillProperties(DiagnosticPropertiesBuilder properties,
+      {String prefix = ''}) {
     super.debugFillProperties(properties);
     style.debugFillProperties(properties, prefix: prefix);
   }
@@ -203,7 +204,8 @@ class CustomStyle with Diagnosticable implements TextStyle {
   }
 
   @override
-  ui.TextStyle getTextStyle({double textScaleFactor = 1.0}) => style.getTextStyle(textScaleFactor: textScaleFactor);
+  ui.TextStyle getTextStyle({double textScaleFactor = 1.0}) =>
+      style.getTextStyle(textScaleFactor: textScaleFactor);
 
   @override
   double? get height => style.height;

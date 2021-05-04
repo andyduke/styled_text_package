@@ -8,6 +8,8 @@ You can set the click handler for the tag, through a tag definition class `Style
 
 **Attention!** The way of specifying the styles and behavior of tags has changed. See how to [migrate from version 2.0](#migration-from-version-2.0).
 
+**Attention!** The default value of the "newLineAsBreaks" parameter has been changed, now it is enabled by default and line breaks are not ignored in the text.
+
 ## Table of Contents
 
 - [Getting Started](#getting-Started)

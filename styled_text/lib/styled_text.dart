@@ -138,9 +138,10 @@ class StyledText extends StatefulWidget {
   StyledText({
     Key? key,
     required this.text,
-    this.newLineAsBreaks = false,
+    this.newLineAsBreaks = true,
     this.style,
-    @Deprecated('Use tags property instead of styles') Map<String, TextStyle>? styles,
+    @Deprecated('Use tags property instead of styles')
+        Map<String, TextStyle>? styles,
     Map<String, StyledTextTagBase>? tags,
     this.textAlign = TextAlign.start,
     this.textDirection,
@@ -181,7 +182,8 @@ class StyledText extends StatefulWidget {
       required this.text,
       this.newLineAsBreaks = false,
       this.style,
-      @Deprecated('Use tags property instead of styles') Map<String, TextStyle>? styles,
+      @Deprecated('Use tags property instead of styles')
+          Map<String, TextStyle>? styles,
       Map<String, StyledTextTagBase>? tags,
       this.textAlign = TextAlign.start,
       this.textDirection,
@@ -310,8 +312,11 @@ class _StyledTextState extends State<StyledText> {
       ListQueue<_Node> textQueue = ListQueue();
       Map<String?, String?>? attributes;
 
-      var xmlStreamer =
-          new XmlStreamer('<?xml version="1.0" encoding="UTF-8"?><root>' + textValue + '</root>', trimSpaces: false);
+      var xmlStreamer = new XmlStreamer(
+          '<?xml version="1.0" encoding="UTF-8"?><root>' +
+              textValue +
+              '</root>',
+          trimSpaces: false);
       xmlStreamer.read().listen((e) {
         switch (e.state) {
           case XmlState.Text:
@@ -431,7 +436,9 @@ abstract class _Node {
     required BuildContext context,
     GestureRecognizer? recognizer,
   }) {
-    return children.map((c) => c.createSpan(context: context, recognizer: recognizer)).toList();
+    return children
+        .map((c) => c.createSpan(context: context, recognizer: recognizer))
+        .toList();
   }
 
   void dispose() {

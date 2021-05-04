@@ -1,3 +1,9 @@
+## 3.0.0-beta
+
+* **[Breaking Changes]** Changed the way text tags are styled. Now, instead of `TextStyle` and classes that implement it, you need to use new classes that describe the styles and behavior of tags.
+* **[Breaking changes]** The `newLineAsBreaks` parameter is now `true` by default.
+* Added the ability to insert any widgets into the text.
+
 ## 2.0.0
 
 * Fixed a typo in the example.

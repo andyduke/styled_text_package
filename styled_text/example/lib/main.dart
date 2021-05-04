@@ -66,6 +66,7 @@ class DemoPage extends StatelessWidget {
       ),
       body: Center(
         child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(vertical: 32),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -73,25 +74,40 @@ class DemoPage extends StatelessWidget {
               StyledText(
                 text: 'Test: <b>bold</b> text.',
                 tags: {
-                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                  'b': StyledTextTag(
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 },
               ),
 
+              // Nested multiple styles
               StyledText(
                 text: 'Test: <b>bold <i>italic</i> bold</b> text.',
                 tags: {
-                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
-                  'i': StyledTextTag(style: TextStyle(fontStyle: FontStyle.italic)),
+                  'b': StyledTextTag(
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  'i': StyledTextTag(
+                      style: TextStyle(fontStyle: FontStyle.italic)),
+                },
+              ),
+
+              // Text with quotes
+              StyledText(
+                text: 'Quote test: <b>&quot;bold&quot;</b> text.',
+                tags: {
+                  'b': StyledTextTag(
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 },
               ),
 
               // Multiline text without breaks
               const SizedBox(height: 20),
               StyledText(
+                newLineAsBreaks: false,
                 text: """Multiline text 
 (wo breaks)""",
                 tags: {
-                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                  'b': StyledTextTag(
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 },
               ),
 
@@ -100,9 +116,9 @@ class DemoPage extends StatelessWidget {
               StyledText(
                 text: """Multiline text
 (with breaks)""",
-                newLineAsBreaks: true,
                 tags: {
-                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                  'b': StyledTextTag(
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 },
               ),
 
@@ -115,16 +131,13 @@ class DemoPage extends StatelessWidget {
                     Icons.alarm,
                     color: Colors.teal,
                     size: 18,
-                    // onTap: (text, attributes) => _alert(context, text: 'Alarm Tapped'),
-                    onTap: (text, attributes) {
-                      debugPrint('Tap: $text, $attributes');
-                      _alert(context, text: 'Alarm Tapped');
-                    },
+                    onTap: (text, attributes) =>
+                        _alert(context, text: 'Alarm Tapped'),
                   ),
                 },
               ),
 
-              // Text with icon
+              // Text with icon inside styled text
               const SizedBox(height: 20),
               StyledText(
                 text: 'Text with <red>alarm <alarm/> icon</red>.',
@@ -134,11 +147,21 @@ class DemoPage extends StatelessWidget {
                     Icons.alarm,
                     color: Colors.teal,
                     size: 18,
-                    // onTap: (text, attributes) => _alert(context, text: 'Alarm Tapped'),
-                    onTap: (text, attributes) {
-                      debugPrint('Tap: $text, $attributes');
-                      _alert(context, text: 'Alarm Tapped');
-                    },
+                    onTap: (text, attributes) =>
+                        _alert(context, text: 'Alarm Tapped'),
+                  ),
+                },
+              ),
+
+              // Text with link
+              const SizedBox(height: 20),
+              StyledText(
+                text:
+                    'Text with <link href="https://flutter.dev">link</link> inside.',
+                tags: {
+                  'link': StyledTextActionTag(
+                    (_, attrs) => _openLink(context, attrs),
+                    style: TextStyle(decoration: TextDecoration.underline),
                   ),
                 },
               ),
@@ -146,18 +169,13 @@ class DemoPage extends StatelessWidget {
               // Text with action
               const SizedBox(height: 20),
               StyledText(
-                text: 'Text with <action><red>red</red> action</action> inside.',
+                text:
+                    'Text with <action><red>red</red> action</action> inside.',
                 tags: {
                   'red': StyledTextTag(style: TextStyle(color: Colors.red)),
                   'action': StyledTextActionTag(
-                    // (_, __) => _alert(context),
-                    (text, attrs) {
-                      debugPrint('Tap: $text, $attrs');
-                      _alert(context);
-                    },
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                    ),
+                    (text, attributes) => _alert(context),
+                    style: TextStyle(decoration: TextDecoration.underline),
                   ),
                 },
               ),
@@ -185,7 +203,8 @@ class DemoPage extends StatelessWidget {
               StyledText.selectable(
                 text: 'Test: selectable <b>bold</b> text.',
                 tags: {
-                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                  'b': StyledTextTag(
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 },
               ),
 
@@ -193,7 +212,8 @@ class DemoPage extends StatelessWidget {
 
               // Text with custom color tag
               StyledText(
-                text: 'Text with custom <color text="#ff5500">color</color> text.',
+                text:
+                    'Text with custom <color text="#ff5500">color</color> text.',
                 tags: {
                   'color': StyledTextCustomTag(
                       baseStyle: TextStyle(fontStyle: FontStyle.italic),
@@ -201,9 +221,13 @@ class DemoPage extends StatelessWidget {
                         if (attributes.containsKey('text') &&
                             (attributes['text']!.substring(0, 1) == '#') &&
                             attributes['text']!.length >= 6) {
-                          final String hexColor = attributes['text']!.substring(1);
-                          final String alphaChannel = (hexColor.length == 8) ? hexColor.substring(6, 8) : 'FF';
-                          final Color color = Color(int.parse('0x$alphaChannel' + hexColor.substring(0, 6)));
+                          final String hexColor =
+                              attributes['text']!.substring(1);
+                          final String alphaChannel = (hexColor.length == 8)
+                              ? hexColor.substring(6, 8)
+                              : 'FF';
+                          final Color color = Color(int.parse(
+                              '0x$alphaChannel' + hexColor.substring(0, 6)));
                           return baseStyle?.copyWith(color: color);
                         } else {
                           return baseStyle;
@@ -211,115 +235,6 @@ class DemoPage extends StatelessWidget {
                       }),
                 },
               ),
-
-              /*
-
-              // Text with quotes
-              const SizedBox(height: 20),
-              StyledText(
-                text: 'Quoted Test: <b>&quot;bold&quot;</b> text.',
-                styles: {
-                  'b': TextStyle(fontWeight: FontWeight.bold),
-                },
-              ),
-
-              // Multiline text without breaks
-              const SizedBox(height: 20),
-              StyledText(
-                text: """Multiline text 
-(wo breaks)""",
-                styles: {
-                  'b': TextStyle(fontWeight: FontWeight.bold),
-                },
-              ),
-
-              // Multiline text with breaks
-              const SizedBox(height: 20),
-              StyledText(
-                text: """Multiline text
-(with breaks)""",
-                newLineAsBreaks: true,
-                styles: {
-                  'b': TextStyle(fontWeight: FontWeight.bold),
-                },
-              ),
-
-              // Custom tags styles
-              const SizedBox(height: 20),
-              StyledText(
-                text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
-                styles: {
-                  'bold': TextStyle(fontWeight: FontWeight.bold),
-                  'red': TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-                },
-              ),
-
-              // Text with icon
-              const SizedBox(height: 20),
-              StyledText(
-                text: 'Text with alarm <alarm/> icon.',
-                styles: {
-                  'alarm': IconStyle(Icons.alarm),
-                },
-              ),
-
-              // Text with action
-              const SizedBox(height: 20),
-              StyledText(
-                text: 'Text with <action>action</action> inside.',
-                styles: {
-                  'action': ActionTextStyle(
-                    decoration: TextDecoration.underline,
-                    onTap: (_, __) => _alert(context),
-                  ),
-                },
-              ),
-
-              // Text with link
-              const SizedBox(height: 20),
-              StyledText(
-                text: 'Text with <link href="https://flutter.dev">link</link> inside.',
-                styles: {
-                  'link': ActionTextStyle(
-                    decoration: TextDecoration.underline,
-                    onTap: (_, attrs) => _openLink(context, attrs),
-                  ),
-                },
-              ),
-
-              const Divider(height: 40),
-
-              // Selectable text
-              StyledText.selectable(
-                text: 'Test: selectable <b>bold</b> text.',
-                styles: {
-                  'b': TextStyle(fontWeight: FontWeight.bold),
-                },
-              ),
-
-              const Divider(height: 40),
-
-              // Text with custom color tag
-              StyledText(
-                text: 'Text with custom <color text="#ff5500">color</color> text.',
-                styles: {
-                  'color': CustomTextStyle(
-                      baseStyle: TextStyle(fontStyle: FontStyle.italic),
-                      parse: (baseStyle, attributes) {
-                        if (attributes.containsKey('text') &&
-                            (attributes['text']!.substring(0, 1) == '#') &&
-                            attributes['text']!.length >= 6) {
-                          final String hexColor = attributes['text']!.substring(1);
-                          final String alphaChannel = (hexColor.length == 8) ? hexColor.substring(6, 8) : 'FF';
-                          final Color color = Color(int.parse('0x$alphaChannel' + hexColor.substring(0, 6)));
-                          return baseStyle?.copyWith(color: color);
-                        } else {
-                          return baseStyle;
-                        }
-                      }),
-                },
-              ),
-              */
             ],
           ),
         ),
