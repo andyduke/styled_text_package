@@ -77,7 +77,7 @@ class StyledText extends StatefulWidget {
   ///   ],
   /// )
   /// ```
-  @deprecated
+  @Deprecated('Use tags instead of styles.')
   final Map<String, TextStyle> styles;
 
   /// Map of tag assignments to text style classes and tag handlers.
@@ -155,8 +155,8 @@ class StyledText extends StatefulWidget {
           styles != null || tags != null,
           'Styles and tags cannot be used at the same time. Use styles for compatibility only. They will be removed in future versions.',
         ),
-        this.styles = styles ??
-            const {}, // ignore: deprecated_member_use_from_same_package
+        this.styles = // ignore: deprecated_member_use_from_same_package
+            styles ?? const {},
         this.tags = tags ?? const {},
         this.selectable = false,
         this._focusNode = null,
@@ -209,8 +209,8 @@ class StyledText extends StatefulWidget {
           styles != null || tags != null,
           'Styles and tags cannot be used at the same time. Use styles for compatibility only. They will be removed in future versions.',
         ),
-        this.styles = styles ??
-            const {}, // ignore: deprecated_member_use_from_same_package
+        this.styles = // ignore: deprecated_member_use_from_same_package
+            styles ?? const {},
         this.tags = tags ?? const {},
         this.selectable = true,
         this.softWrap = true,
@@ -272,7 +272,7 @@ class _StyledTextState extends State<StyledText> {
 
     if ((widget.text != oldWidget.text) ||
         (widget.tags != oldWidget.tags) ||
-        (widget.styles !=
+        (widget.styles != // ignore: deprecated_member_use_from_same_package
             oldWidget
                 .styles) || // ignore: deprecated_member_use_from_same_package
         (widget.style != oldWidget.style) ||
@@ -291,8 +291,9 @@ class _StyledTextState extends State<StyledText> {
     // ignore: deprecated_member_use_from_same_package
     if (widget.styles.containsKey(tagName)) {
       return StyledTextTag(
-          style: widget.styles[
-              tagName]); // ignore: deprecated_member_use_from_same_package
+          style:
+              widget.styles[// ignore: deprecated_member_use_from_same_package
+                  tagName]);
     }
 
     return null;
