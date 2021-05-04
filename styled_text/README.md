@@ -8,7 +8,7 @@ You can set the click handler for the tag, through a tag definition class `Style
 
 **Attention!** The way of specifying the styles and behavior of tags has changed. See how to [migrate from version 2.0](#migration-from-version-20).
 
-**Attention!** The default value of the "newLineAsBreaks" parameter has been changed, now it is enabled by default and line breaks are not ignored in the text.
+**Attention!** The default value of the `newLineAsBreaks` parameter has been changed, now it is enabled by default and line breaks are not ignored in the text.
 
 ## Table of Contents
 
@@ -16,6 +16,7 @@ You can set the click handler for the tag, through a tag definition class `Style
   - [Escaping & special characters](#escaping--special-characters)
   - [Line breaks](#line-breaks)
 - [Usage examples](#usage-examples)
+  - [How to insert a widget into text](#an-example-of-inserting-an-input-field-widget-in-place-of-a-tag)
 - [Migration from version 2.0](#migration-from-version-20)
 
 ## Getting Started
@@ -51,7 +52,7 @@ Original character  Escaped character
 
 ### Line breaks
 
-To force the text to wrap on a new line, you must use the `<br/>` tag (as in HTML). An alternative would be to set the `newLineAsBreaks = true` parameter in the constructor, then all line breaks `\n` will be automatically converted to `<br/>`.
+By default, line breaks are not ignored, all line breaks `\n` are automatically translated into the `<br/>` tag. To disable this behavior, you can set the `newLineAsBreaks` parameter to `false` and insert the `<br/>` tag where you want to break to a new line.
 
 ## Usage examples
 
