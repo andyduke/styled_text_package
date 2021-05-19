@@ -1,3 +1,7 @@
+## 3.0.0
+
+* Flutter 2.2 compatibility.
+
 ## 3.0.0-beta+2
 
 * **[Breaking Changes]** Changed the way text tags are styled. Now, instead of `TextStyle` and classes that implement it, you need to use new classes that describe the styles and behavior of tags.

@@ -1,4 +1,5 @@
-import 'dart:ui' as ui show TextStyle, ParagraphStyle, FontFeature;
+import 'dart:ui' as ui
+    show TextStyle, ParagraphStyle, FontFeature, TextLeadingDistribution;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       double heightFactor = 1.0,
       double heightDelta = 0.0,
       TextBaseline? textBaseline,
+      ui.TextLeadingDistribution? leadingDistribution,
       Locale? locale,
       List<Shadow>? shadows,
       List<ui.FontFeature>? fontFeatures}) {
@@ -58,6 +60,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       heightFactor: heightFactor,
       heightDelta: heightDelta,
       textBaseline: textBaseline,
+      leadingDistribution: leadingDistribution,
       locale: locale,
       shadows: shadows,
       fontFeatures: fontFeatures,
@@ -92,6 +95,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       double? wordSpacing,
       TextBaseline? textBaseline,
       double? height,
+      ui.TextLeadingDistribution? leadingDistribution,
       Locale? locale,
       Paint? foreground,
       Paint? background,
@@ -115,6 +119,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       wordSpacing: wordSpacing,
       textBaseline: textBaseline,
       height: height,
+      leadingDistribution: leadingDistribution,
       locale: locale,
       foreground: foreground,
       background: background,
@@ -209,6 +214,10 @@ class CustomStyle with Diagnosticable implements TextStyle {
 
   @override
   double? get height => style.height;
+
+  @override
+  ui.TextLeadingDistribution? get leadingDistribution =>
+      style.leadingDistribution;
 
   @override
   bool get inherit => style.inherit;
