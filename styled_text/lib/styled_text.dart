@@ -373,10 +373,10 @@ class _StyledTextState extends State<StyledText> {
         }
       }).onDone(() {
         _rootNode = node;
+        if (mounted) {
         final span = node.createSpan(context: context);
         _textSpans = TextSpan(style: defaultStyle, children: [span]);
 
-        if (mounted) {
           setState(() {});
         }
       });
