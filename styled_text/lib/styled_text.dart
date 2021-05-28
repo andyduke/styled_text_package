@@ -373,13 +373,28 @@ class _StyledTextState extends State<StyledText> {
         }
       }).onDone(() {
         _rootNode = node;
-        if (mounted) {
-        final span = node.createSpan(context: context);
-        _textSpans = TextSpan(style: defaultStyle, children: [span]);
-
-          setState(() {});
-        }
+        _buildTextSpans(_rootNode, defaultStyle);
       });
+    } else {
+      if (_rootNode != null && _textSpans == null) {
+        _buildTextSpans(_rootNode);
+      }
+    }
+  }
+
+  void _buildTextSpans(_Node? node, [TextStyle? defaultStyle]) {
+    if (mounted && node != null) {
+      TextStyle? style = defaultStyle;
+      if (style == null) {
+        style = (widget.style != null)
+            ? DefaultTextStyle.of(context).style.merge(widget.style)
+            : DefaultTextStyle.of(context).style;
+      }
+
+      final span = node.createSpan(context: context);
+      _textSpans = TextSpan(style: style, children: [span]);
+
+      setState(() {});
     }
   }
 

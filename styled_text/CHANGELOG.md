@@ -1,3 +1,7 @@
+## 3.0.1
+
+* Fixed a bug when unmounting a widget from a tree during text parsing.
+
 ## 3.0.0
 
 * Flutter 2.2 compatibility.
