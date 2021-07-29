@@ -1,3 +1,7 @@
+## 3.0.2
+
+* **[Breaking Changes]** In `StyledTextWidgetBuilderTag.builder` now the tag attributes are passed as the second parameter.
+
 ## 3.0.1
 
 * Fixed a bug when unmounting a widget from a tree during text parsing.

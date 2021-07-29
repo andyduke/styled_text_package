@@ -2,6 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:styled_text/tags/styled_text_tag_base.dart';
 
+/// Signature for the widget builder function for StyledTextWidgetBuilderTag
+typedef StyledTextWidgetBuilderTagCallback = Widget Function(
+    BuildContext context, Map<String?, String?> attributes);
+
 /// A class in which you can specify the widget builder to
 /// insert in place of the tag.
 ///
@@ -11,7 +15,7 @@ import 'package:styled_text/tags/styled_text_tag_base.dart';
 ///   text: 'Text with <input/> inside.',
 ///   tags: {
 ///     'input': StyledTextWidgetBuilderTag(
-///       () => TextField(
+///       (context, attributes) => TextField(
 ///         decoration: InputDecoration(
 ///           hintText: 'Input',
 ///         ),
@@ -24,7 +28,7 @@ import 'package:styled_text/tags/styled_text_tag_base.dart';
 /// ```
 class StyledTextWidgetBuilderTag extends StyledTextTagBase {
   /// Widget builder to insert in place of the tag.
-  final WidgetBuilder builder;
+  final StyledTextWidgetBuilderTagCallback builder;
 
   /// The size of the available space for the widget,
   /// if not specified, the widget will take up
@@ -59,7 +63,7 @@ class StyledTextWidgetBuilderTag extends StyledTextTagBase {
     required Map<String?, String?> attributes,
     GestureRecognizer? recognizer,
   }) {
-    Widget widget = builder(context);
+    Widget widget = builder(context, attributes);
 
     if (size != null) {
       widget = SizedBox(

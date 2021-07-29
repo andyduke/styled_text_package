@@ -28,7 +28,7 @@ class StyledTextWidgetTag extends StyledTextWidgetBuilderTag {
     PlaceholderAlignment alignment = PlaceholderAlignment.middle,
     TextBaseline baseline = TextBaseline.alphabetic,
   }) : super(
-          (context) => child,
+          (context, attributes) => child,
           size: size,
           constraints: constraints,
           alignment: alignment,
