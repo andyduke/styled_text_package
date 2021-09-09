@@ -56,6 +56,10 @@ class CustomTextStyle extends CustomStyle {
     }
     return _style.object ?? const TextStyle();
   }
+
+  TextOverflow? get overflow {
+    return style.overflow;
+  }
 }
 
 class _Holder<T> {
