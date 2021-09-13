@@ -1,3 +1,9 @@
+## 3.0.3
+
+**Attention!** Deprecated constructs from version 2.x will be removed in the next update.
+
+* Flutter 2.5 compatibility.
+
 ## 3.0.2
 
 * **[Breaking Changes]** In `StyledTextWidgetBuilderTag.builder` now the tag attributes are passed as the second parameter.
