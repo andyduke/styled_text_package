@@ -14,31 +14,33 @@ class CustomStyle with Diagnosticable implements TextStyle {
   TextStyle get style => baseStyle ?? const TextStyle();
 
   @override
-  TextStyle apply(
-      {Color? color,
-      Color? backgroundColor,
-      TextDecoration? decoration,
-      Color? decorationColor,
-      TextDecorationStyle? decorationStyle,
-      double decorationThicknessFactor = 1.0,
-      double decorationThicknessDelta = 0.0,
-      String? fontFamily,
-      List<String>? fontFamilyFallback,
-      double fontSizeFactor = 1.0,
-      double fontSizeDelta = 0.0,
-      int fontWeightDelta = 0,
-      FontStyle? fontStyle,
-      double letterSpacingFactor = 1.0,
-      double letterSpacingDelta = 0.0,
-      double wordSpacingFactor = 1.0,
-      double wordSpacingDelta = 0.0,
-      double heightFactor = 1.0,
-      double heightDelta = 0.0,
-      TextBaseline? textBaseline,
-      ui.TextLeadingDistribution? leadingDistribution,
-      Locale? locale,
-      List<Shadow>? shadows,
-      List<ui.FontFeature>? fontFeatures}) {
+  TextStyle apply({
+    Color? color,
+    Color? backgroundColor,
+    TextDecoration? decoration,
+    Color? decorationColor,
+    TextDecorationStyle? decorationStyle,
+    double decorationThicknessFactor = 1.0,
+    double decorationThicknessDelta = 0.0,
+    String? fontFamily,
+    List<String>? fontFamilyFallback,
+    double fontSizeFactor = 1.0,
+    double fontSizeDelta = 0.0,
+    int fontWeightDelta = 0,
+    FontStyle? fontStyle,
+    double letterSpacingFactor = 1.0,
+    double letterSpacingDelta = 0.0,
+    double wordSpacingFactor = 1.0,
+    double wordSpacingDelta = 0.0,
+    double heightFactor = 1.0,
+    double heightDelta = 0.0,
+    TextBaseline? textBaseline,
+    ui.TextLeadingDistribution? leadingDistribution,
+    Locale? locale,
+    List<Shadow>? shadows,
+    List<ui.FontFeature>? fontFeatures,
+    TextOverflow? overflow,
+  }) {
     return style.apply(
       color: color,
       backgroundColor: backgroundColor,
@@ -64,6 +66,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       locale: locale,
       shadows: shadows,
       fontFeatures: fontFeatures,
+      overflow: overflow,
     );
   }
 
@@ -82,30 +85,32 @@ class CustomStyle with Diagnosticable implements TextStyle {
   }
 
   @override
-  TextStyle copyWith(
-      {bool? inherit,
-      Color? color,
-      Color? backgroundColor,
-      String? fontFamily,
-      List<String>? fontFamilyFallback,
-      double? fontSize,
-      FontWeight? fontWeight,
-      FontStyle? fontStyle,
-      double? letterSpacing,
-      double? wordSpacing,
-      TextBaseline? textBaseline,
-      double? height,
-      ui.TextLeadingDistribution? leadingDistribution,
-      Locale? locale,
-      Paint? foreground,
-      Paint? background,
-      List<Shadow>? shadows,
-      List<ui.FontFeature>? fontFeatures,
-      TextDecoration? decoration,
-      Color? decorationColor,
-      TextDecorationStyle? decorationStyle,
-      double? decorationThickness,
-      String? debugLabel}) {
+  TextStyle copyWith({
+    bool? inherit,
+    Color? color,
+    Color? backgroundColor,
+    String? fontFamily,
+    List<String>? fontFamilyFallback,
+    double? fontSize,
+    FontWeight? fontWeight,
+    FontStyle? fontStyle,
+    double? letterSpacing,
+    double? wordSpacing,
+    TextBaseline? textBaseline,
+    double? height,
+    ui.TextLeadingDistribution? leadingDistribution,
+    Locale? locale,
+    Paint? foreground,
+    Paint? background,
+    List<Shadow>? shadows,
+    List<ui.FontFeature>? fontFeatures,
+    TextDecoration? decoration,
+    Color? decorationColor,
+    TextDecorationStyle? decorationStyle,
+    double? decorationThickness,
+    String? debugLabel,
+    TextOverflow? overflow,
+  }) {
     return style.copyWith(
       inherit: inherit,
       color: color,
@@ -130,6 +135,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       decorationStyle: decorationStyle,
       decorationThickness: decorationThickness,
       debugLabel: debugLabel,
+      overflow: overflow,
     );
   }
 
@@ -242,4 +248,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
 
   @override
   double? get wordSpacing => style.wordSpacing;
+
+  @override
+  TextOverflow? get overflow => style.overflow;
 }
