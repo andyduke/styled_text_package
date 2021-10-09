@@ -5,7 +5,6 @@ export "FLUTTER_APPLICATION_PATH=D:\Flutter2Live\_projects\styled_text\styled_te
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"
-export "SYMROOT=${SOURCE_ROOT}/../build\ios"
 export "FLUTTER_BUILD_NAME=2.0.0"
 export "FLUTTER_BUILD_NUMBER=2.0.0"
 export "DART_OBFUSCATION=false"

@@ -448,6 +448,9 @@ abstract class _Node {
   String? text;
   final List<_Node> children = [];
 
+  String get textContent =>
+      children.fold(text ?? '', (prevText, tag) => prevText + tag.textContent);
+
   InlineSpan createSpan({
     required BuildContext context,
     GestureRecognizer? recognizer,
@@ -475,6 +478,7 @@ class _TagNode extends _Node {
   StyledTextTagBase? tag;
   Map<String?, String?> attributes = {};
   GestureRecognizer? _recognizer;
+  String? _textContent;
 
   _TagNode({
     this.tag,
@@ -498,7 +502,9 @@ class _TagNode extends _Node {
     required BuildContext context,
     GestureRecognizer? recognizer,
   }) {
-    _recognizer = tag?.createRecognizer(text, attributes) ?? recognizer;
+    _recognizer =
+        tag?.createRecognizer(_textContent ??= textContent, attributes) ??
+            recognizer;
     InlineSpan? result = (tag != null)
         ? tag!.createSpan(
             context: context,

@@ -1,3 +1,7 @@
+## 3.0.4
+
+* Fixed a bug in `StyledTextActionTag` (tag's content was not passed to the first parameter of the callback).
+
 ## 3.0.3
 
 **Attention!** Deprecated constructs from version 2.x will be removed in the next update.

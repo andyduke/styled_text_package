@@ -101,8 +101,8 @@ StyledText(
 StyledText(
   text: 'Text with <link href="https://flutter.dev">link</link> inside.',
   tags: {
-    'link': StyledTextTagAction(
-      (TextSpan text, Map<String, String> attrs) => {
+    'link': StyledTextActionTag(
+      (String? text, Map<String?, String?> attrs) => {
         final String link = attrs['href'];
         print('The "$link" link is tapped.');
       },
