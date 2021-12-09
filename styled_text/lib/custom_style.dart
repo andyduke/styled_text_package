@@ -1,5 +1,6 @@
 import 'dart:ui' as ui
     show TextStyle, ParagraphStyle, FontFeature, TextLeadingDistribution;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +40,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
     Locale? locale,
     List<Shadow>? shadows,
     List<ui.FontFeature>? fontFeatures,
+    String? package,
     TextOverflow? overflow,
   }) {
     return style.apply(
@@ -66,6 +68,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       locale: locale,
       shadows: shadows,
       fontFeatures: fontFeatures,
+      package: package,
       overflow: overflow,
     );
   }
@@ -109,6 +112,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
     TextDecorationStyle? decorationStyle,
     double? decorationThickness,
     String? debugLabel,
+    String? package,
     TextOverflow? overflow,
   }) {
     return style.copyWith(
@@ -135,6 +139,7 @@ class CustomStyle with Diagnosticable implements TextStyle {
       decorationStyle: decorationStyle,
       decorationThickness: decorationThickness,
       debugLabel: debugLabel,
+      package: package,
       overflow: overflow,
     );
   }
