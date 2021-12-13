@@ -1,4 +1,4 @@
-## 4.0.0
+## 4.0.0+1
 
 * **[Breaking Changes]** Removed deprecated widgets and classes from version 2.x.
 
