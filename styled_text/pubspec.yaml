@@ -1,6 +1,6 @@
 name: styled_text
 description: Text widget with formatted text using tags. Makes it easier to use formatted text in multilingual applications.
-version: 3.0.4+1
+version: 4.0.0
 author: Andy Chentsov <chentsov@gmail.com>
 homepage: https://github.com/andyduke/styled_text_package/tree/master/styled_text
 repository: https://github.com/andyduke/styled_text_package
@@ -8,7 +8,7 @@ issue_tracker: https://github.com/andyduke/styled_text_package/issues
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
-  flutter: ">=2.5.0"
+  flutter: ">=2.8.0"
 
 dependencies:
   flutter:

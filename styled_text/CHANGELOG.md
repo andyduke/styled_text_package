@@ -1,3 +1,7 @@
+## 4.0.0
+
+* **[Breaking Changes]** Removed deprecated widgets and classes from version 2.x.
+
 ## 3.0.4+1
 
 * Fixed a bug in `StyledTextActionTag` (tag's content was not passed to the first parameter of the callback).

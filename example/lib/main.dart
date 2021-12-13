@@ -73,8 +73,8 @@ class DemoPage extends StatelessWidget {
             // Simple formatted text
             StyledText(
               text: 'Test: <b>bold</b> text.',
-              styles: {
-                'b': TextStyle(fontWeight: FontWeight.bold),
+              tags: {
+                'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
               },
             ),
 
@@ -82,8 +82,8 @@ class DemoPage extends StatelessWidget {
             const SizedBox(height: 20),
             StyledText(
               text: 'Quoted Test: <b>&quot;bold&quot;</b> text.',
-              styles: {
-                'b': TextStyle(fontWeight: FontWeight.bold),
+              tags: {
+                'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
               },
             ),
 
@@ -92,8 +92,8 @@ class DemoPage extends StatelessWidget {
             StyledText(
               text: """Multiline text 
 (wo breaks)""",
-              styles: {
-                'b': TextStyle(fontWeight: FontWeight.bold),
+              tags: {
+                'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
               },
             ),
 
@@ -103,8 +103,8 @@ class DemoPage extends StatelessWidget {
               text: """Multiline text
 (with breaks)""",
               newLineAsBreaks: true,
-              styles: {
-                'b': TextStyle(fontWeight: FontWeight.bold),
+              tags: {
+                'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
               },
             ),
 
@@ -112,9 +112,9 @@ class DemoPage extends StatelessWidget {
             const SizedBox(height: 20),
             StyledText(
               text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
-              styles: {
-                'bold': TextStyle(fontWeight: FontWeight.bold),
-                'red': TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+              tags: {
+                'bold': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                'red': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
               },
             ),
 
@@ -122,8 +122,8 @@ class DemoPage extends StatelessWidget {
             const SizedBox(height: 20),
             StyledText(
               text: 'Text with alarm <alarm/> icon.',
-              styles: {
-                'alarm': IconStyle(Icons.alarm),
+              tags: {
+                'alarm': StyledTextIconTag(Icons.alarm),
               },
             ),
 
@@ -131,10 +131,10 @@ class DemoPage extends StatelessWidget {
             const SizedBox(height: 20),
             StyledText(
               text: 'Text with <action>action</action> inside.',
-              styles: {
-                'action': ActionTextStyle(
-                  decoration: TextDecoration.underline,
-                  onTap: (_, __) => _alert(context),
+              tags: {
+                'action': StyledTextActionTag(
+                  (_, attrs) => _alert(context),
+                  style: TextStyle(decoration: TextDecoration.underline),
                 ),
               },
             ),
@@ -143,10 +143,10 @@ class DemoPage extends StatelessWidget {
             const SizedBox(height: 20),
             StyledText(
               text: 'Text with <link href="https://flutter.dev">link</link> inside.',
-              styles: {
-                'link': ActionTextStyle(
-                  decoration: TextDecoration.underline,
-                  onTap: (_, attrs) => _openLink(context, attrs),
+              tags: {
+                'link': StyledTextActionTag(
+                  (_, attrs) => _openLink(context, attrs),
+                  style: TextStyle(decoration: TextDecoration.underline),
                 ),
               },
             ),

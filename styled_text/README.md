@@ -88,7 +88,7 @@ StyledText(
 StyledText(
   text: 'Text with alarm <alarm/> icon.',
   tags: {
-    'alarm': StyledTextTagIcon(Icons.alarm),
+    'alarm': StyledTextIconTag(Icons.alarm),
   },
 )
 ```
