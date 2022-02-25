@@ -261,6 +261,7 @@ class _StyledTextState extends State<StyledText> {
   void _updateTextSpans({bool force = false}) {
     if (_text != widget.text || force) {
       _text = widget.text;
+      // _textSpans = null;
 
       String? textValue = _text;
       if (textValue == null) return;
@@ -275,8 +276,10 @@ class _StyledTextState extends State<StyledText> {
       ListQueue<_Node> textQueue = ListQueue();
       Map<String?, String?>? attributes;
 
-      var xmlStreamer =
-          new XmlStreamer('<?xml version="1.0" encoding="UTF-8"?><root>' + textValue + '</root>', trimSpaces: false);
+      final xmlStreamer = XmlStreamer(
+        '<?xml version="1.0" encoding="UTF-8"?><root>' + textValue + '</root>',
+        trimSpaces: false,
+      );
       xmlStreamer.read().listen((e) {
         switch (e.state) {
           case XmlState.Text:
@@ -334,12 +337,11 @@ class _StyledTextState extends State<StyledText> {
     }
   }
 
-  void _buildTextSpans(_Node? node, [TextStyle? defaultStyle]) {
-    if (mounted && node != null) {
+  void _buildTextSpans(_Node? node) {
+    if (node != null) {
       final span = node.createSpan(context: context);
-      _textSpans = TextSpan(style: defaultStyle, children: [span]);
-
-      setState(() {});
+      _textSpans = TextSpan(children: [span]);
+      if (mounted) setState(() {});
     }
   }
 
@@ -352,6 +354,7 @@ class _StyledTextState extends State<StyledText> {
     if (widget.style == null || widget.style!.inherit) effectiveTextStyle = defaultTextStyle.style.merge(widget.style);
     if (MediaQuery.boldTextOverride(context))
       effectiveTextStyle = effectiveTextStyle!.merge(const TextStyle(fontWeight: FontWeight.bold));
+
     final span = TextSpan(
       style: effectiveTextStyle,
       children: [_textSpans!],
