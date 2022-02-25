@@ -1,3 +1,7 @@
+## 5.0.0
+
+* `StyledText` now reacts to theme and default text style changes. 
+
 ## 4.0.0+1
 
 * **[Breaking Changes]** Removed deprecated widgets and classes from version 2.x.

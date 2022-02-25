@@ -1,6 +1,7 @@
 library styled_text;
 
 import 'dart:collection';
+import 'dart:ui' as ui show TextHeightBehavior;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -62,20 +63,6 @@ class StyledText extends StatefulWidget {
   /// Default text style.
   final TextStyle? style;
 
-  /// Style map for tags in text.
-  ///
-  /// Example:
-  /// ```dart
-  /// StyledText(
-  ///   text: '<red>Red</red> text.',
-  ///   styles: [
-  ///     'red': TextStyle(color: Colors.red),
-  ///   ],
-  /// )
-  /// ```
-  @Deprecated('Use tags instead of styles.')
-  final Map<String, TextStyle> styles;
-
   /// Map of tag assignments to text style classes and tag handlers.
   ///
   /// Example:
@@ -90,7 +77,7 @@ class StyledText extends StatefulWidget {
   final Map<String, StyledTextTagBase> tags;
 
   /// How the text should be aligned horizontally.
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
 
   /// The directionality of the text.
   final TextDirection? textDirection;
@@ -98,16 +85,16 @@ class StyledText extends StatefulWidget {
   /// Whether the text should break at soft line breaks.
   ///
   /// If false, the glyphs in the text will be positioned as if there was unlimited horizontal space.
-  final bool softWrap;
+  final bool? softWrap;
 
   /// How visual overflow should be handled.
-  final TextOverflow overflow;
+  final TextOverflow? overflow;
 
   /// The number of font pixels for each logical pixel.
   ///
   /// For example, if the text scale factor is 1.5, text will be 50% larger than
   /// the specified font size.
-  final double textScaleFactor;
+  final double? textScaleFactor;
 
   /// An optional maximum number of lines for the text to span, wrapping if necessary.
   /// If the text exceeds the given number of lines, it will be truncated according
@@ -129,6 +116,12 @@ class StyledText extends StatefulWidget {
   /// {@macro flutter.painting.textPainter.strutStyle}
   final StrutStyle? strutStyle;
 
+  /// {@macro flutter.painting.textPainter.textWidthBasis}
+  final TextWidthBasis? textWidthBasis;
+
+  /// {@macro flutter.dart:ui.textHeightBehavior}
+  final ui.TextHeightBehavior? textHeightBehavior;
+
   /// Create a text widget with formatting via tags.
   ///
   StyledText({
@@ -136,24 +129,18 @@ class StyledText extends StatefulWidget {
     required this.text,
     this.newLineAsBreaks = true,
     this.style,
-    @Deprecated('Use tags property instead of styles')
-        Map<String, TextStyle>? styles,
     Map<String, StyledTextTagBase>? tags,
-    this.textAlign = TextAlign.start,
+    this.textAlign,
     this.textDirection,
     this.softWrap = true,
-    this.overflow = TextOverflow.clip,
-    this.textScaleFactor = 1.0,
+    this.overflow,
+    this.textScaleFactor,
     this.maxLines,
     this.locale,
     this.strutStyle,
-  })  : assert(
-          styles != null || tags != null,
-          'Styles and tags cannot be used at the same time. Use styles for compatibility only. They will be removed in future versions.',
-        ),
-        this.styles = // ignore: deprecated_member_use_from_same_package
-            styles ?? const {},
-        this.tags = tags ?? const {},
+    this.textWidthBasis,
+    this.textHeightBehavior,
+  })  : this.tags = tags ?? const {},
         this.selectable = false,
         this._focusNode = null,
         this._showCursor = false,
@@ -167,47 +154,37 @@ class StyledText extends StatefulWidget {
         this._enableInteractiveSelection = false,
         this._onTap = null,
         this._scrollPhysics = null,
-        this._textHeightBehavior = null,
-        this._textWidthBasis = null,
         super(key: key);
 
   /// Create a selectable text widget with formatting via tags.
   ///
   /// See [SelectableText.rich] for more options.
-  StyledText.selectable(
-      {Key? key,
-      required this.text,
-      this.newLineAsBreaks = false,
-      this.style,
-      @Deprecated('Use tags property instead of styles')
-          Map<String, TextStyle>? styles,
-      Map<String, StyledTextTagBase>? tags,
-      this.textAlign = TextAlign.start,
-      this.textDirection,
-      this.textScaleFactor = 1.0,
-      this.maxLines,
-      this.strutStyle,
-      FocusNode? focusNode,
-      bool showCursor = false,
-      bool autofocus = false,
-      ToolbarOptions? toolbarOptions,
-      double cursorWidth = 2.0,
-      double? cursorHeight,
-      Radius? cursorRadius,
-      Color? cursorColor,
-      DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-      bool enableInteractiveSelection = true,
-      GestureTapCallback? onTap,
-      ScrollPhysics? scrollPhysics,
-      TextHeightBehavior? textHeightBehavior,
-      TextWidthBasis? textWidthBasis})
-      : assert(
-          styles != null || tags != null,
-          'Styles and tags cannot be used at the same time. Use styles for compatibility only. They will be removed in future versions.',
-        ),
-        this.styles = // ignore: deprecated_member_use_from_same_package
-            styles ?? const {},
-        this.tags = tags ?? const {},
+  StyledText.selectable({
+    Key? key,
+    required this.text,
+    this.newLineAsBreaks = false,
+    this.style,
+    Map<String, StyledTextTagBase>? tags,
+    this.textAlign,
+    this.textDirection,
+    this.textScaleFactor,
+    this.maxLines,
+    this.strutStyle,
+    this.textWidthBasis,
+    this.textHeightBehavior,
+    FocusNode? focusNode,
+    bool showCursor = false,
+    bool autofocus = false,
+    ToolbarOptions? toolbarOptions,
+    double cursorWidth = 2.0,
+    double? cursorHeight,
+    Radius? cursorRadius,
+    Color? cursorColor,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    bool enableInteractiveSelection = true,
+    GestureTapCallback? onTap,
+    ScrollPhysics? scrollPhysics,
+  })  : this.tags = tags ?? const {},
         this.selectable = true,
         this.softWrap = true,
         this.overflow = TextOverflow.clip,
@@ -228,8 +205,6 @@ class StyledText extends StatefulWidget {
         this._enableInteractiveSelection = enableInteractiveSelection,
         this._onTap = onTap,
         this._scrollPhysics = scrollPhysics,
-        this._textHeightBehavior = textHeightBehavior,
-        this._textWidthBasis = textWidthBasis,
         super(key: key);
 
   final FocusNode? _focusNode;
@@ -244,8 +219,6 @@ class StyledText extends StatefulWidget {
   final bool _enableInteractiveSelection;
   final GestureTapCallback? _onTap;
   final ScrollPhysics? _scrollPhysics;
-  final TextHeightBehavior? _textHeightBehavior;
-  final TextWidthBasis? _textWidthBasis;
 
   @override
   _StyledTextState createState() => _StyledTextState();
@@ -268,9 +241,6 @@ class _StyledTextState extends State<StyledText> {
 
     if ((widget.text != oldWidget.text) ||
         (widget.tags != oldWidget.tags) ||
-        (widget.styles != // ignore: deprecated_member_use_from_same_package
-            oldWidget
-                .styles) || // ignore: deprecated_member_use_from_same_package
         (widget.style != oldWidget.style) ||
         (widget.newLineAsBreaks != oldWidget.newLineAsBreaks)) {
       _updateTextSpans(force: true);
@@ -282,14 +252,6 @@ class _StyledTextState extends State<StyledText> {
 
     if (widget.tags.containsKey(tagName)) {
       return widget.tags[tagName];
-    }
-
-    // ignore: deprecated_member_use_from_same_package
-    if (widget.styles.containsKey(tagName)) {
-      return StyledTextTag(
-          style:
-              widget.styles[// ignore: deprecated_member_use_from_same_package
-                  tagName]);
     }
 
     return null;
@@ -309,18 +271,12 @@ class _StyledTextState extends State<StyledText> {
 
       _rootNode?.dispose();
 
-      TextStyle defaultStyle = (widget.style != null)
-          ? DefaultTextStyle.of(context).style.merge(widget.style)
-          : DefaultTextStyle.of(context).style;
       _Node node = _TextNode();
       ListQueue<_Node> textQueue = ListQueue();
       Map<String?, String?>? attributes;
 
-      var xmlStreamer = new XmlStreamer(
-          '<?xml version="1.0" encoding="UTF-8"?><root>' +
-              textValue +
-              '</root>',
-          trimSpaces: false);
+      var xmlStreamer =
+          new XmlStreamer('<?xml version="1.0" encoding="UTF-8"?><root>' + textValue + '</root>', trimSpaces: false);
       xmlStreamer.read().listen((e) {
         switch (e.state) {
           case XmlState.Text:
@@ -369,7 +325,7 @@ class _StyledTextState extends State<StyledText> {
         }
       }).onDone(() {
         _rootNode = node;
-        _buildTextSpans(_rootNode, defaultStyle);
+        _buildTextSpans(_rootNode);
       });
     } else {
       if (_rootNode != null && _textSpans == null) {
@@ -380,15 +336,8 @@ class _StyledTextState extends State<StyledText> {
 
   void _buildTextSpans(_Node? node, [TextStyle? defaultStyle]) {
     if (mounted && node != null) {
-      TextStyle? style = defaultStyle;
-      if (style == null) {
-        style = (widget.style != null)
-            ? DefaultTextStyle.of(context).style.merge(widget.style)
-            : DefaultTextStyle.of(context).style;
-      }
-
       final span = node.createSpan(context: context);
-      _textSpans = TextSpan(style: style, children: [span]);
+      _textSpans = TextSpan(style: defaultStyle, children: [span]);
 
       setState(() {});
     }
@@ -398,21 +347,34 @@ class _StyledTextState extends State<StyledText> {
   Widget build(BuildContext context) {
     if (_textSpans == null) return const SizedBox();
 
+    final DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
+    TextStyle? effectiveTextStyle = widget.style;
+    if (widget.style == null || widget.style!.inherit) effectiveTextStyle = defaultTextStyle.style.merge(widget.style);
+    if (MediaQuery.boldTextOverride(context))
+      effectiveTextStyle = effectiveTextStyle!.merge(const TextStyle(fontWeight: FontWeight.bold));
+    final span = TextSpan(
+      style: effectiveTextStyle,
+      children: [_textSpans!],
+    );
+
     if (!widget.selectable) {
       return RichText(
-        textAlign: widget.textAlign,
+        textAlign: widget.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
         textDirection: widget.textDirection,
-        softWrap: widget.softWrap,
-        overflow: widget.overflow,
-        textScaleFactor: widget.textScaleFactor,
-        maxLines: widget.maxLines,
+        softWrap: widget.softWrap ?? defaultTextStyle.softWrap,
+        overflow: widget.overflow ?? effectiveTextStyle?.overflow ?? defaultTextStyle.overflow,
+        textScaleFactor: widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
+        maxLines: widget.maxLines ?? defaultTextStyle.maxLines,
         locale: widget.locale,
         strutStyle: widget.strutStyle,
-        text: _textSpans!,
+        textWidthBasis: widget.textWidthBasis ?? defaultTextStyle.textWidthBasis,
+        textHeightBehavior:
+            widget.textHeightBehavior ?? defaultTextStyle.textHeightBehavior ?? DefaultTextHeightBehavior.of(context),
+        text: span,
       );
     } else {
       return SelectableText.rich(
-        _textSpans!,
+        span,
         focusNode: widget._focusNode,
         showCursor: widget._showCursor,
         autofocus: widget._autofocus,
@@ -425,14 +387,15 @@ class _StyledTextState extends State<StyledText> {
         enableInteractiveSelection: widget._enableInteractiveSelection,
         onTap: widget._onTap,
         scrollPhysics: widget._scrollPhysics,
-        textHeightBehavior: widget._textHeightBehavior,
-        textWidthBasis: widget._textWidthBasis,
-        textAlign: widget.textAlign,
+        textWidthBasis: widget.textWidthBasis ?? defaultTextStyle.textWidthBasis,
+        textHeightBehavior:
+            widget.textHeightBehavior ?? defaultTextStyle.textHeightBehavior ?? DefaultTextHeightBehavior.of(context),
+        textAlign: widget.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
         textDirection: widget.textDirection,
         // softWrap
         // overflow
-        textScaleFactor: widget.textScaleFactor,
-        maxLines: widget.maxLines,
+        textScaleFactor: widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
+        maxLines: widget.maxLines ?? defaultTextStyle.maxLines,
         // locale
         strutStyle: widget.strutStyle,
       );
@@ -444,8 +407,7 @@ abstract class _Node {
   String? text;
   final List<_Node> children = [];
 
-  String get textContent =>
-      children.fold(text ?? '', (prevText, tag) => prevText + tag.textContent);
+  String get textContent => children.fold(text ?? '', (prevText, tag) => prevText + tag.textContent);
 
   InlineSpan createSpan({
     required BuildContext context,
@@ -458,9 +420,7 @@ abstract class _Node {
     required BuildContext context,
     GestureRecognizer? recognizer,
   }) {
-    return children
-        .map((c) => c.createSpan(context: context, recognizer: recognizer))
-        .toList();
+    return children.map((c) => c.createSpan(context: context, recognizer: recognizer)).toList();
   }
 
   void dispose() {
@@ -498,9 +458,7 @@ class _TagNode extends _Node {
     required BuildContext context,
     GestureRecognizer? recognizer,
   }) {
-    _recognizer =
-        tag?.createRecognizer(_textContent ??= textContent, attributes) ??
-            recognizer;
+    _recognizer = tag?.createRecognizer(_textContent ??= textContent, attributes) ?? recognizer;
     InlineSpan? result = (tag != null)
         ? tag!.createSpan(
             context: context,
