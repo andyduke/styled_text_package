@@ -6,7 +6,6 @@ import 'dart:ui' as ui show TextHeightBehavior;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:xmlstream/xmlstream.dart';
-import 'package:styled_text/tags/styled_text_tag.dart';
 import 'package:styled_text/tags/styled_text_tag_base.dart';
 
 export 'tags/styled_text_tag_base.dart';
