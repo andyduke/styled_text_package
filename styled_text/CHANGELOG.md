@@ -1,6 +1,8 @@
 ## 5.0.0
 
 * `StyledText` now reacts to theme and default text style changes. 
+* Fixed flickering when rebuilding without changing text and styles.
+* Removed deprecated stuff.
 
 ## 4.0.0+1
 
