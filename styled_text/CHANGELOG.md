@@ -1,3 +1,7 @@
+## 5.1.0
+
+* Fixed a bug that caused building after dispose.
+
 ## 5.0.0+1
 
 * `StyledText` now reacts to theme and default text style changes. 

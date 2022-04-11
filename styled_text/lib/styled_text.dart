@@ -258,7 +258,7 @@ class _StyledTextState extends State<StyledText> {
 
   // Parse text
   void _updateTextSpans({bool force = false}) {
-    if (_text != widget.text || force) {
+    if ((_text != widget.text) || (_textSpans == null) || force) {
       _text = widget.text;
       // _textSpans = null;
 
@@ -338,9 +338,13 @@ class _StyledTextState extends State<StyledText> {
 
   void _buildTextSpans(_Node? node) {
     if (node != null) {
-      final span = node.createSpan(context: context);
-      _textSpans = TextSpan(children: [span]);
-      if (mounted) setState(() {});
+      if (mounted) {
+        final span = node.createSpan(context: context);
+        _textSpans = TextSpan(children: [span]);
+        setState(() {});
+      } else {
+        _textSpans = null;
+      }
     }
   }
 
