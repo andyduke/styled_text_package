@@ -1,3 +1,7 @@
+## 6.0.0
+
+* Added support for `SelectionArea`.
+
 ## 5.1.0
 
 * Fixed a bug that caused building after dispose.

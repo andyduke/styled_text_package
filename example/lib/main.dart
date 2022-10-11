@@ -60,97 +60,99 @@ class DemoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('StyledText Demo'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            // Simple formatted text
-            StyledText(
-              text: 'Test: <b>bold</b> text.',
-              tags: {
-                'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
-              },
-            ),
+    return SelectionArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('StyledText Demo'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              // Simple formatted text
+              StyledText(
+                text: 'Test: <b>bold</b> text.',
+                tags: {
+                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                },
+              ),
 
-            // Text with quotes
-            const SizedBox(height: 20),
-            StyledText(
-              text: 'Quoted Test: <b>&quot;bold&quot;</b> text.',
-              tags: {
-                'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
-              },
-            ),
+              // Text with quotes
+              const SizedBox(height: 20),
+              StyledText(
+                text: 'Quoted Test: <b>&quot;bold&quot;</b> text.',
+                tags: {
+                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                },
+              ),
 
-            // Multiline text without breaks
-            const SizedBox(height: 20),
-            StyledText(
-              text: """Multiline text 
+              // Multiline text without breaks
+              const SizedBox(height: 20),
+              StyledText(
+                text: """Multiline text 
 (wo breaks)""",
-              tags: {
-                'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
-              },
-            ),
+                tags: {
+                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                },
+              ),
 
-            // Multiline text with breaks
-            const SizedBox(height: 20),
-            StyledText(
-              text: """Multiline text
+              // Multiline text with breaks
+              const SizedBox(height: 20),
+              StyledText(
+                text: """Multiline text
 (with breaks)""",
-              newLineAsBreaks: true,
-              tags: {
-                'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
-              },
-            ),
+                newLineAsBreaks: true,
+                tags: {
+                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                },
+              ),
 
-            // Custom tags styles
-            const SizedBox(height: 20),
-            StyledText(
-              text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
-              tags: {
-                'bold': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
-                'red': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
-              },
-            ),
+              // Custom tags styles
+              const SizedBox(height: 20),
+              StyledText(
+                text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
+                tags: {
+                  'bold': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                  'red': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+                },
+              ),
 
-            // Icon
-            const SizedBox(height: 20),
-            StyledText(
-              text: 'Text with alarm <alarm/> icon.',
-              tags: {
-                'alarm': StyledTextIconTag(Icons.alarm),
-              },
-            ),
+              // Icon
+              const SizedBox(height: 20),
+              StyledText(
+                text: 'Text with alarm <alarm/> icon.',
+                tags: {
+                  'alarm': StyledTextIconTag(Icons.alarm),
+                },
+              ),
 
-            // Action
-            const SizedBox(height: 20),
-            StyledText(
-              text: 'Text with <action>action</action> inside.',
-              tags: {
-                'action': StyledTextActionTag(
-                  (_, attrs) => _alert(context),
-                  style: TextStyle(decoration: TextDecoration.underline),
-                ),
-              },
-            ),
+              // Action
+              const SizedBox(height: 20),
+              StyledText(
+                text: 'Text with <action>action</action> inside.',
+                tags: {
+                  'action': StyledTextActionTag(
+                    (_, attrs) => _alert(context),
+                    style: TextStyle(decoration: TextDecoration.underline),
+                  ),
+                },
+              ),
 
-            // Link
-            const SizedBox(height: 20),
-            StyledText(
-              text: 'Text with <link href="https://flutter.dev">link</link> inside.',
-              tags: {
-                'link': StyledTextActionTag(
-                  (_, attrs) => _openLink(context, attrs),
-                  style: TextStyle(decoration: TextDecoration.underline),
-                ),
-              },
-            ),
-          ],
+              // Link
+              const SizedBox(height: 20),
+              StyledText(
+                text: 'Text with <link href="https://flutter.dev">link</link> inside.',
+                tags: {
+                  'link': StyledTextActionTag(
+                    (_, attrs) => _openLink(context, attrs),
+                    style: TextStyle(decoration: TextDecoration.underline),
+                  ),
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

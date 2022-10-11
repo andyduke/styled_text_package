@@ -5,6 +5,7 @@ import 'dart:ui' as ui show TextHeightBehavior;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:xmlstream/xmlstream.dart';
 import 'package:styled_text/tags/styled_text_tag_base.dart';
 
@@ -366,7 +367,9 @@ class _StyledTextState extends State<StyledText> {
     );
 
     if (!widget.selectable) {
-      return RichText(
+      final SelectionRegistrar? registrar = SelectionContainer.maybeOf(context);
+
+      Widget result = RichText(
         textAlign:
             widget.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
         textDirection: widget.textDirection,
@@ -385,7 +388,18 @@ class _StyledTextState extends State<StyledText> {
             defaultTextStyle.textHeightBehavior ??
             DefaultTextHeightBehavior.of(context),
         text: span,
+        selectionRegistrar: registrar,
+        selectionColor: DefaultSelectionStyle.of(context).selectionColor,
       );
+
+      if (registrar != null) {
+        result = MouseRegion(
+          cursor: SystemMouseCursors.text,
+          child: result,
+        );
+      }
+
+      return result;
     } else {
       return SelectableText.rich(
         span,
