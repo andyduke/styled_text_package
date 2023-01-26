@@ -186,6 +186,7 @@ class StyledText extends StatefulWidget {
       'Use `contextMenuBuilder` instead. '
       'This feature was deprecated after Flutter v3.3.0-0.5.pre.',
     )
+        // ignore: deprecated_member_use
         ToolbarOptions? toolbarOptions,
     EditableTextContextMenuBuilder contextMenuBuilder =
         _defaultContextMenuBuilder,
@@ -212,6 +213,7 @@ class StyledText extends StatefulWidget {
         this._showCursor = showCursor,
         this._autofocus = autofocus,
         this._toolbarOptions = toolbarOptions ??
+            // ignore: deprecated_member_use
             const ToolbarOptions(
               selectAll: true,
               copy: true,
@@ -236,6 +238,7 @@ class StyledText extends StatefulWidget {
   final FocusNode? _focusNode;
   final bool _showCursor;
   final bool _autofocus;
+  // ignore: deprecated_member_use
   final ToolbarOptions? _toolbarOptions;
   final EditableTextContextMenuBuilder? _contextMenuBuilder;
   final TextSelectionControls? _selectionControls;
@@ -446,6 +449,7 @@ class _StyledTextState extends State<StyledText> {
         focusNode: widget._focusNode,
         showCursor: widget._showCursor,
         autofocus: widget._autofocus,
+        // ignore: deprecated_member_use
         toolbarOptions: widget._toolbarOptions,
         contextMenuBuilder: widget._contextMenuBuilder,
         selectionControls: widget._selectionControls,
