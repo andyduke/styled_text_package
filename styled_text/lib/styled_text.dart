@@ -1,7 +1,7 @@
 library styled_text;
 
 import 'dart:collection';
-import 'dart:ui' as ui show TextHeightBehavior;
+import 'dart:ui' as ui show TextHeightBehavior, BoxHeightStyle, BoxWidthStyle;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -146,6 +146,12 @@ class StyledText extends StatefulWidget {
         this._showCursor = false,
         this._autofocus = false,
         this._toolbarOptions = null,
+        this._contextMenuBuilder = null,
+        this._selectionControls = null,
+        this._selectionHeightStyle = null,
+        this._selectionWidthStyle = null,
+        this._onSelectionChanged = null,
+        this._magnifierConfiguration = null,
         this._cursorWidth = null,
         this._cursorHeight = null,
         this._cursorRadius = null,
@@ -154,6 +160,7 @@ class StyledText extends StatefulWidget {
         this._enableInteractiveSelection = false,
         this._onTap = null,
         this._scrollPhysics = null,
+        this._semanticsLabel = null,
         super(key: key);
 
   /// Create a selectable text widget with formatting via tags.
@@ -175,7 +182,18 @@ class StyledText extends StatefulWidget {
     FocusNode? focusNode,
     bool showCursor = false,
     bool autofocus = false,
-    ToolbarOptions? toolbarOptions,
+    @Deprecated(
+      'Use `contextMenuBuilder` instead. '
+      'This feature was deprecated after Flutter v3.3.0-0.5.pre.',
+    )
+        ToolbarOptions? toolbarOptions,
+    EditableTextContextMenuBuilder contextMenuBuilder =
+        _defaultContextMenuBuilder,
+    TextSelectionControls? selectionControls,
+    ui.BoxHeightStyle selectionHeightStyle = ui.BoxHeightStyle.tight,
+    ui.BoxWidthStyle selectionWidthStyle = ui.BoxWidthStyle.tight,
+    SelectionChangedCallback? onSelectionChanged,
+    TextMagnifierConfiguration? magnifierConfiguration,
     double cursorWidth = 2.0,
     double? cursorHeight,
     Radius? cursorRadius,
@@ -184,6 +202,7 @@ class StyledText extends StatefulWidget {
     bool enableInteractiveSelection = true,
     GestureTapCallback? onTap,
     ScrollPhysics? scrollPhysics,
+    String? semanticsLabel,
   })  : this.tags = tags ?? const {},
         this.selectable = true,
         this.softWrap = true,
@@ -197,6 +216,12 @@ class StyledText extends StatefulWidget {
               selectAll: true,
               copy: true,
             ),
+        this._contextMenuBuilder = contextMenuBuilder,
+        this._selectionHeightStyle = selectionHeightStyle,
+        this._selectionWidthStyle = selectionWidthStyle,
+        this._selectionControls = selectionControls,
+        this._onSelectionChanged = onSelectionChanged,
+        this._magnifierConfiguration = magnifierConfiguration,
         this._cursorWidth = cursorWidth,
         this._cursorHeight = cursorHeight,
         this._cursorRadius = cursorRadius,
@@ -205,12 +230,19 @@ class StyledText extends StatefulWidget {
         this._enableInteractiveSelection = enableInteractiveSelection,
         this._onTap = onTap,
         this._scrollPhysics = scrollPhysics,
+        this._semanticsLabel = semanticsLabel,
         super(key: key);
 
   final FocusNode? _focusNode;
   final bool _showCursor;
   final bool _autofocus;
   final ToolbarOptions? _toolbarOptions;
+  final EditableTextContextMenuBuilder? _contextMenuBuilder;
+  final TextSelectionControls? _selectionControls;
+  final ui.BoxHeightStyle? _selectionHeightStyle;
+  final ui.BoxWidthStyle? _selectionWidthStyle;
+  final SelectionChangedCallback? _onSelectionChanged;
+  final TextMagnifierConfiguration? _magnifierConfiguration;
   final double? _cursorWidth;
   final double? _cursorHeight;
   final Radius? _cursorRadius;
@@ -219,6 +251,14 @@ class StyledText extends StatefulWidget {
   final bool _enableInteractiveSelection;
   final GestureTapCallback? _onTap;
   final ScrollPhysics? _scrollPhysics;
+  final String? _semanticsLabel;
+
+  static Widget _defaultContextMenuBuilder(
+      BuildContext context, EditableTextState editableTextState) {
+    return AdaptiveTextSelectionToolbar.editableText(
+      editableTextState: editableTextState,
+    );
+  }
 
   @override
   _StyledTextState createState() => _StyledTextState();
@@ -386,7 +426,7 @@ class _StyledTextState extends State<StyledText> {
             widget.textWidthBasis ?? defaultTextStyle.textWidthBasis,
         textHeightBehavior: widget.textHeightBehavior ??
             defaultTextStyle.textHeightBehavior ??
-            DefaultTextHeightBehavior.of(context),
+            DefaultTextHeightBehavior.maybeOf(context),
         text: span,
         selectionRegistrar: registrar,
         selectionColor: DefaultSelectionStyle.of(context).selectionColor,
@@ -407,6 +447,12 @@ class _StyledTextState extends State<StyledText> {
         showCursor: widget._showCursor,
         autofocus: widget._autofocus,
         toolbarOptions: widget._toolbarOptions,
+        contextMenuBuilder: widget._contextMenuBuilder,
+        selectionControls: widget._selectionControls,
+        selectionHeightStyle: widget._selectionHeightStyle!,
+        selectionWidthStyle: widget._selectionWidthStyle!,
+        onSelectionChanged: widget._onSelectionChanged,
+        magnifierConfiguration: widget._magnifierConfiguration,
         cursorWidth: widget._cursorWidth!,
         cursorHeight: widget._cursorHeight,
         cursorRadius: widget._cursorRadius,
@@ -419,7 +465,7 @@ class _StyledTextState extends State<StyledText> {
             widget.textWidthBasis ?? defaultTextStyle.textWidthBasis,
         textHeightBehavior: widget.textHeightBehavior ??
             defaultTextStyle.textHeightBehavior ??
-            DefaultTextHeightBehavior.of(context),
+            DefaultTextHeightBehavior.maybeOf(context),
         textAlign:
             widget.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
         textDirection: widget.textDirection,
@@ -430,6 +476,7 @@ class _StyledTextState extends State<StyledText> {
         maxLines: widget.maxLines ?? defaultTextStyle.maxLines,
         // locale
         strutStyle: widget.strutStyle,
+        semanticsLabel: widget._semanticsLabel,
       );
     }
   }

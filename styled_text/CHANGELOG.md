@@ -1,3 +1,9 @@
+## 7.0.0
+
+* Compatibility with Flutter 3.7.0.
+* New parameters `contextMenuBuilder`, `selectionControls`, `selectionHeightStyle`, `selectionWidthStyle`, `onSelectionChanged`, `magnifierConfiguration`, `semanticsLabel` have been added to `StyledText.selectable`.
+* In `StyledText.selectable`, the `toolbarOptions` parameter has been deprecated.
+
 ## 6.0.0
 
 * Added support for `SelectionArea`.

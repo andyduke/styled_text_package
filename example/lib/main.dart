@@ -151,6 +151,18 @@ class DemoPage extends StatelessWidget {
                   ),
                 },
               ),
+
+              // SelectableText with Link
+              const SizedBox(height: 20),
+              StyledText.selectable(
+                text: 'Text with <link href="https://flutter.dev">link</link> inside.',
+                tags: {
+                  'link': StyledTextActionTag(
+                    (_, attrs) => _openLink(context, attrs),
+                    style: TextStyle(decoration: TextDecoration.underline),
+                  ),
+                },
+              ),
             ],
           ),
         ),
