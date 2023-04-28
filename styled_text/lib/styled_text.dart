@@ -6,16 +6,22 @@ import 'dart:ui' as ui show TextHeightBehavior, BoxHeightStyle, BoxWidthStyle;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:xmlstream/xmlstream.dart';
 import 'package:styled_text/tags/styled_text_tag_base.dart';
+import 'package:xmlstream/xmlstream.dart';
 
-export 'tags/styled_text_tag_base.dart';
 export 'tags/styled_text_tag.dart';
-export 'tags/styled_text_tag_icon.dart';
 export 'tags/styled_text_tag_action.dart';
+export 'tags/styled_text_tag_base.dart';
+export 'tags/styled_text_tag_custom.dart';
+export 'tags/styled_text_tag_icon.dart';
 export 'tags/styled_text_tag_widget.dart';
 export 'tags/styled_text_tag_widget_builder.dart';
-export 'tags/styled_text_tag_custom.dart';
+
+/// The builder callback for a custom [StyledText] widget.
+///
+/// This can be used with [StyledText.builder].
+typedef StyledTextWidgetBuilderCallback = Widget Function(
+    BuildContext context, TextSpan textSpan);
 
 ///
 /// Text widget with formatting via tags.
@@ -161,6 +167,7 @@ class StyledText extends StatefulWidget {
         this._onTap = null,
         this._scrollPhysics = null,
         this._semanticsLabel = null,
+        this._builder = null,
         super(key: key);
 
   /// Create a selectable text widget with formatting via tags.
@@ -233,11 +240,56 @@ class StyledText extends StatefulWidget {
         this._onTap = onTap,
         this._scrollPhysics = scrollPhysics,
         this._semanticsLabel = semanticsLabel,
+        this._builder = null,
+        super(key: key);
+
+  /// Create a custom [StyledText] with your own builder function.
+  ///
+  /// This way you can manage the resulting [TextSpan] by yourself.
+  StyledText.builder({
+    Key? key,
+    this.newLineAsBreaks = true,
+    required this.text,
+    this.tags = const {},
+    this.style,
+    required StyledTextWidgetBuilderCallback builder,
+  })  : this.textAlign = null,
+        this.textDirection = null,
+        this.softWrap = true,
+        this.overflow = null,
+        this.textScaleFactor = null,
+        this.maxLines = null,
+        this.locale = null,
+        this.strutStyle = null,
+        this.textWidthBasis = null,
+        this.textHeightBehavior = null,
+        this.selectable = false,
+        this._builder = builder,
+        this._focusNode = null,
+        this._showCursor = false,
+        this._autofocus = false,
+        this._toolbarOptions = null,
+        this._contextMenuBuilder = null,
+        this._selectionControls = null,
+        this._selectionHeightStyle = null,
+        this._selectionWidthStyle = null,
+        this._onSelectionChanged = null,
+        this._magnifierConfiguration = null,
+        this._cursorWidth = null,
+        this._cursorHeight = null,
+        this._cursorRadius = null,
+        this._cursorColor = null,
+        this._dragStartBehavior = DragStartBehavior.start,
+        this._enableInteractiveSelection = false,
+        this._onTap = null,
+        this._scrollPhysics = null,
+        this._semanticsLabel = null,
         super(key: key);
 
   final FocusNode? _focusNode;
   final bool _showCursor;
   final bool _autofocus;
+
   // ignore: deprecated_member_use
   final ToolbarOptions? _toolbarOptions;
   final EditableTextContextMenuBuilder? _contextMenuBuilder;
@@ -255,6 +307,7 @@ class StyledText extends StatefulWidget {
   final GestureTapCallback? _onTap;
   final ScrollPhysics? _scrollPhysics;
   final String? _semanticsLabel;
+  final StyledTextWidgetBuilderCallback? _builder;
 
   static Widget _defaultContextMenuBuilder(
       BuildContext context, EditableTextState editableTextState) {
@@ -408,6 +461,8 @@ class _StyledTextState extends State<StyledText> {
       style: effectiveTextStyle,
       children: [_textSpans!],
     );
+
+    if (widget._builder != null) return widget._builder!.call(context, span);
 
     if (!widget.selectable) {
       final SelectionRegistrar? registrar = SelectionContainer.maybeOf(context);
