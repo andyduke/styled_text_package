@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_text/tags/styled_text_tag_base.dart';
+import 'package:styled_text/widgets/styled_text.dart';
 import 'package:xmlstream/xmlstream.dart';
 
 /// The builder callback for the [CustomStyledText] widget.
@@ -10,17 +11,20 @@ typedef StyledTextWidgetBuilderCallback = Widget Function(
     BuildContext context, TextSpan textSpan);
 
 ///
-/// Text widget with formatting via tags.
+/// Custom widget with formatting via tags.
 ///
 /// Formatting is specified as xml tags. For each tag, you can specify a style, icon, etc. in the [tags] parameter.
 ///
+/// Consider using the simpler [StyledText] instead
+///
 /// Example:
 /// ```dart
-/// StyledText(
-///   text: '<red>Red</red> text.',
+/// CustomStyledText(
+///   text: '&lt;red&gt;Red&lt;/red&gt; text.',
 ///   tags: [
 ///     'red': StyledTextTag(style: TextStyle(color: Colors.red)),
 ///   ],
+///   builder: (context, textSpan) => Text.rich(textSpan),
 /// )
 /// ```
 /// See also:
@@ -56,11 +60,12 @@ class CustomStyledText extends StatefulWidget {
   ///
   /// Example:
   /// ```dart
-  /// StyledText(
-  ///   text: '<red>Red</red> text.',
+  /// CustomStyledText(
+  ///   text: '&lt;red&gt;Red&lt;/red&gt; text.',
   ///   tags: [
   ///     'red': StyledTextTag(style: TextStyle(color: Colors.red)),
   ///   ],
+  ///   ...
   /// )
   /// ```
   final Map<String, StyledTextTagBase> tags;

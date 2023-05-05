@@ -11,10 +11,12 @@ import 'package:styled_text/widgets/custom_styled_text.dart';
 ///
 /// Formatting is specified as xml tags. For each tag, you can specify a style, icon, etc. in the [tags] parameter.
 ///
+/// Consider using the [CustomStyledText] instead if you need more customisation.
+///
 /// Example:
 /// ```dart
 /// StyledText(
-///   text: '<red>Red</red> text.',
+///   text: '&lt;red&gt;Red&lt;/red&gt; text.',
 ///   tags: [
 ///     'red': StyledTextTag(style: TextStyle(color: Colors.red)),
 ///   ],
@@ -57,7 +59,7 @@ class StyledText extends StatelessWidget {
   /// Example:
   /// ```dart
   /// StyledText(
-  ///   text: '<red>Red</red> text.',
+  ///   text: '&lt;red&gt;Red&lt;/red&gt; text.',
   ///   tags: [
   ///     'red': StyledTextTag(style: TextStyle(color: Colors.red)),
   ///   ],
