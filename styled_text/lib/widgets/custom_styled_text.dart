@@ -15,7 +15,7 @@ typedef StyledTextWidgetBuilderCallback = Widget Function(
 ///
 /// Formatting is specified as xml tags. For each tag, you can specify a style, icon, etc. in the [tags] parameter.
 ///
-/// Consider using the simpler [StyledText] instead
+/// Consider using the simpler [StyledText] instead.
 ///
 /// Example:
 /// ```dart
