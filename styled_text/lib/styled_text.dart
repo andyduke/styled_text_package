@@ -186,10 +186,9 @@ class StyledText extends StatefulWidget {
       'Use `contextMenuBuilder` instead. '
       'This feature was deprecated after Flutter v3.3.0-0.5.pre.',
     )
-        // ignore: deprecated_member_use
-        ToolbarOptions? toolbarOptions,
-    EditableTextContextMenuBuilder contextMenuBuilder =
-        _defaultContextMenuBuilder,
+    // ignore: deprecated_member_use
+    ToolbarOptions? toolbarOptions,
+    EditableTextContextMenuBuilder contextMenuBuilder = _defaultContextMenuBuilder,
     TextSelectionControls? selectionControls,
     ui.BoxHeightStyle selectionHeightStyle = ui.BoxHeightStyle.tight,
     ui.BoxWidthStyle selectionWidthStyle = ui.BoxWidthStyle.tight,
@@ -256,8 +255,7 @@ class StyledText extends StatefulWidget {
   final ScrollPhysics? _scrollPhysics;
   final String? _semanticsLabel;
 
-  static Widget _defaultContextMenuBuilder(
-      BuildContext context, EditableTextState editableTextState) {
+  static Widget _defaultContextMenuBuilder(BuildContext context, EditableTextState editableTextState) {
     return AdaptiveTextSelectionToolbar.editableText(
       editableTextState: editableTextState,
     );
@@ -282,10 +280,7 @@ class _StyledTextState extends State<StyledText> {
   void didUpdateWidget(StyledText oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if ((widget.text != oldWidget.text) ||
-        (widget.tags != oldWidget.tags) ||
-        (widget.style != oldWidget.style) ||
-        (widget.newLineAsBreaks != oldWidget.newLineAsBreaks)) {
+    if ((widget.text != oldWidget.text) || (widget.tags != oldWidget.tags) || (widget.style != oldWidget.style) || (widget.newLineAsBreaks != oldWidget.newLineAsBreaks)) {
       _updateTextSpans(force: true);
     }
   }
@@ -398,11 +393,8 @@ class _StyledTextState extends State<StyledText> {
 
     final DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
     TextStyle? effectiveTextStyle = widget.style;
-    if (widget.style == null || widget.style!.inherit)
-      effectiveTextStyle = defaultTextStyle.style.merge(widget.style);
-    if (MediaQuery.boldTextOverride(context))
-      effectiveTextStyle = effectiveTextStyle!
-          .merge(const TextStyle(fontWeight: FontWeight.bold));
+    if (widget.style == null || widget.style!.inherit) effectiveTextStyle = defaultTextStyle.style.merge(widget.style);
+    if (MediaQuery.boldTextOverride(context)) effectiveTextStyle = effectiveTextStyle!.merge(const TextStyle(fontWeight: FontWeight.bold));
 
     final span = TextSpan(
       style: effectiveTextStyle,
@@ -413,23 +405,16 @@ class _StyledTextState extends State<StyledText> {
       final SelectionRegistrar? registrar = SelectionContainer.maybeOf(context);
 
       Widget result = RichText(
-        textAlign:
-            widget.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
+        textAlign: widget.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
         textDirection: widget.textDirection,
         softWrap: widget.softWrap ?? defaultTextStyle.softWrap,
-        overflow: widget.overflow ??
-            effectiveTextStyle?.overflow ??
-            defaultTextStyle.overflow,
-        textScaleFactor:
-            widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
+        overflow: widget.overflow ?? effectiveTextStyle?.overflow ?? defaultTextStyle.overflow,
+        textScaleFactor: widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
         maxLines: widget.maxLines ?? defaultTextStyle.maxLines,
         locale: widget.locale,
         strutStyle: widget.strutStyle,
-        textWidthBasis:
-            widget.textWidthBasis ?? defaultTextStyle.textWidthBasis,
-        textHeightBehavior: widget.textHeightBehavior ??
-            defaultTextStyle.textHeightBehavior ??
-            DefaultTextHeightBehavior.maybeOf(context),
+        textWidthBasis: widget.textWidthBasis ?? defaultTextStyle.textWidthBasis,
+        textHeightBehavior: widget.textHeightBehavior ?? defaultTextStyle.textHeightBehavior ?? DefaultTextHeightBehavior.maybeOf(context),
         text: span,
         selectionRegistrar: registrar,
         selectionColor: DefaultSelectionStyle.of(context).selectionColor,
@@ -465,18 +450,13 @@ class _StyledTextState extends State<StyledText> {
         enableInteractiveSelection: widget._enableInteractiveSelection,
         onTap: widget._onTap,
         scrollPhysics: widget._scrollPhysics,
-        textWidthBasis:
-            widget.textWidthBasis ?? defaultTextStyle.textWidthBasis,
-        textHeightBehavior: widget.textHeightBehavior ??
-            defaultTextStyle.textHeightBehavior ??
-            DefaultTextHeightBehavior.maybeOf(context),
-        textAlign:
-            widget.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
+        textWidthBasis: widget.textWidthBasis ?? defaultTextStyle.textWidthBasis,
+        textHeightBehavior: widget.textHeightBehavior ?? defaultTextStyle.textHeightBehavior ?? DefaultTextHeightBehavior.maybeOf(context),
+        textAlign: widget.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
         textDirection: widget.textDirection,
         // softWrap
         // overflow
-        textScaleFactor:
-            widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
+        textScaleFactor: widget.textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
         maxLines: widget.maxLines ?? defaultTextStyle.maxLines,
         // locale
         strutStyle: widget.strutStyle,
@@ -490,8 +470,7 @@ abstract class _Node {
   String? text;
   final List<_Node> children = [];
 
-  String get textContent =>
-      children.fold(text ?? '', (prevText, tag) => prevText + tag.textContent);
+  String get textContent => children.fold(text ?? '', (prevText, tag) => prevText + tag.textContent);
 
   InlineSpan createSpan({
     required BuildContext context,
@@ -504,9 +483,7 @@ abstract class _Node {
     required BuildContext context,
     GestureRecognizer? recognizer,
   }) {
-    return children
-        .map((c) => c.createSpan(context: context, recognizer: recognizer))
-        .toList();
+    return children.map((c) => c.createSpan(context: context, recognizer: recognizer)).toList();
   }
 
   void dispose() {
@@ -544,13 +521,12 @@ class _TagNode extends _Node {
     required BuildContext context,
     GestureRecognizer? recognizer,
   }) {
-    _recognizer =
-        tag?.createRecognizer(_textContent ??= textContent, attributes) ??
-            recognizer;
+    _recognizer = tag?.createRecognizer(_textContent ??= textContent, attributes) ?? recognizer;
     InlineSpan? result = (tag != null)
         ? tag!.createSpan(
             context: context,
             text: text,
+            textContent: textContent,
             children: createChildren(context: context, recognizer: _recognizer),
             attributes: attributes,
             recognizer: _recognizer,
@@ -574,14 +550,7 @@ class _TextNode extends _Node {
   }) : _text = text;
 
   @override
-  String? get text => _text
-      ?.replaceAll('&space;', ' ')
-      .replaceAll('&nbsp;', ' ')
-      .replaceAll('&quot;', '"')
-      .replaceAll('&apos;', "'")
-      .replaceAll('&amp;', '&')
-      .replaceAll('&lt;', "<")
-      .replaceAll('&gt;', ">");
+  String? get text => _text?.replaceAll('&space;', ' ').replaceAll('&nbsp;', ' ').replaceAll('&quot;', '"').replaceAll('&apos;', "'").replaceAll('&amp;', '&').replaceAll('&lt;', "<").replaceAll('&gt;', ">");
 
   @override
   InlineSpan createSpan({

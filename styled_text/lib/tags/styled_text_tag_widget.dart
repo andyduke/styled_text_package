@@ -24,11 +24,12 @@ class StyledTextWidgetTag extends StyledTextWidgetBuilderTag {
   StyledTextWidgetTag(
     Widget child, {
     Size? size,
+    String? textContent,
     BoxConstraints? constraints,
     PlaceholderAlignment alignment = PlaceholderAlignment.middle,
     TextBaseline baseline = TextBaseline.alphabetic,
   }) : super(
-          (context, attributes) => child,
+          (context, attributes, textContent) => child,
           size: size,
           constraints: constraints,
           alignment: alignment,
