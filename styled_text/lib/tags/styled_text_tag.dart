@@ -16,6 +16,7 @@ class StyledTextTag extends StyledTextTagBase {
   InlineSpan createSpan({
     required BuildContext context,
     String? text,
+    String? textContent,
     List<InlineSpan>? children,
     required Map<String?, String?> attributes,
     GestureRecognizer? recognizer,

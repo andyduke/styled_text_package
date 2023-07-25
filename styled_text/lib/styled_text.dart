@@ -400,7 +400,7 @@ class _StyledTextState extends State<StyledText> {
     TextStyle? effectiveTextStyle = widget.style;
     if (widget.style == null || widget.style!.inherit)
       effectiveTextStyle = defaultTextStyle.style.merge(widget.style);
-    if (MediaQuery.boldTextOverride(context))
+    if (MediaQuery.boldTextOf(context))
       effectiveTextStyle = effectiveTextStyle!
           .merge(const TextStyle(fontWeight: FontWeight.bold));
 
@@ -551,6 +551,7 @@ class _TagNode extends _Node {
         ? tag!.createSpan(
             context: context,
             text: text,
+            textContent: textContent,
             children: createChildren(context: context, recognizer: _recognizer),
             attributes: attributes,
             recognizer: _recognizer,
