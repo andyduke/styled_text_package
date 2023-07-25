@@ -1,3 +1,7 @@
+## 8.1.0
+
+* A new base widget, `CustomStyledText`, has been added that allows you to implement the construction of a `RichText` widget, for example, when using the `AutoSizeText` widget (thanks to [@maeddin](https://github.com/maeddin)).
+
 ## 8.0.0
 
 * A new parameter has been added to the `builder` signature of the `StyledTextWidgetBuilderTag` widget: `textContent` - the text content of the tag; thanks to [@ThomasGysemans](https://github.com/ThomasGysemans).
