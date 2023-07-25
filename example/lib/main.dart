@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:styled_text/styled_text.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,21 +13,23 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: DemoPage(),
+      home: const DemoPage(),
     );
   }
 }
 
 class DemoPage extends StatelessWidget {
+  const DemoPage({super.key});
+
   void _alert(BuildContext context) {
     showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Tapped'),
+          title: const Text('Tapped'),
           actions: <Widget>[
             TextButton(
-              child: Text('Ok'),
+              child: const Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -43,11 +47,11 @@ class DemoPage extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Open Link'),
+          title: const Text('Open Link'),
           content: Text(link),
           actions: <Widget>[
             TextButton(
-              child: Text('Ok'),
+              child: const Text('Ok'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -63,7 +67,7 @@ class DemoPage extends StatelessWidget {
     return SelectionArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('StyledText Demo'),
+          title: const Text('StyledText Demo'),
         ),
         body: Center(
           child: Column(
@@ -75,7 +79,7 @@ class DemoPage extends StatelessWidget {
               StyledText(
                 text: 'Test: <b>bold</b> text.',
                 tags: {
-                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                  'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
                 },
               ),
 
@@ -84,7 +88,7 @@ class DemoPage extends StatelessWidget {
               StyledText(
                 text: 'Quoted Test: <b>&quot;bold&quot;</b> text.',
                 tags: {
-                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                  'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
                 },
               ),
 
@@ -94,7 +98,7 @@ class DemoPage extends StatelessWidget {
                 text: """Multiline text 
 (wo breaks)""",
                 tags: {
-                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                  'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
                 },
               ),
 
@@ -105,7 +109,7 @@ class DemoPage extends StatelessWidget {
 (with breaks)""",
                 newLineAsBreaks: true,
                 tags: {
-                  'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                  'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
                 },
               ),
 
@@ -114,8 +118,8 @@ class DemoPage extends StatelessWidget {
               StyledText(
                 text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
                 tags: {
-                  'bold': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
-                  'red': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+                  'bold': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+                  'red': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
                 },
               ),
 
@@ -135,7 +139,7 @@ class DemoPage extends StatelessWidget {
                 tags: {
                   'action': StyledTextActionTag(
                     (_, attrs) => _alert(context),
-                    style: TextStyle(decoration: TextDecoration.underline),
+                    style: const TextStyle(decoration: TextDecoration.underline),
                   ),
                 },
               ),
@@ -147,7 +151,7 @@ class DemoPage extends StatelessWidget {
                 tags: {
                   'link': StyledTextActionTag(
                     (_, attrs) => _openLink(context, attrs),
-                    style: TextStyle(decoration: TextDecoration.underline),
+                    style: const TextStyle(decoration: TextDecoration.underline),
                   ),
                 },
               ),
@@ -159,7 +163,7 @@ class DemoPage extends StatelessWidget {
                 tags: {
                   'link': StyledTextActionTag(
                     (_, attrs) => _openLink(context, attrs),
-                    style: TextStyle(decoration: TextDecoration.underline),
+                    style: const TextStyle(decoration: TextDecoration.underline),
                   ),
                 },
               ),
