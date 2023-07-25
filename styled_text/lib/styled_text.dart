@@ -186,8 +186,8 @@ class StyledText extends StatefulWidget {
       'Use `contextMenuBuilder` instead. '
       'This feature was deprecated after Flutter v3.3.0-0.5.pre.',
     )
-        // ignore: deprecated_member_use
-        ToolbarOptions? toolbarOptions,
+    // ignore: deprecated_member_use
+    ToolbarOptions? toolbarOptions,
     EditableTextContextMenuBuilder contextMenuBuilder =
         _defaultContextMenuBuilder,
     TextSelectionControls? selectionControls,
