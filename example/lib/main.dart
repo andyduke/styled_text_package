@@ -71,43 +71,6 @@ class DemoPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              StyledText(
-                text: "Famous equation: E=mc<sup>2</sup>",
-                tags: {
-                  'sup': StyledTextWidgetBuilderTag(
-                    (_, attributes, textContent) {
-                      return Transform.translate(
-                        offset: const Offset(0.5, -4),
-                        child: Text(
-                          textContent ?? "",
-                          textScaleFactor: 0.85,
-                        ),
-                      );
-                    },
-                  ),
-                },
-              ),
-
-              const SizedBox(height: 20),
-
-              StyledText(
-                text: "The element of life: H<sub>2</sub>0",
-                tags: {
-                  'sub': StyledTextWidgetBuilderTag(
-                    (_, attributes, textContent) {
-                      return Transform.translate(
-                        offset: const Offset(0.5, 4),
-                        child: Text(
-                          textContent ?? "",
-                          textScaleFactor: 0.8,
-                        ),
-                      );
-                    },
-                  ),
-                },
-              ),
-
-              const SizedBox(height: 20),
               // Simple formatted text
               StyledText(
                 text: 'Test: <b>bold</b> text.',
@@ -197,6 +160,44 @@ class DemoPage extends StatelessWidget {
                   'link': StyledTextActionTag(
                     (_, attrs) => _openLink(context, attrs),
                     style: TextStyle(decoration: TextDecoration.underline),
+                  ),
+                },
+              ),
+
+              // Text with superscript
+              const SizedBox(height: 20),
+              StyledText(
+                text: "Famous equation: E=mc<sup>2</sup>",
+                tags: {
+                  'sup': StyledTextWidgetBuilderTag(
+                    (_, attributes, textContent) {
+                      return Transform.translate(
+                        offset: const Offset(0.5, -4),
+                        child: Text(
+                          textContent ?? "",
+                          textScaleFactor: 0.85,
+                        ),
+                      );
+                    },
+                  ),
+                },
+              ),
+
+              // Text with subscript
+              const SizedBox(height: 20),
+              StyledText(
+                text: "The element of life: H<sub>2</sub>0",
+                tags: {
+                  'sub': StyledTextWidgetBuilderTag(
+                    (_, attributes, textContent) {
+                      return Transform.translate(
+                        offset: const Offset(0.5, 4),
+                        child: Text(
+                          textContent ?? "",
+                          textScaleFactor: 0.8,
+                        ),
+                      );
+                    },
                   ),
                 },
               ),

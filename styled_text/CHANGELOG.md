@@ -1,3 +1,27 @@
+## 8.0.0
+
+* A new parameter has been added to the `builder` signature of the `StyledTextWidgetBuilderTag` widget: `textContent` - the text content of the tag; thanks to [@ThomasGysemans](https://github.com/ThomasGysemans).
+
+  Usage example:
+  ```dart
+  StyledText(
+    text: "Famous equation: E=mc<sup>2</sup>",
+    tags: {
+      'sup': StyledTextWidgetBuilderTag(
+        (_, attributes, textContent) {
+          return Transform.translate(
+            offset: const Offset(0.5, -4),
+            child: Text(
+              textContent ?? "",
+              textScaleFactor: 0.85,
+            ),
+          );
+        },
+      ),
+    },
+  ),
+  ```
+
 ## 7.0.0
 
 * Compatibility with Flutter 3.7.0.
