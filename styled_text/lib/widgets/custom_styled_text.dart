@@ -139,7 +139,7 @@ class _CustomStyledTextState extends State<CustomStyledText> {
 
       _Node node = _TextNode();
       ListQueue<_Node> textQueue = ListQueue();
-      Map<String?, String?>? attributes;
+      List<Map<String?, String?>> attributes = [];
 
       final xmlStreamer = XmlStreamer(
         '<?xml version="1.0" encoding="UTF-8"?><root>' + textValue + '</root>',
@@ -162,13 +162,13 @@ class _CustomStyledTextState extends State<CustomStyledText> {
             } else {
               StyledTextTagBase? tag = _tag(e.value);
               node = _TagNode(tag: tag);
-              attributes = {};
             }
+            attributes.add({});
 
             break;
 
           case XmlState.Closed:
-            node.configure(attributes);
+            node.configure(attributes.isEmpty ? null : attributes.removeLast());
 
             if (textQueue.isNotEmpty) {
               final _Node child = node;
@@ -179,8 +179,8 @@ class _CustomStyledTextState extends State<CustomStyledText> {
             break;
 
           case XmlState.Attribute:
-            if (e.key != null && attributes != null) {
-              attributes![e.key] = e.value;
+            if (e.key != null && attributes.isNotEmpty) {
+              attributes.last[e.key] = e.value;
             }
             break;
 
