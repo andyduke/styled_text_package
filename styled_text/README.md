@@ -6,10 +6,6 @@ Formatting is set in the text using **xml tags**, for which styles and other beh
 
 You can set the click handler for the tag, through a tag definition class `StyledTextActionTag`.
 
-**Attention!** The way of specifying the styles and behavior of tags has changed. See how to [migrate from version 2.0](#migration-from-version-20).
-
-**Attention!** The default value of the `newLineAsBreaks` parameter has been changed, now it is enabled by default and line breaks are not ignored in the text.
-
 ## Table of Contents
 
 - [Getting Started](#getting-Started)
@@ -25,7 +21,6 @@ In your flutter project add the dependency:
 
 ```dart
 dependencies:
-  ...
   styled_text: ^[version]
 ```
 

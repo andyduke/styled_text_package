@@ -1,10 +1,11 @@
 import 'dart:ui' as ui show TextHeightBehavior, BoxHeightStyle, BoxWidthStyle;
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:styled_text/tags/styled_text_tag_base.dart';
-import 'package:styled_text/widgets/custom_styled_text.dart';
+import 'package:styled_text/src/parsers/text_parser_async.dart';
+import 'package:styled_text/src/parsers/text_parser_sync.dart';
+import 'package:styled_text/src/tags/styled_text_tag_base.dart';
+import 'package:styled_text/src/widgets/custom_styled_text.dart';
 
 ///
 /// Text widget with formatting via tags.
@@ -110,8 +111,20 @@ class StyledText extends StatelessWidget {
   /// {@macro flutter.painting.textPainter.textWidthBasis}
   final TextWidthBasis? textWidthBasis;
 
-  /// {@macro flutter.dart:ui.textHeightBehavior}
+  /// {@macro dart.ui.textHeightBehavior}
   final ui.TextHeightBehavior? textHeightBehavior;
+
+  /// Used for asynchronous text parsing.
+  /// Necessary to solve performance problems when a large block
+  /// of text with a large number of tags is passed to [StyledText].
+  ///
+  /// By default, parsing is synchronous.
+  ///
+  /// **Attention!** With asynchronous parsing, the size of the widget changes,
+  /// and flickering is also possible, because first, the widget is rendered empty,
+  /// and then (when asynchronous parsing is completed), the widget is redrawn
+  /// with the final formatted text.
+  final bool async;
 
   /// Create a text widget with formatting via tags.
   ///
@@ -131,6 +144,7 @@ class StyledText extends StatelessWidget {
     this.strutStyle,
     this.textWidthBasis,
     this.textHeightBehavior,
+    this.async = false,
   })  : this.tags = tags ?? const {},
         this.selectable = false,
         this._focusNode = null,
@@ -173,14 +187,14 @@ class StyledText extends StatelessWidget {
     FocusNode? focusNode,
     bool showCursor = false,
     bool autofocus = false,
+    this.async = false,
     @Deprecated(
       'Use `contextMenuBuilder` instead. '
       'This feature was deprecated after Flutter v3.3.0-0.5.pre.',
     )
     // ignore: deprecated_member_use
     ToolbarOptions? toolbarOptions,
-    EditableTextContextMenuBuilder contextMenuBuilder =
-        _defaultContextMenuBuilder,
+    EditableTextContextMenuBuilder contextMenuBuilder = _defaultContextMenuBuilder,
     TextSelectionControls? selectionControls,
     ui.BoxHeightStyle selectionHeightStyle = ui.BoxHeightStyle.tight,
     ui.BoxWidthStyle selectionWidthStyle = ui.BoxWidthStyle.tight,
@@ -248,8 +262,7 @@ class StyledText extends StatelessWidget {
   final ScrollPhysics? _scrollPhysics;
   final String? _semanticsLabel;
 
-  static Widget _defaultContextMenuBuilder(
-      BuildContext context, EditableTextState editableTextState) {
+  static Widget _defaultContextMenuBuilder(BuildContext context, EditableTextState editableTextState) {
     return AdaptiveTextSelectionToolbar.editableText(
       editableTextState: editableTextState,
     );
@@ -263,16 +276,14 @@ class StyledText extends StatelessWidget {
       textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
       textDirection: textDirection,
       softWrap: softWrap ?? defaultTextStyle.softWrap,
-      overflow:
-          overflow ?? textSpan.style?.overflow ?? defaultTextStyle.overflow,
+      overflow: overflow ?? textSpan.style?.overflow ?? defaultTextStyle.overflow,
       textScaleFactor: textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
       maxLines: maxLines ?? defaultTextStyle.maxLines,
       locale: locale,
       strutStyle: strutStyle,
       textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
-      textHeightBehavior: textHeightBehavior ??
-          defaultTextStyle.textHeightBehavior ??
-          DefaultTextHeightBehavior.maybeOf(context),
+      textHeightBehavior:
+          textHeightBehavior ?? defaultTextStyle.textHeightBehavior ?? DefaultTextHeightBehavior.maybeOf(context),
       text: textSpan,
       selectionRegistrar: registrar,
       selectionColor: DefaultSelectionStyle.of(context).selectionColor,
@@ -313,9 +324,8 @@ class StyledText extends StatelessWidget {
       onTap: _onTap,
       scrollPhysics: _scrollPhysics,
       textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
-      textHeightBehavior: textHeightBehavior ??
-          defaultTextStyle.textHeightBehavior ??
-          DefaultTextHeightBehavior.maybeOf(context),
+      textHeightBehavior:
+          textHeightBehavior ?? defaultTextStyle.textHeightBehavior ?? DefaultTextHeightBehavior.maybeOf(context),
       textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
       textDirection: textDirection,
       // softWrap
@@ -336,6 +346,9 @@ class StyledText extends StatelessWidget {
       text: text,
       tags: tags,
       builder: selectable ? _buildSelectableText : _buildText,
+      textParserBuilder: async
+          ? ((onTag, onParsed) => StyledTextParserAsync(onTag: onTag, onParsed: onParsed))
+          : ((onTag, onParsed) => StyledTextParserSync(onTag: onTag, onParsed: onParsed)),
     );
   }
 }
