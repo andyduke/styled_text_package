@@ -171,8 +171,8 @@ class SimpleDemoPage extends StatelessWidget {
                 StyledText(
                   async: async,
                   text: 'Test: <b>bold</b> text.',
-                  tags: {
-                    'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+                  tags: const {
+                    'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
                   },
                 ),
 
@@ -181,8 +181,8 @@ class SimpleDemoPage extends StatelessWidget {
                 StyledText(
                   async: async,
                   text: 'Quoted Test: <b>&quot;bold&quot;</b> text.',
-                  tags: {
-                    'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+                  tags: const {
+                    'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
                   },
                 ),
 
@@ -191,9 +191,9 @@ class SimpleDemoPage extends StatelessWidget {
                 StyledText(
                   async: async,
                   text: """Multiline text 
-            (wo breaks)""",
-                  tags: {
-                    'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+(wo breaks)""",
+                  tags: const {
+                    'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
                   },
                 ),
 
@@ -202,10 +202,10 @@ class SimpleDemoPage extends StatelessWidget {
                 StyledText(
                   async: async,
                   text: """Multiline text
-            (with breaks)""",
+(with breaks)""",
                   newLineAsBreaks: true,
-                  tags: {
-                    'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+                  tags: const {
+                    'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
                   },
                 ),
 
@@ -214,9 +214,9 @@ class SimpleDemoPage extends StatelessWidget {
                 StyledText(
                   async: async,
                   text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
-                  tags: {
-                    'bold': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
-                    'red': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+                  tags: const {
+                    'bold': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                    'red': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
                   },
                 ),
 
@@ -225,7 +225,7 @@ class SimpleDemoPage extends StatelessWidget {
                 StyledText(
                   async: async,
                   text: 'Text with alarm <alarm/> icon.',
-                  tags: {
+                  tags: const {
                     'alarm': StyledTextIconTag(Icons.alarm),
                   },
                 ),
@@ -366,9 +366,9 @@ Lorem ipsum dolor sit <b>amet</b>, consectetuer adipiscing elit. Sed <i>dapibus,
 Lorem ipsum dolor sit <b>amet</b>, consectetuer adipiscing elit. Sed <i>dapibus, ante ultricies adipiscing pulvinar</i>, enim tellus volutpat odio, vel <b>pretium <i>ligula</i> purus</b> vel ligula. In posuere justo eget libero. Cras consequat quam sit amet metus. Sed vitae nulla. Cras imperdiet sapien vitae ipsum. Curabitur tristique. Aliquam non tellus eget sem commodo tincidunt. Phasellus cursus nunc. Integer vel mi. Aenean rutrum libero sit amet enim. Nunc elementum, erat eu volutpat ultricies, eros justo scelerisque leo, quis sollicitudin purus ipsum at purus. Aenean ut nulla.
 Lorem ipsum dolor sit <b>amet</b>, consectetuer adipiscing elit. Sed <i>dapibus, ante ultricies adipiscing pulvinar</i>, enim tellus volutpat odio, vel <b>pretium <i>ligula</i> purus</b> vel ligula. In posuere justo eget libero. Cras consequat quam sit amet metus. Sed vitae nulla. Cras imperdiet sapien vitae ipsum. Curabitur tristique. Aliquam non tellus eget sem commodo tincidunt. Phasellus cursus nunc. Integer vel mi. Aenean rutrum libero sit amet enim. Nunc elementum, erat eu volutpat ultricies, eros justo scelerisque leo, quis sollicitudin purus ipsum at purus. Aenean ut nulla.
 ''',
-            tags: {
-              'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
-              'i': StyledTextTag(style: const TextStyle(fontStyle: FontStyle.italic)),
+            tags: const {
+              'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+              'i': StyledTextTag(style: TextStyle(fontStyle: FontStyle.italic)),
             },
           ),
         ),
@@ -399,9 +399,9 @@ class ListDemo extends StatelessWidget {
           text: '''
 Lorem ipsum dolor sit <b>amet</b>, consectetuer adipiscing elit. Sed <i>dapibus, ante ultricies adipiscing pulvinar</i>, enim tellus volutpat odio.
         ''',
-          tags: {
-            'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
-            'i': StyledTextTag(style: const TextStyle(fontStyle: FontStyle.italic)),
+          tags: const {
+            'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+            'i': StyledTextTag(style: TextStyle(fontStyle: FontStyle.italic)),
           },
         ),
       ),

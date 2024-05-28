@@ -76,59 +76,59 @@ class DemoPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 // Simple formatted text
-                StyledText(
+                const StyledText(
                   text: 'Test: <b>bold</b> text.',
                   tags: {
                     'b': StyledTextTag(
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   },
                 ),
 
                 // Nested multiple styles
-                StyledText(
+                const StyledText(
                   text: 'Test: <b>bold <i>italic</i> bold</b> text.',
                   tags: {
                     'b': StyledTextTag(
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     'i': StyledTextTag(
-                      style: const TextStyle(fontStyle: FontStyle.italic),
+                      style: TextStyle(fontStyle: FontStyle.italic),
                     ),
                   },
                 ),
 
                 // Text with quotes
-                StyledText(
+                const StyledText(
                   text: 'Quote test: <b>&quot;bold&quot;</b> text.',
                   tags: {
                     'b': StyledTextTag(
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   },
                 ),
 
                 // Multiline text without breaks
                 const SizedBox(height: 20),
-                StyledText(
+                const StyledText(
                   newLineAsBreaks: false,
                   text: """Multiline text 
 (wo breaks)""",
                   tags: {
                     'b': StyledTextTag(
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   },
                 ),
 
                 // Multiline text with breaks
                 const SizedBox(height: 20),
-                StyledText(
+                const StyledText(
                   text: """Multiline text
 (with breaks)""",
                   tags: {
                     'b': StyledTextTag(
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   },
                 ),
@@ -153,8 +153,8 @@ class DemoPage extends StatelessWidget {
                 StyledText(
                   text: 'Text with <red>alarm <alarm/> icon</red>.',
                   tags: {
-                    'red': StyledTextTag(
-                      style: const TextStyle(color: Colors.red),
+                    'red': const StyledTextTag(
+                      style: TextStyle(color: Colors.red),
                     ),
                     'alarm': StyledTextIconTag(
                       Icons.alarm,
@@ -186,8 +186,8 @@ class DemoPage extends StatelessWidget {
                   text:
                       'Text with <action><red>red</red> action</action> inside.',
                   tags: {
-                    'red': StyledTextTag(
-                      style: const TextStyle(color: Colors.red),
+                    'red': const StyledTextTag(
+                      style: TextStyle(color: Colors.red),
                     ),
                     'action': StyledTextActionTag(
                       (text, attributes) => _alert(context),
@@ -257,11 +257,11 @@ class DemoPage extends StatelessWidget {
                 const Divider(height: 40),
 
                 // Selectable text
-                StyledText.selectable(
+                const StyledText.selectable(
                   text: 'Test: selectable <b>bold</b> text.',
                   tags: {
                     'b': StyledTextTag(
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   },
                 ),

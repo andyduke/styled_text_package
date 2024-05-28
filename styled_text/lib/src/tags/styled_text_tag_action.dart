@@ -10,7 +10,7 @@ class StyledTextActionTag extends StyledTextTag {
   /// A callback to be called when the tag is tapped.
   final StyledTextTagActionCallback onTap;
 
-  StyledTextActionTag(
+  const StyledTextActionTag(
     this.onTap, {
     TextStyle? style,
   }) : super(style: style);

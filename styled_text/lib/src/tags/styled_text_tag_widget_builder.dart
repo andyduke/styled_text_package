@@ -50,7 +50,7 @@ class StyledTextWidgetBuilderTag extends StyledTextTagBase {
   /// This is ignored when using other alignment modes.
   final TextBaseline? baseline;
 
-  StyledTextWidgetBuilderTag(
+  const StyledTextWidgetBuilderTag(
     this.builder, {
     this.size,
     this.constraints,

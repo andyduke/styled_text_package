@@ -15,7 +15,7 @@ class StyledTextCustomTag extends StyledTextTagBase {
   /// Called when parsing the attributes of a tag.
   final StyledTextCustomTagParser parse;
 
-  StyledTextCustomTag({
+  const StyledTextCustomTag({
     required this.parse,
     this.baseStyle,
   });

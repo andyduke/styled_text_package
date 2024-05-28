@@ -85,7 +85,7 @@ class CustomStyledText extends StatefulWidget {
   /// Create a [CustomStyledText] with your own builder function.
   ///
   /// This way you can manage the resulting [TextSpan] by yourself.
-  CustomStyledText({
+  const CustomStyledText({
     super.key,
     this.newLineAsBreaks = true,
     required this.text,

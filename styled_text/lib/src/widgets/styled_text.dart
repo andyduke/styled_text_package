@@ -136,7 +136,7 @@ class StyledText extends StatelessWidget {
 
   /// Create a text widget with formatting via tags.
   ///
-  StyledText({
+  const StyledText({
     Key? key,
     required this.text,
     this.newLineAsBreaks = true,

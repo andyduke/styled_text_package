@@ -8,7 +8,7 @@ class StyledTextTag extends StyledTextTagBase {
   /// The TextStyle to apply to this tag.
   final TextStyle? style;
 
-  StyledTextTag({
+  const StyledTextTag({
     this.style,
   });
 

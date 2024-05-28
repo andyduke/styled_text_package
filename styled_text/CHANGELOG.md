@@ -1,3 +1,15 @@
+## 9.0.0-beta-2
+
+* The constructors of some widgets and classes are now constant:
+  - StyledText
+  - CustomStyledText
+  - StyledTextTagBase
+  - StyledTextTag
+  - StyledTextWidgetBuilderTag
+  - StyledTextIconTag
+  - StyledTextActionTag
+  - StyledTextCustomTag
+
 ## 9.0.0-beta-1
 
 * Text parsing has been changed from **asynchronous** to **synchronous**.

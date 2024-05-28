@@ -3,6 +3,9 @@ import 'package:flutter/widgets.dart';
 
 /// Abstract base class for specifying tag style.
 abstract class StyledTextTagBase {
+  /// @nodoc
+  const StyledTextTagBase();
+
   /// Creates a Gesture Recognizer for a given style.
   GestureRecognizer? createRecognizer(
           String? text, Map<String?, String?> attributes) =>

@@ -29,7 +29,7 @@ class StyledTextIconTag extends StyledTextTagBase {
   /// Called when the text is tapped or otherwise activated.
   final StyledTextTagActionCallback? onTap;
 
-  StyledTextIconTag(
+  const StyledTextIconTag(
     this.icon, {
     this.color,
     this.size,
