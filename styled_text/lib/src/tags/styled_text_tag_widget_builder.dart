@@ -44,8 +44,8 @@ class StyledTextWidgetBuilderTag extends StyledTextTagBase {
   /// Aligning the widget relative to the text.
   final PlaceholderAlignment alignment;
 
-  /// The [TextBaseline] to align against when using [ui.PlaceholderAlignment.baseline],
-  /// [ui.PlaceholderAlignment.aboveBaseline], and [ui.PlaceholderAlignment.belowBaseline].
+  /// The [TextBaseline] to align against when using [PlaceholderAlignment.baseline],
+  /// [PlaceholderAlignment.aboveBaseline], and [PlaceholderAlignment.belowBaseline].
   ///
   /// This is ignored when using other alignment modes.
   final TextBaseline? baseline;
@@ -90,7 +90,6 @@ class StyledTextWidgetBuilderTag extends StyledTextTagBase {
           child: widget,
           alignment: alignment,
           baseline: baseline,
-          // style: TextStyle(backgroundColor: backgroundColor),
         ),
       ],
     );
