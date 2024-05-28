@@ -160,153 +160,156 @@ class SimpleDemoPage extends StatelessWidget {
           title: const Text('Simple Demo'),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              // Simple formatted text
-              StyledText(
-                async: async,
-                text: 'Test: <b>bold</b> text.',
-                tags: {
-                  'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
-                },
-              ),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                // Simple formatted text
+                StyledText(
+                  async: async,
+                  text: 'Test: <b>bold</b> text.',
+                  tags: {
+                    'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+                  },
+                ),
 
-              // Text with quotes
-              const SizedBox(height: 20),
-              StyledText(
-                async: async,
-                text: 'Quoted Test: <b>&quot;bold&quot;</b> text.',
-                tags: {
-                  'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
-                },
-              ),
+                // Text with quotes
+                const SizedBox(height: 20),
+                StyledText(
+                  async: async,
+                  text: 'Quoted Test: <b>&quot;bold&quot;</b> text.',
+                  tags: {
+                    'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+                  },
+                ),
 
-              // Multiline text without breaks
-              const SizedBox(height: 20),
-              StyledText(
-                async: async,
-                text: """Multiline text 
-(wo breaks)""",
-                tags: {
-                  'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
-                },
-              ),
+                // Multiline text without breaks
+                const SizedBox(height: 20),
+                StyledText(
+                  async: async,
+                  text: """Multiline text 
+            (wo breaks)""",
+                  tags: {
+                    'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+                  },
+                ),
 
-              // Multiline text with breaks
-              const SizedBox(height: 20),
-              StyledText(
-                async: async,
-                text: """Multiline text
-(with breaks)""",
-                newLineAsBreaks: true,
-                tags: {
-                  'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
-                },
-              ),
+                // Multiline text with breaks
+                const SizedBox(height: 20),
+                StyledText(
+                  async: async,
+                  text: """Multiline text
+            (with breaks)""",
+                  newLineAsBreaks: true,
+                  tags: {
+                    'b': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+                  },
+                ),
 
-              // Custom tags styles
-              const SizedBox(height: 20),
-              StyledText(
-                async: async,
-                text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
-                tags: {
-                  'bold': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
-                  'red': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
-                },
-              ),
+                // Custom tags styles
+                const SizedBox(height: 20),
+                StyledText(
+                  async: async,
+                  text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
+                  tags: {
+                    'bold': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold)),
+                    'red': StyledTextTag(style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+                  },
+                ),
 
-              // Icon
-              const SizedBox(height: 20),
-              StyledText(
-                async: async,
-                text: 'Text with alarm <alarm/> icon.',
-                tags: {
-                  'alarm': StyledTextIconTag(Icons.alarm),
-                },
-              ),
+                // Icon
+                const SizedBox(height: 20),
+                StyledText(
+                  async: async,
+                  text: 'Text with alarm <alarm/> icon.',
+                  tags: {
+                    'alarm': StyledTextIconTag(Icons.alarm),
+                  },
+                ),
 
-              // Action
-              const SizedBox(height: 20),
-              StyledText(
-                async: async,
-                text: 'Text with <action>action</action> inside.',
-                tags: {
-                  'action': StyledTextActionTag(
-                    (_, attrs) => _alert(context),
-                    style: const TextStyle(decoration: TextDecoration.underline),
-                  ),
-                },
-              ),
+                // Action
+                const SizedBox(height: 20),
+                StyledText(
+                  async: async,
+                  text: 'Text with <action>action</action> inside.',
+                  tags: {
+                    'action': StyledTextActionTag(
+                      (_, attrs) => _alert(context),
+                      style: const TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  },
+                ),
 
-              // Link
-              const SizedBox(height: 20),
-              StyledText(
-                async: async,
-                text: 'Text with <link href="https://flutter.dev">link</link> inside.',
-                tags: {
-                  'link': StyledTextActionTag(
-                    (_, attrs) => _openLink(context, attrs),
-                    style: const TextStyle(decoration: TextDecoration.underline),
-                  ),
-                },
-              ),
+                // Link
+                const SizedBox(height: 20),
+                StyledText(
+                  async: async,
+                  text: 'Text with <link href="https://flutter.dev">link</link> inside.',
+                  tags: {
+                    'link': StyledTextActionTag(
+                      (_, attrs) => _openLink(context, attrs),
+                      style: const TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  },
+                ),
 
-              // SelectableText with Link
-              const SizedBox(height: 20),
-              StyledText.selectable(
-                async: async,
-                text: 'Text with <link href="https://flutter.dev">link</link> inside.',
-                tags: {
-                  'link': StyledTextActionTag(
-                    (_, attrs) => _openLink(context, attrs),
-                    style: const TextStyle(decoration: TextDecoration.underline),
-                  ),
-                },
-              ),
+                // SelectableText with Link
+                const SizedBox(height: 20),
+                StyledText.selectable(
+                  async: async,
+                  text: 'Text with <link href="https://flutter.dev">link</link> inside.',
+                  tags: {
+                    'link': StyledTextActionTag(
+                      (_, attrs) => _openLink(context, attrs),
+                      style: const TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  },
+                ),
 
-              // Text with superscript
-              const SizedBox(height: 20),
-              StyledText(
-                async: async,
-                text: "Famous equation: E=mc<sup>2</sup>",
-                tags: {
-                  'sup': StyledTextWidgetBuilderTag(
-                    (_, attributes, textContent) {
-                      return Transform.translate(
-                        offset: const Offset(0.5, -4),
-                        child: Text(
-                          textContent ?? "",
-                          textScaleFactor: 0.85,
-                        ),
-                      );
-                    },
-                  ),
-                },
-              ),
+                // Text with superscript
+                const SizedBox(height: 20),
+                StyledText(
+                  async: async,
+                  text: "Famous equation: E=mc<sup>2</sup>",
+                  tags: {
+                    'sup': StyledTextWidgetBuilderTag(
+                      (_, attributes, textContent) {
+                        return Transform.translate(
+                          offset: const Offset(0.5, -4),
+                          child: Text(
+                            textContent ?? "",
+                            textScaler: TextScaler.linear(MediaQuery.of(context).textScaler.scale(0.85)),
+                          ),
+                        );
+                      },
+                    ),
+                  },
+                ),
 
-              // Text with subscript
-              const SizedBox(height: 20),
-              StyledText(
-                async: async,
-                text: "The element of life: H<sub>2</sub>0",
-                tags: {
-                  'sub': StyledTextWidgetBuilderTag(
-                    (_, attributes, textContent) {
-                      return Transform.translate(
-                        offset: const Offset(0.5, 4),
-                        child: Text(
-                          textContent ?? "",
-                          textScaleFactor: 0.8,
-                        ),
-                      );
-                    },
-                  ),
-                },
-              ),
-            ],
+                // Text with subscript
+                const SizedBox(height: 20),
+                StyledText(
+                  async: async,
+                  text: "The element of life: H<sub>2</sub>0",
+                  tags: {
+                    'sub': StyledTextWidgetBuilderTag(
+                      (_, attributes, textContent) {
+                        return Transform.translate(
+                          offset: const Offset(0.5, 4),
+                          child: Text(
+                            textContent ?? "",
+                            textScaler: TextScaler.linear(MediaQuery.of(context).textScaler.scale(0.8)),
+                          ),
+                        );
+                      },
+                    ),
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

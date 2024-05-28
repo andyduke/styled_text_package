@@ -86,7 +86,15 @@ class StyledText extends StatelessWidget {
   ///
   /// For example, if the text scale factor is 1.5, text will be 50% larger than
   /// the specified font size.
+  @Deprecated(
+    'Use textScaler instead. '
+    'Use of textScaleFactor was deprecated in preparation for the upcoming nonlinear text scaling support. '
+    'This feature was deprecated in next major release.',
+  )
   final double? textScaleFactor;
+
+  /// {@macro flutter.painting.textPainter.textScaler}
+  final TextScaler? textScaler;
 
   /// An optional maximum number of lines for the text to span, wrapping if necessary.
   /// If the text exceeds the given number of lines, it will be truncated according
@@ -139,6 +147,7 @@ class StyledText extends StatelessWidget {
     this.softWrap = true,
     this.overflow,
     this.textScaleFactor,
+    this.textScaler,
     this.maxLines,
     this.locale,
     this.strutStyle,
@@ -180,6 +189,7 @@ class StyledText extends StatelessWidget {
     this.textAlign,
     this.textDirection,
     this.textScaleFactor,
+    this.textScaler,
     this.maxLines,
     this.strutStyle,
     this.textWidthBasis,
@@ -272,12 +282,20 @@ class StyledText extends StatelessWidget {
     final defaultTextStyle = DefaultTextStyle.of(context);
     final registrar = SelectionContainer.maybeOf(context);
 
+    final effectiveTextScaler = textScaler ??
+        // ignore: deprecated_member_use_from_same_package
+        ((textScaleFactor != null)
+            // ignore: deprecated_member_use_from_same_package
+            ? TextScaler.linear(textScaleFactor!)
+            : null) ??
+        MediaQuery.textScalerOf(context);
+
     Widget result = RichText(
       textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
       textDirection: textDirection,
       softWrap: softWrap ?? defaultTextStyle.softWrap,
       overflow: overflow ?? textSpan.style?.overflow ?? defaultTextStyle.overflow,
-      textScaleFactor: textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
+      textScaler: effectiveTextScaler,
       maxLines: maxLines ?? defaultTextStyle.maxLines,
       locale: locale,
       strutStyle: strutStyle,
@@ -301,6 +319,14 @@ class StyledText extends StatelessWidget {
 
   Widget _buildSelectableText(BuildContext context, TextSpan textSpan) {
     final defaultTextStyle = DefaultTextStyle.of(context);
+
+    final effectiveTextScaler = textScaler ??
+        // ignore: deprecated_member_use_from_same_package
+        ((textScaleFactor != null)
+            // ignore: deprecated_member_use_from_same_package
+            ? TextScaler.linear(textScaleFactor!)
+            : null) ??
+        MediaQuery.textScalerOf(context);
 
     return SelectableText.rich(
       textSpan,
@@ -330,7 +356,7 @@ class StyledText extends StatelessWidget {
       textDirection: textDirection,
       // softWrap
       // overflow
-      textScaleFactor: textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
+      textScaler: effectiveTextScaler,
       maxLines: maxLines ?? defaultTextStyle.maxLines,
       // locale
       strutStyle: strutStyle,
