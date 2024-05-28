@@ -4,7 +4,9 @@ import 'package:flutter/widgets.dart';
 /// Abstract base class for specifying tag style.
 abstract class StyledTextTagBase {
   /// Creates a Gesture Recognizer for a given style.
-  GestureRecognizer? createRecognizer(String? text, Map<String?, String?> attributes) => null;
+  GestureRecognizer? createRecognizer(
+          String? text, Map<String?, String?> attributes) =>
+      null;
 
   /// Creates a style-based Span for a RichText widget.
   InlineSpan createSpan({
@@ -18,4 +20,5 @@ abstract class StyledTextTagBase {
 }
 
 /// Callback to an action called from a style (for example, tapping text inside a style).
-typedef StyledTextTagActionCallback = void Function(String? text, Map<String?, String?> attributes);
+typedef StyledTextTagActionCallback = void Function(
+    String? text, Map<String?, String?> attributes);

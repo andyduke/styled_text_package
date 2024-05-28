@@ -1,3 +1,11 @@
+## 9.0.0-beta-1
+
+* Text parsing has been changed from **asynchronous** to **synchronous**.
+  This fixes an issue with the `StyledText` widget resizing when text parsing is complete, which was causing problems in lists.
+  To return asynchronous parsing, the `async` parameter has been added to the `StyledText` constructor.
+  This change was made possible thanks to the help of [@Maatteogekko](https://github.com/Maatteogekko).
+* Require Flutter 3.16 and Dart 3.2.
+
 ## 8.1.0
 
 * A new base widget, `CustomStyledText`, has been added that allows you to implement the construction of a `RichText` widget, for example, when using the `AutoSizeText` widget (thanks to [@maeddin](https://github.com/maeddin)).

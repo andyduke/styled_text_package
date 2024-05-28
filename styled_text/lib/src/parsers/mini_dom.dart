@@ -11,7 +11,8 @@ abstract class StyledNode {
   final List<StyledNode> children = [];
 
   /// Text content of a node, including text content of child nodes.
-  String get textContent => children.fold(text ?? '', (prevText, tag) => prevText + tag.textContent);
+  String get textContent =>
+      children.fold(text ?? '', (prevText, tag) => prevText + tag.textContent);
 
   /// Creates a Span based on node information for a RichText widget.
   InlineSpan createSpan({
@@ -27,7 +28,9 @@ abstract class StyledNode {
     required BuildContext context,
     GestureRecognizer? recognizer,
   }) {
-    return children.map((c) => c.createSpan(context: context, recognizer: recognizer)).toList();
+    return children
+        .map((c) => c.createSpan(context: context, recognizer: recognizer))
+        .toList();
   }
 
   /// Discards any resources used by the object.
@@ -75,7 +78,9 @@ class StyledTagNode extends StyledNode {
     required BuildContext context,
     GestureRecognizer? recognizer,
   }) {
-    _recognizer = tag?.createRecognizer(_textContent ??= textContent, attributes) ?? recognizer;
+    _recognizer =
+        tag?.createRecognizer(_textContent ??= textContent, attributes) ??
+            recognizer;
     InlineSpan? result = (tag != null)
         ? tag!.createSpan(
             context: context,

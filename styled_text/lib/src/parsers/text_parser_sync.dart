@@ -42,7 +42,8 @@ class StyledTextParserSync extends StyledTextParser {
           node = StyledTagNode(tag: tag);
           node.configure(
             {
-              for (final attribute in e.attributes) attribute.name: attribute.value,
+              for (final attribute in e.attributes)
+                attribute.name: attribute.value,
             },
           );
         }

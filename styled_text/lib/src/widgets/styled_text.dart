@@ -204,7 +204,8 @@ class StyledText extends StatelessWidget {
     )
     // ignore: deprecated_member_use
     ToolbarOptions? toolbarOptions,
-    EditableTextContextMenuBuilder contextMenuBuilder = _defaultContextMenuBuilder,
+    EditableTextContextMenuBuilder contextMenuBuilder =
+        _defaultContextMenuBuilder,
     TextSelectionControls? selectionControls,
     ui.BoxHeightStyle selectionHeightStyle = ui.BoxHeightStyle.tight,
     ui.BoxWidthStyle selectionWidthStyle = ui.BoxWidthStyle.tight,
@@ -272,7 +273,8 @@ class StyledText extends StatelessWidget {
   final ScrollPhysics? _scrollPhysics;
   final String? _semanticsLabel;
 
-  static Widget _defaultContextMenuBuilder(BuildContext context, EditableTextState editableTextState) {
+  static Widget _defaultContextMenuBuilder(
+      BuildContext context, EditableTextState editableTextState) {
     return AdaptiveTextSelectionToolbar.editableText(
       editableTextState: editableTextState,
     );
@@ -294,14 +296,16 @@ class StyledText extends StatelessWidget {
       textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
       textDirection: textDirection,
       softWrap: softWrap ?? defaultTextStyle.softWrap,
-      overflow: overflow ?? textSpan.style?.overflow ?? defaultTextStyle.overflow,
+      overflow:
+          overflow ?? textSpan.style?.overflow ?? defaultTextStyle.overflow,
       textScaler: effectiveTextScaler,
       maxLines: maxLines ?? defaultTextStyle.maxLines,
       locale: locale,
       strutStyle: strutStyle,
       textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
-      textHeightBehavior:
-          textHeightBehavior ?? defaultTextStyle.textHeightBehavior ?? DefaultTextHeightBehavior.maybeOf(context),
+      textHeightBehavior: textHeightBehavior ??
+          defaultTextStyle.textHeightBehavior ??
+          DefaultTextHeightBehavior.maybeOf(context),
       text: textSpan,
       selectionRegistrar: registrar,
       selectionColor: DefaultSelectionStyle.of(context).selectionColor,
@@ -350,8 +354,9 @@ class StyledText extends StatelessWidget {
       onTap: _onTap,
       scrollPhysics: _scrollPhysics,
       textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
-      textHeightBehavior:
-          textHeightBehavior ?? defaultTextStyle.textHeightBehavior ?? DefaultTextHeightBehavior.maybeOf(context),
+      textHeightBehavior: textHeightBehavior ??
+          defaultTextStyle.textHeightBehavior ??
+          DefaultTextHeightBehavior.maybeOf(context),
       textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
       textDirection: textDirection,
       // softWrap
@@ -373,8 +378,10 @@ class StyledText extends StatelessWidget {
       tags: tags,
       builder: selectable ? _buildSelectableText : _buildText,
       textParserBuilder: async
-          ? ((onTag, onParsed) => StyledTextParserAsync(onTag: onTag, onParsed: onParsed))
-          : ((onTag, onParsed) => StyledTextParserSync(onTag: onTag, onParsed: onParsed)),
+          ? ((onTag, onParsed) =>
+              StyledTextParserAsync(onTag: onTag, onParsed: onParsed))
+          : ((onTag, onParsed) =>
+              StyledTextParserSync(onTag: onTag, onParsed: onParsed)),
     );
   }
 }

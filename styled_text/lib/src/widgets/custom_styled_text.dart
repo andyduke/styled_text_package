@@ -6,7 +6,8 @@ import 'package:styled_text/src/tags/styled_text_tag_base.dart';
 import 'package:styled_text/src/widgets/styled_text.dart';
 
 /// The builder callback for the [CustomStyledText] widget.
-typedef StyledTextWidgetBuilderCallback = Widget Function(BuildContext context, TextSpan textSpan);
+typedef StyledTextWidgetBuilderCallback = Widget Function(
+    BuildContext context, TextSpan textSpan);
 
 /// The text parser builder callback signature for the [CustomStyledText] widget.
 typedef StyledTextWidgetParserBuilderCallback = StyledTextParser Function(
@@ -103,9 +104,11 @@ class _CustomStyledTextState extends State<CustomStyledText> {
   TextSpan? _textSpans;
   StyledNode? _rootNode;
 
-  late StyledTextParser _parser = (widget.textParserBuilder ?? _defaultParserBuilder)(_tag, _parsed);
+  late StyledTextParser _parser =
+      (widget.textParserBuilder ?? _defaultParserBuilder)(_tag, _parsed);
 
-  StyledTextParser _defaultParserBuilder(StyledTextParserTagCallback onTag, StyledTextParserCallback onParsed) {
+  StyledTextParser _defaultParserBuilder(
+      StyledTextParserTagCallback onTag, StyledTextParserCallback onParsed) {
     return StyledTextParserSync(
       onTag: onTag,
       onParsed: onParsed,
@@ -190,7 +193,8 @@ class _CustomStyledTextState extends State<CustomStyledText> {
       effectiveTextStyle = defaultTextStyle.style.merge(widget.style);
     }
     if (MediaQuery.boldTextOf(context)) {
-      effectiveTextStyle = effectiveTextStyle!.merge(const TextStyle(fontWeight: FontWeight.bold));
+      effectiveTextStyle = effectiveTextStyle!
+          .merge(const TextStyle(fontWeight: FontWeight.bold));
     }
 
     final span = TextSpan(
