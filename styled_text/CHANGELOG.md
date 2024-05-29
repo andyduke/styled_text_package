@@ -1,3 +1,7 @@
+## 9.0.0-beta-3
+
+* The value of the `async` parameter has been fixed in `onParsed` of the synchronous parser `StyledTextParserSync`.
+
 ## 9.0.0-beta-2
 
 * The constructors of some widgets and classes are now constant:

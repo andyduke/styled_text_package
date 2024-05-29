@@ -16,8 +16,8 @@ class StyledTextParserSync extends StyledTextParser {
 
   @override
   void parse(String text) {
+    final ListQueue<StyledNode> textQueue = ListQueue();
     StyledNode node = StyledTextNode();
-    ListQueue<StyledNode> textQueue = ListQueue();
 
     void onEndElement() {
       if (textQueue.isNotEmpty) {
@@ -55,6 +55,6 @@ class StyledTextParserSync extends StyledTextParser {
       }
     }
 
-    onParsed(node, true);
+    onParsed(node, false);
   }
 }
