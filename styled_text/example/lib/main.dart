@@ -316,7 +316,6 @@ class DemoPage extends StatelessWidget {
                           }
 
                           //Tag bold
-
                           final weight = attributes['weight'];
                           if (weight != null) {
                             if (weight == 'bold') {
