@@ -96,7 +96,7 @@ class CustomStyledText extends StatefulWidget {
   });
 
   @override
-  _CustomStyledTextState createState() => _CustomStyledTextState();
+  State<CustomStyledText> createState() => _CustomStyledTextState();
 }
 
 class _CustomStyledTextState extends State<CustomStyledText> {
@@ -104,7 +104,7 @@ class _CustomStyledTextState extends State<CustomStyledText> {
   TextSpan? _textSpans;
   StyledNode? _rootNode;
 
-  late StyledTextParser _parser =
+  late final StyledTextParser _parser =
       (widget.textParserBuilder ?? _defaultParserBuilder)(_tag, _parsed);
 
   StyledTextParser _defaultParserBuilder(

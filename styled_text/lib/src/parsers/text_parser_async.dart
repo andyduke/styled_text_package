@@ -25,11 +25,11 @@ class StyledTextParserAsync extends StyledTextParser {
     }
 
     StyledNode node = StyledTextNode();
-    ListQueue<StyledNode> textQueue = ListQueue();
-    Map<String?, String?>? attributes;
+    final ListQueue<StyledNode> textQueue = ListQueue();
+    final ListQueue<Map<String, String?>> attributes = ListQueue();
 
     _xmlStreamer = XmlStreamer(
-      '<?xml version="1.0" encoding="UTF-8"?><root>' + text + '</root>',
+      '<?xml version="1.0" encoding="UTF-8"?><root>$text</root>',
       trimSpaces: false,
     );
     _xmlStreamer!.read().listen((e) {
@@ -49,13 +49,15 @@ class StyledTextParserAsync extends StyledTextParser {
           } else {
             StyledTextTagBase? tag = onTag(e.value);
             node = StyledTagNode(tag: tag);
-            attributes = {};
+            attributes.addLast({});
           }
 
           break;
 
         case XmlState.Closed:
-          node.configure(attributes);
+          if (attributes.isNotEmpty) {
+            node.configure(attributes.removeLast());
+          }
 
           if (textQueue.isNotEmpty) {
             final StyledNode child = node;
@@ -66,8 +68,8 @@ class StyledTextParserAsync extends StyledTextParser {
           break;
 
         case XmlState.Attribute:
-          if (e.key != null && attributes != null) {
-            attributes![e.key] = e.value;
+          if (e.key != null && attributes.isNotEmpty) {
+            attributes.last[e.key!] = e.value;
           }
           break;
 

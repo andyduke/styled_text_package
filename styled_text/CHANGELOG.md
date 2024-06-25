@@ -1,3 +1,7 @@
+## 9.0.0-beta-4
+
+* Fixed a bug in asynchronous parsing of tag attributes - the last set of attributes "stuck" in nested tags. Thanks to [@Mithos5r](https://github.com/Mithos5r), [@rambah](https://github.com/rambah) and [@Merlin1stHere](https://github.com/Merlin1stHere).
+
 ## 9.0.0-beta-3
 
 * The value of the `async` parameter has been fixed in `onParsed` of the synchronous parser `StyledTextParserSync`.

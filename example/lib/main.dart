@@ -260,7 +260,7 @@ class SimpleDemoPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 StyledText.selectable(
                   async: async,
-                  text: 'Text with <link href="https://flutter.dev">link</link> inside.',
+                  text: 'Selectable text with <link href="https://flutter.dev">link</link> inside.',
                   tags: {
                     'link': StyledTextActionTag(
                       (_, attrs) => _openLink(context, attrs),
@@ -304,6 +304,37 @@ class SimpleDemoPage extends StatelessWidget {
                             textScaler: TextScaler.linear(MediaQuery.of(context).textScaler.scale(0.8)),
                           ),
                         );
+                      },
+                    ),
+                  },
+                ),
+
+                // Custom attributes
+                const SizedBox(height: 20),
+                StyledText(
+                  async: async,
+                  text:
+                      'Text with <text color="#ff5500">custom <text weight="bold" color="#00ca9d">nested</text> tags</text> text.',
+                  tags: {
+                    'text': StyledTextCustomTag(
+                      baseStyle: const TextStyle(fontStyle: FontStyle.italic),
+                      parse: (style, attributes) {
+                        // Text color
+                        final textColor = attributes['color'];
+                        if (textColor != null && (textColor.substring(0, 1) == '#') && textColor.length >= 6) {
+                          final String hexColor = textColor.substring(1);
+                          final String alphaChannel = (hexColor.length == 8) ? hexColor.substring(6, 8) : 'FF';
+                          final Color color = Color(int.parse('0x$alphaChannel${hexColor.substring(0, 6)}'));
+                          return style?.copyWith(color: color);
+                        }
+
+                        // Font style
+                        if (attributes['weight'] == 'bold') {
+                          style = style?.copyWith(
+                            fontWeight: FontWeight.w900,
+                          );
+                        }
+                        return style;
                       },
                     ),
                   },
