@@ -91,12 +91,10 @@ class StyledTagNode extends StyledNode {
             recognizer: _recognizer,
           )
         : null;
-    if (result == null) {
-      result = TextSpan(
-        text: text,
-        children: createChildren(context: context, recognizer: _recognizer),
-      );
-    }
+    result ??= TextSpan(
+      text: text,
+      children: createChildren(context: context, recognizer: _recognizer),
+    );
     return result;
   }
 }

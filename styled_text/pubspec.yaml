@@ -17,6 +17,7 @@ dependencies:
   xml: ^6.5.0
 
 dev_dependencies:
+  flutter_lints: ^2.0.2
   flutter_test:
     sdk: flutter
 

@@ -26,10 +26,10 @@ class StyledTextParserAsync extends StyledTextParser {
 
     StyledNode node = StyledTextNode();
     ListQueue<StyledNode> textQueue = ListQueue();
-    Map<String?, String?>? attributes;
+    Map<String?, String?> attributes = {};
 
     _xmlStreamer = XmlStreamer(
-      '<?xml version="1.0" encoding="UTF-8"?><root>' + text + '</root>',
+      '<?xml version="1.0" encoding="UTF-8"?><root>$text</root>',
       trimSpaces: false,
     );
     _xmlStreamer!.read().listen((e) {
@@ -66,8 +66,8 @@ class StyledTextParserAsync extends StyledTextParser {
           break;
 
         case XmlState.Attribute:
-          if (e.key != null && attributes != null) {
-            attributes![e.key] = e.value;
+          if (e.key != null) {
+            attributes[e.key] = e.value;
           }
           break;
 
