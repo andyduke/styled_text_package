@@ -113,25 +113,42 @@ StyledText(
 ### Example of using a custom tag attributes handler, highlights text with the color specified in the "text" attribute of the tag:
 ```dart
 StyledText(
-  text: 'Text with custom <color text="#ff5500">color</color> text.',
-  tags: {
-    'color': StyledTextCustomTag(
-        baseStyle: TextStyle(fontStyle: FontStyle.italic),
-        parse: (baseStyle, attributes) {
-          if (attributes.containsKey('text') &&
-              (attributes['text'].substring(0, 1) == '#') &&
-              attributes['text'].length >= 6) {
-            final String hexColor = attributes['text'].substring(1);
-            final String alphaChannel = (hexColor.length == 8) ? hexColor.substring(6, 8) : 'FF';
-            final Color color = Color(int.parse('0x$alphaChannel' + hexColor.substring(0, 6)));
-            return baseStyle.copyWith(color: color);
-          } else {
-            return baseStyle;
-          }
-        }),
-  },
-)
+ text:
+     'Text with <text color="#ff5500">custom <text weight="bold" color="#eeca9d">nested</text> tags</text> text.',
+ tags: {
+   'text': StyledTextCustomTag(
+       baseStyle: const TextStyle(fontStyle: FontStyle.italic),
+       parse: (style, attributes) {
+         //Tag color
+         final textColor = attributes['color'];
+         if (textColor != null &&
+             (textColor.substring(0, 1) == '#') &&
+             textColor.length >= 6) {
+           final String hexColor = textColor.substring(1);
+           final String alphaChannel = (hexColor.length == 8)
+               ? hexColor.substring(6, 8)
+               : 'FF';
+           final Color color = Color(int.parse(
+               '0x$alphaChannel${hexColor.substring(0, 6)}'));
+           return style?.copyWith(color: color);
+         }
+
+         //Tag bold
+
+         final weight = attributes['weight'];
+         if (weight != null) {
+           if (weight == 'bold') {
+             style = style?.copyWith(
+               fontWeight: FontWeight.w900,
+             );
+           }
+         }
+         return style;
+       }),
+ },
+),
 ```
+![](https://github.com/andyduke/styled_text_package/raw/master/screenshots/5-custom_tags.png)
 ---
 
 ### An example of inserting an input field widget in place of a tag:

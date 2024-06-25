@@ -293,6 +293,42 @@ class DemoPage extends StatelessWidget {
                         }),
                   },
                 ),
+
+                StyledText(
+                  text:
+                      'Text with <text color="#ff5500">custom <text weight="bold" color="#eeca9d">nested</text> tags</text> text.',
+                  tags: {
+                    'text': StyledTextCustomTag(
+                        baseStyle: const TextStyle(fontStyle: FontStyle.italic),
+                        parse: (style, attributes) {
+                          //Tag color
+                          final textColor = attributes['color'];
+                          if (textColor != null &&
+                              (textColor.substring(0, 1) == '#') &&
+                              textColor.length >= 6) {
+                            final String hexColor = textColor.substring(1);
+                            final String alphaChannel = (hexColor.length == 8)
+                                ? hexColor.substring(6, 8)
+                                : 'FF';
+                            final Color color = Color(int.parse(
+                                '0x$alphaChannel${hexColor.substring(0, 6)}'));
+                            return style?.copyWith(color: color);
+                          }
+
+                          //Tag bold
+
+                          final weight = attributes['weight'];
+                          if (weight != null) {
+                            if (weight == 'bold') {
+                              style = style?.copyWith(
+                                fontWeight: FontWeight.w900,
+                              );
+                            }
+                          }
+                          return style;
+                        }),
+                  },
+                ),
               ],
             ),
           ),
