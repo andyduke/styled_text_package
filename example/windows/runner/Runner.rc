@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.amazingsoftworks" "\0"
-            VALUE "FileDescription", "example" "\0"
+            VALUE "CompanyName", "com.example" "\0"
+            VALUE "FileDescription", "styled_text_example" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "example" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 com.amazingsoftworks. All rights reserved." "\0"
-            VALUE "OriginalFilename", "example.exe" "\0"
-            VALUE "ProductName", "example" "\0"
+            VALUE "InternalName", "styled_text_example" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
+            VALUE "OriginalFilename", "styled_text_example.exe" "\0"
+            VALUE "ProductName", "styled_text_example" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

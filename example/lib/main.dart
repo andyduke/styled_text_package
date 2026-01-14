@@ -62,7 +62,9 @@ class _StartPageState extends State<StartPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SimpleDemoPage(async: async)),
+                    MaterialPageRoute(
+                      builder: (context) => SimpleDemoPage(async: async),
+                    ),
                   );
                 },
                 child: const Text('Simple Demo'),
@@ -76,7 +78,9 @@ class _StartPageState extends State<StartPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LargeTextDemo(async: async)),
+                    MaterialPageRoute(
+                      builder: (context) => LargeTextDemo(async: async),
+                    ),
                   );
                 },
                 child: const Text('Large Text Demo'),
@@ -90,7 +94,9 @@ class _StartPageState extends State<StartPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ListDemo(async: async)),
+                    MaterialPageRoute(
+                      builder: (context) => ListDemo(async: async),
+                    ),
                   );
                 },
                 child: const Text('List Demo'),
@@ -172,7 +178,9 @@ class SimpleDemoPage extends StatelessWidget {
                   async: async,
                   text: 'Test: <b>bold</b> text.',
                   tags: const {
-                    'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                    'b': StyledTextTag(
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   },
                 ),
 
@@ -182,7 +190,9 @@ class SimpleDemoPage extends StatelessWidget {
                   async: async,
                   text: 'Quoted Test: <b>&quot;bold&quot;</b> text.',
                   tags: const {
-                    'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                    'b': StyledTextTag(
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   },
                 ),
 
@@ -193,7 +203,9 @@ class SimpleDemoPage extends StatelessWidget {
                   text: """Multiline text 
 (wo breaks)""",
                   tags: const {
-                    'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                    'b': StyledTextTag(
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   },
                 ),
 
@@ -205,7 +217,9 @@ class SimpleDemoPage extends StatelessWidget {
 (with breaks)""",
                   newLineAsBreaks: true,
                   tags: const {
-                    'b': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
+                    'b': StyledTextTag(
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   },
                 ),
 
@@ -213,10 +227,16 @@ class SimpleDemoPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 StyledText(
                   async: async,
-                  text: 'Test: <bold>bold</bold> and <red>red color</red> text.',
+                  text:
+                      'Test: <bold>bold</bold> and <red>red color</red> text.',
                   tags: const {
-                    'bold': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold)),
-                    'red': StyledTextTag(style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+                    'bold': StyledTextTag(
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    'red': StyledTextTag(
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.red),
+                    ),
                   },
                 ),
 
@@ -238,7 +258,8 @@ class SimpleDemoPage extends StatelessWidget {
                   tags: {
                     'action': StyledTextActionTag(
                       (_, attrs) => _alert(context),
-                      style: const TextStyle(decoration: TextDecoration.underline),
+                      style:
+                          const TextStyle(decoration: TextDecoration.underline),
                     ),
                   },
                 ),
@@ -247,11 +268,13 @@ class SimpleDemoPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 StyledText(
                   async: async,
-                  text: 'Text with <link href="https://flutter.dev">link</link> inside.',
+                  text:
+                      'Text with <link href="https://flutter.dev">link</link> inside.',
                   tags: {
                     'link': StyledTextActionTag(
                       (_, attrs) => _openLink(context, attrs),
-                      style: const TextStyle(decoration: TextDecoration.underline),
+                      style:
+                          const TextStyle(decoration: TextDecoration.underline),
                     ),
                   },
                 ),
@@ -260,11 +283,13 @@ class SimpleDemoPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 StyledText.selectable(
                   async: async,
-                  text: 'Selectable text with <link href="https://flutter.dev">link</link> inside.',
+                  text:
+                      'Selectable text with <link href="https://flutter.dev">link</link> inside.',
                   tags: {
                     'link': StyledTextActionTag(
                       (_, attrs) => _openLink(context, attrs),
-                      style: const TextStyle(decoration: TextDecoration.underline),
+                      style:
+                          const TextStyle(decoration: TextDecoration.underline),
                     ),
                   },
                 ),
@@ -281,7 +306,8 @@ class SimpleDemoPage extends StatelessWidget {
                           offset: const Offset(0.5, -4),
                           child: Text(
                             textContent ?? "",
-                            textScaler: TextScaler.linear(MediaQuery.of(context).textScaler.scale(0.85)),
+                            textScaler: TextScaler.linear(
+                                MediaQuery.of(context).textScaler.scale(0.85)),
                           ),
                         );
                       },
@@ -301,7 +327,8 @@ class SimpleDemoPage extends StatelessWidget {
                           offset: const Offset(0.5, 4),
                           child: Text(
                             textContent ?? "",
-                            textScaler: TextScaler.linear(MediaQuery.of(context).textScaler.scale(0.8)),
+                            textScaler: TextScaler.linear(
+                                MediaQuery.of(context).textScaler.scale(0.8)),
                           ),
                         );
                       },
@@ -321,10 +348,15 @@ class SimpleDemoPage extends StatelessWidget {
                       parse: (style, attributes) {
                         // Text color
                         final textColor = attributes['color'];
-                        if (textColor != null && (textColor.substring(0, 1) == '#') && textColor.length >= 6) {
+                        if (textColor != null &&
+                            (textColor.substring(0, 1) == '#') &&
+                            textColor.length >= 6) {
                           final String hexColor = textColor.substring(1);
-                          final String alphaChannel = (hexColor.length == 8) ? hexColor.substring(6, 8) : 'FF';
-                          final Color color = Color(int.parse('0x$alphaChannel${hexColor.substring(0, 6)}'));
+                          final String alphaChannel = (hexColor.length == 8)
+                              ? hexColor.substring(6, 8)
+                              : 'FF';
+                          final Color color = Color(int.parse(
+                              '0x$alphaChannel${hexColor.substring(0, 6)}'));
                           return style?.copyWith(color: color);
                         }
 

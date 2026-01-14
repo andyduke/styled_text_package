@@ -6,6 +6,8 @@ Formatting is set in the text using **xml tags**, for which styles and other beh
 
 You can set the click handler for the tag, through a tag definition class `StyledTextActionTag`.
 
+> Since version 9, parsing is **synchronous** by default, which should eliminate issues with lists and UI testing. If you experience performance issues, switch parsing to asynchronous mode using the `async` constructor parameter.
+
 ## Table of Contents
 
 - [Getting Started](#getting-Started)

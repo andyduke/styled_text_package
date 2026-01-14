@@ -8,24 +8,26 @@
       "name": "playground",
       "cwd": "example",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "program": "lib/main.dart"
     },
     {
       "name": "example",
-      "cwd": "styled_text\\example",
+      "cwd": "styled_text/example",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "program": "lib/main.dart"
     },
     {
       "name": "example (profile mode)",
-      "cwd": "styled_text\\example",
+      "cwd": "styled_text/example",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
       "name": "example (release mode)",
-      "cwd": "styled_text\\example",
+      "cwd": "styled_text/example",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"

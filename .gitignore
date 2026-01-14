@@ -2,3 +2,5 @@ zip.cmd
 **/flutter_export_environment.sh
 _temp/
 styled_text.code-workspace
+.puro.json
+/.vscode/settings.json

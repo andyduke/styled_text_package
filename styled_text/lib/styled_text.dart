@@ -1,5 +1,5 @@
 /// Text widget with formatted text using tags. Makes it easier to use formatted text in multilingual applications.
-library styled_text;
+library;
 
 export 'src/parsers/mini_dom.dart';
 export 'src/parsers/text_parser.dart';
