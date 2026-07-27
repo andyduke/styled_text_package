@@ -1,6 +1,6 @@
-## 9.1.0
+## 10.0.0
 
-* Bump `xml` dependency to `^7.0.0` for compatibility with packages that require `xml` 7 (e.g. `pdf` / `printing`).
+* Bump `xml` dependency to `^7.0.0` for compatibility with packages that require `xml` 7 (e.g. `pdf` / `printing`). Thanks to [@mohanedy](https://github.com/mohanedy).
 
 ## 9.0.0
 

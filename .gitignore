@@ -4,3 +4,5 @@ _temp/
 styled_text.code-workspace
 .puro.json
 /.vscode/settings.json
+.puro.json
+ios/Flutter/flutter_export_environment.sh
