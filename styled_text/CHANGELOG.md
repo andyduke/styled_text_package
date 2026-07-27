@@ -1,3 +1,7 @@
+## 9.1.0
+
+* Bump `xml` dependency to `^7.0.0` for compatibility with packages that require `xml` 7 (e.g. `pdf` / `printing`).
+
 ## 9.0.0
 
 * Flutter 3.38 compatibility.
